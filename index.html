@@ -1,274 +1,39 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Alumnos</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <style>
- body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
-    padding-top: 40px;
-    line-height: 1.6; /* Improve readability */
-}
+    <title>Introduccion a JS</title>
 
-.container {
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow for depth */
-    padding: 20px;
-    max-width: 800px;
-    margin: 20px auto; /* Add margin to top and bottom */
-    transition: box-shadow 0.3s ease; /* Smooth transition for shadow */
-}
-
-.container:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Dynamic interaction */
-}
-
-h1 {
-    font-size: 2em; /* Slightly larger for emphasis */
-    color: #00539f;
-    text-align: center;
-    margin-bottom: 20px;
-    font-weight: normal; /* More modern look */
-}
-
-.form-control {
-    border-radius: 15px;
-    border: 1px solid #ccc;
-    padding: 10px; /* Added padding for better text field size */
-    width: 100%; /* Responsive width */
-    box-sizing: border-box; /* Include padding in width */
-    transition: border-color 0.3s ease; /* Smooth transition for border */
-}
-
-.form-control:focus {
-    border-color: #00539f; /* Highlight focus */
-    outline: none; /* Remove default focus outline */
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.btn-custom {
-    background-color: #00539f;
-    color: white;
-    border-radius: 15px;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth transition for button */
-    display: inline-block; /* Ensuring proper spacing and alignment */
-    text-align: center; /* Center text for consistency */
-}
-
-.btn-custom:hover {
-    background-color: #004080;
-    text-decoration: none; /* Remove underline effect */
-}
-
-/* Responsive design considerations */
-@media (max-width: 768px) {
-    .container {
-        padding: 15px;
-        margin: 10px;
-    }
-
-    h1 {
-        font-size: 1.5em;
-    }
-}
-
-/*__________________________*/
-
-.modal-content {
-    border-radius: 20px;
-    overflow: hidden; /* Ensures child elements don't overflow the specified border-radius */
-}
-
-.modal-header, .modal-footer {
-    background-color: #f5f5f5;
-    padding: 15px; /* Adjust padding for better spacing */
-    border: none; /* Remove default borders if any */
-}
-
-.modal-header {
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-}
-
-.modal-footer {
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    display: flex; /* Use flexbox for better alignment */
-    justify-content: flex-end; /* Align buttons to the right */
-}
-
-.modal-title {
-    color: #00539f;
-    margin: 0; /* Reset margin for better control */
-    font-weight: normal; /* Optional: Adjusts font weight for modern look */
-}
-
-.btn-custom {
-    background-color: #00539f;
-    color: white;
-    border-radius: 15px;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-    text-align: center; /* Center text inside the button */
-    display: inline-block; /* Ensures proper spacing and alignment */
-}
-
-.btn-custom:hover {
-    background-color: #004080;
-    text-decoration: none; /* Remove default text decoration on hover */
-}
-
-/* Optional: Responsive adjustments */
-@media (max-width: 576px) {
-    .modal-footer {
-        flex-direction: column; /* Stack buttons in a column on smaller screens */
-        align-items: stretch; /* Stretch buttons to full width */
-    }
-    .btn-custom {
-        width: 100%; /* Full width for buttons on smaller screens */
-        margin-bottom: 10px; /* Add space between stacked buttons */
-    }
-    .btn-custom:last-child {
-        margin-bottom: 0; /* Remove margin for the last button */
-    }
-}
-
-
-    </style>
+    <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container">
-        <div id="app">
-            <h1>Registro de Alumnos</h1>
-            <form @submit.prevent="submitForm">
-                <div class="form-group">
-                    <label for="codigo">Código:</label>
-                    <input type="text" class="form-control" id="codigo" v-model="alumno.codigo">
+    <div class="container-fluid">
+         <div id="app">
+            <div class="row">
+                <div class="col">
+                    <h1>Bienvenidos a Progra IV</h1>
                 </div>
-                <div class="form-group">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" class="form-control" id="nombre" v-model="alumno.nombre">
-                </div>
-                <div class="form-group">
-                    <label for="direccion">Dirección:</label>
-                    <input type="text" class="form-control" id="direccion" v-model="alumno.direccion">
-                </div>
-                <div class="form-group">
-                    <label for="municipio">Municipio:</label>
-                    <input type="text" class="form-control" id="municipio" v-model="alumno.municipio">
-                </div>
-                <div class="form-group">
-                    <label for="departamento">Departamento:</label>
-                    <input type="text" class="form-control" id="departamento" v-model="alumno.departamento">
-                </div>
-                <div class="form-group">
-                    <label for="telefono">Teléfono:</label>
-                    <input type="tel" class="form-control" id="telefono" v-model="alumno.telefono">
-                </div>
-                <div class="form-group">
-                    <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-                    <input type="date" class="form-control" id="fechaNacimiento" v-model="alumno.fechaNacimiento">
-                </div>
-                <div class="form-group">
-                    <label for="sexo">Sexo:</label>
-                    <select class="form-control" id="sexo" v-model="alumno.sexo">
-                        <option value="">Seleccione</option>
-                        <option value="Femenino">Femenino</option>
-                        <option value="Masculino">Masculino</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-custom">Registrar</button>
-            </form>
-        </div>
-    </div>
-
-<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalLabel">Confirmación de Registro</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                El alumno ha sido registrado exitosamente.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-custom" data-bs-dismiss="modal">Cerrar</button>
+            <div class="row">
+                <div class="col col-md-2"><label for="txtnombre">Nombre:</label></div>
+                <div class="col col-md-3">
+                    <input class="form-control" type="text" id="txtnombre" v-model="nombre">
+                    Hola que tal {{nombre}}
+                </div>
             </div>
         </div>
     </div>
-</div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+   
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
     <script>
         var app = new Vue({
             el: '#app',
-            data: {
-                alumno: {
-                    codigo: '',
-                    nombre: '',
-                    direccion: '',
-                    municipio: '',
-                    departamento: '',
-                    telefono: '',
-                    fechaNacimiento: '',
-                    sexo: ''
-                }
-            },
-            methods: {
-    submitForm() {
-
-
-
-
-        if (!this.alumno.codigo.trim()) {
-      alert("El código es requerido");
-      return;
-    }
-    if (!this.alumno.nombre.trim()) {
-      alert("El nombre es requerido");
-      return;
-    }
-    // ... Realizar el resto de las validaciones aquí
-
-    if (!this.alumno.telefono.match(/^(\+?\d{1,3}[- ]?)?\d{10}$/)) {
-      alert("Formato de teléfono no válido");
-      return;
-    }
-
-    if (!this.alumno.sexo) {
-      alert("Seleccione el sexo");
-      return;
-    }
-    
-           
-           console.log(this.alumno);
-       
-        new bootstrap.Modal(document.getElementById('confirmationModal')).show();
-
-        
-    }
-}
-        });
-
-    
-
+            data:{
+                nombre: '',
+                saludo: 'Hola mundo con Vue.js'
+            }
+        })
     </script>
 </body>
 </html>
-
