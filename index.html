@@ -212,15 +212,15 @@ h1 {
         </div>
     </div>
 </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         var app = new Vue({
             el: '#app',
             data: {
                 alumno: {
-                    codigo: '',
                     nombre: '',
                     direccion: '',
                     municipio: '',
@@ -231,43 +231,18 @@ h1 {
                 }
             },
             methods: {
-    submitForm() {
-
-
-
-
-        if (!this.alumno.codigo.trim()) {
-      alert("El código es requerido");
-      return;
-    }
-    if (!this.alumno.nombre.trim()) {
-      alert("El nombre es requerido");
-      return;
-    }
-    // ... Realizar el resto de las validaciones aquí
-
-    if (!this.alumno.telefono.match(/^(\+?\d{1,3}[- ]?)?\d{10}$/)) {
-      alert("Formato de teléfono no válido");
-      return;
-    }
-
-    if (!this.alumno.sexo) {
-      alert("Seleccione el sexo");
-      return;
-    }
+                submitForm() {
+                    // Obtener la información almacenada en localStorage
+                    let alumnos = JSON.parse(localStorage.getItem('alumnos')) || [];
     
-           
-           console.log(this.alumno);
-       
-        new bootstrap.Modal(document.getElementById('confirmationModal')).show();
-
-        
-    }
-}
+                    // Agregar el nuevo alumno al array
+                    alumnos.push(this.alumno);
+    
+                    // Guardar el array actualizado en localStorage
+                    localStorage.setItem('alumnos', JSON.stringify(alumnos));
+                }
+            }
         });
-
-    
-
     </script>
 </body>
 </html>
