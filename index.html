@@ -232,10 +232,36 @@ h1 {
             },
             methods: {
     submitForm() {
-        // Aquí va la lógica de validación y procesamiento del formulario
-        console.log(this.alumno);
-        // Mostrar el modal
+
+
+
+
+        if (!this.alumno.codigo.trim()) {
+      alert("El código es requerido");
+      return;
+    }
+    if (!this.alumno.nombre.trim()) {
+      alert("El nombre es requerido");
+      return;
+    }
+    // ... Realizar el resto de las validaciones aquí
+
+    if (!this.alumno.telefono.match(/^(\+?\d{1,3}[- ]?)?\d{10}$/)) {
+      alert("Formato de teléfono no válido");
+      return;
+    }
+
+    if (!this.alumno.sexo) {
+      alert("Seleccione el sexo");
+      return;
+    }
+    
+           
+           console.log(this.alumno);
+       
         new bootstrap.Modal(document.getElementById('confirmationModal')).show();
+
+        
     }
 }
         });
