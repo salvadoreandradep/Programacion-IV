@@ -1,249 +1,262 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Alumnos</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <style>
- body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
-    padding-top: 40px;
-    line-height: 1.6; /* Improve readability */
+    <title>App de Productos</title>
+<style>
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Tipografía más moderna */
+    background-color: #f8f9fa; /* Un tono de gris más claro */
+    color: #495057; /* Un color de texto más suave */
+    line-height: 1.6;
+    margin: 0; /* Remueve el margen por defecto */
+    padding: 0; /* Remueve el relleno por defecto */
 }
 
-.container {
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow for depth */
-    padding: 20px;
-    max-width: 800px;
-    margin: 20px auto; /* Add margin to top and bottom */
-    transition: box-shadow 0.3s ease; /* Smooth transition for shadow */
+h2 {
+    color: #007bff; /* Un azul más vibrante para los títulos */
+    margin-top: 1rem; /* Espacio adicional antes del título */
 }
 
-.container:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Dynamic interaction */
+.row {
+    margin-bottom: 20px; /* Más espacio entre filas */
 }
 
-h1 {
-    font-size: 2em; /* Slightly larger for emphasis */
-    color: #00539f;
-    text-align: center;
-    margin-bottom: 20px;
-    font-weight: normal; /* More modern look */
+.col-md-2 {
+    font-weight: bold;
+    text-align: right;
+    padding-top: 10px; /* Más espacio en la parte superior */
 }
 
 .form-control {
-    border-radius: 15px;
-    border: 1px solid #ccc;
-    padding: 10px; /* Added padding for better text field size */
-    width: 100%; /* Responsive width */
-    box-sizing: border-box; /* Include padding in width */
-    transition: border-color 0.3s ease; /* Smooth transition for border */
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); /* Ligero sombreado para profundidad */
 }
 
-.form-control:focus {
-    border-color: #00539f; /* Highlight focus */
-    outline: none; /* Remove default focus outline */
+.btn {
+    margin: 5px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1); /* Sombreado en botones */
 }
 
-.form-group {
-    margin-bottom: 15px;
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    transition: background-color 0.3s ease; /* Transición suave al cambiar el color */
 }
 
-.btn-custom {
-    background-color: #00539f;
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    transition: background-color 0.3s ease;
+}
+
+.table {
+    background-color: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada para la tabla */
+}
+
+th {
+    background-color: #007bff;
     color: white;
-    border-radius: 15px;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth transition for button */
-    display: inline-block; /* Ensuring proper spacing and alignment */
-    text-align: center; /* Center text for consistency */
 }
 
-.btn-custom:hover {
-    background-color: #004080;
-    text-decoration: none; /* Remove underline effect */
+td {
+    vertical-align: middle;
+    padding: 12px; /* Mayor espacio dentro de las celdas */
 }
 
-/* Responsive design considerations */
-@media (max-width: 768px) {
-    .container {
-        padding: 15px;
-        margin: 10px;
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    transition: background-color 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+    .col-md-6, .col-md-2, .col-md-3, .col-md-5 {
+        flex: 0 0 100%;
+        max-width: 100%;
     }
 
-    h1 {
-        font-size: 1.5em;
-    }
-}
-
-/*__________________________*/
-
-.modal-content {
-    border-radius: 20px;
-    overflow: hidden; /* Ensures child elements don't overflow the specified border-radius */
-}
-
-.modal-header, .modal-footer {
-    background-color: #f5f5f5;
-    padding: 15px; /* Adjust padding for better spacing */
-    border: none; /* Remove default borders if any */
-}
-
-.modal-header {
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-}
-
-.modal-footer {
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    display: flex; /* Use flexbox for better alignment */
-    justify-content: flex-end; /* Align buttons to the right */
-}
-
-.modal-title {
-    color: #00539f;
-    margin: 0; /* Reset margin for better control */
-    font-weight: normal; /* Optional: Adjusts font weight for modern look */
-}
-
-.btn-custom {
-    background-color: #00539f;
-    color: white;
-    border-radius: 15px;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
-    text-align: center; /* Center text inside the button */
-    display: inline-block; /* Ensures proper spacing and alignment */
-}
-
-.btn-custom:hover {
-    background-color: #004080;
-    text-decoration: none; /* Remove default text decoration on hover */
-}
-
-/* Optional: Responsive adjustments */
-@media (max-width: 576px) {
-    .modal-footer {
-        flex-direction: column; /* Stack buttons in a column on smaller screens */
-        align-items: stretch; /* Stretch buttons to full width */
-    }
-    .btn-custom {
-        width: 100%; /* Full width for buttons on smaller screens */
-        margin-bottom: 10px; /* Add space between stacked buttons */
-    }
-    .btn-custom:last-child {
-        margin-bottom: 0; /* Remove margin for the last button */
+    .col-md-2 {
+        text-align: left;
+        margin-bottom: 10px;
     }
 }
 
+.container-fluid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
 
-    </style>
+#app {
+    width: 90%; /* Ligeramente más ancho para pantallas más grandes */
+    max-width: 1200px;
+    margin: auto;
+    background-color: #ffffff; /* Fondo blanco para resaltar el contenido */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+    padding: 20px; /* Espacio interior para no pegar el contenido a los bordes */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+
+
+
+
+</style>
+    <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <div id="app">
-            <h1>Registro de Alumnos</h1>
-            <form @submit.prevent="submitForm">
-                <div class="form-group">
-                    <label for="codigo">Código:</label>
-                    <input type="text" class="form-control" id="codigo" v-model="alumno.codigo">
+            <div class="row">
+                <div class="col">::.. SISTEMA DE FACTURACION .::</div>
+            </div>
+            <div class="row">
+                <div class="col col-md-6">
+                    <div class="row p-1">
+                        <div class="col col-md-2">CODIGO</div>
+                        <div class="col col-md-3">
+                            <input v-model="producto.codigo" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row p-1">
+                        <div class="col col-md-2">NOMBRE</div>
+                        <div class="col col-md-5">
+                            <input v-model="producto.nombre" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row p-1">
+                        <div class="col col-md-2">MARCA</div>
+                        <div class="col col-md-5">
+                            <input v-model="producto.marca" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row p-1">
+                        <div class="col col-md-2">PRESENTACION</div>
+                        <div class="col col-md-3">
+                            <input v-model="producto.presentacion" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row p-1">
+                        <div class="col col-md-2">PRECIO</div>
+                        <div class="col col-md-3">
+                            <input v-model="producto.precio" type="number" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row p-1">
+                        <div class="col">
+                            <button @click.prevent.default="guardarProducto" class="btn btn-success">GUARDAR</button>
+                            <button @click.prevent.default="nuevoProducto" class="btn btn-warning">NUEVO</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" class="form-control" id="nombre" v-model="alumno.nombre">
+                <div class="col col-md-6">
+                    <form id="frmProducto">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>BUSCAR</th>
+                                    <th colspan="5">
+                                        <input placeholder="codigo, nombre, marca, presentacion" type="search" v-model="valor" @keyup="buscarProducto" class="form-control">
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>CODIGO</th>
+                                    <th>NOMBRE</th>
+                                    <th>MARCA</th>
+                                    <th>PRESENTACION</th>
+                                    <th>PRECIO</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr @click="modificarProducto(producto)" v-for="producto in productos" :key="producto.idProducto">
+                                    <td>{{producto.codigo}}</td>
+                                    <td>{{producto.nombre}}</td>
+                                    <td>{{producto.marca}}</td>
+                                    <td>{{producto.presentacion}}</td>
+                                    <td>{{producto.precio}}</td>
+                                    <td><button @click.prevent.default="eliminarProducto(producto.idProducto)" class="btn btn-danger">del</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="direccion">Dirección:</label>
-                    <input type="text" class="form-control" id="direccion" v-model="alumno.direccion">
-                </div>
-                <div class="form-group">
-                    <label for="municipio">Municipio:</label>
-                    <input type="text" class="form-control" id="municipio" v-model="alumno.municipio">
-                </div>
-                <div class="form-group">
-                    <label for="departamento">Departamento:</label>
-                    <input type="text" class="form-control" id="departamento" v-model="alumno.departamento">
-                </div>
-                <div class="form-group">
-                    <label for="telefono">Teléfono:</label>
-                    <input type="tel" class="form-control" id="telefono" v-model="alumno.telefono">
-                </div>
-                <div class="form-group">
-                    <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-                    <input type="date" class="form-control" id="fechaNacimiento" v-model="alumno.fechaNacimiento">
-                </div>
-                <div class="form-group">
-                    <label for="sexo">Sexo:</label>
-                    <select class="form-control" id="sexo" v-model="alumno.sexo">
-                        <option value="">Seleccione</option>
-                        <option value="Femenino">Femenino</option>
-                        <option value="Masculino">Masculino</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-custom">Registrar</button>
-            </form>
+            </div>
         </div>
     </div>
-
-<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalLabel">Confirmación de Registro</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                El alumno ha sido registrado exitosamente.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-custom" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+   
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         var app = new Vue({
             el: '#app',
-            data: {
-                alumno: {
-                    nombre: '',
-                    direccion: '',
-                    municipio: '',
-                    departamento: '',
-                    telefono: '',
-                    fechaNacimiento: '',
-                    sexo: ''
+            data:{
+                valor:'',
+                productos:[],
+                accion:'nuevo',
+                producto:{
+                    idProducto: new Date().getTime(),
+                    codigo:'',
+                    nombre:'',
+                    marca:'',
+                    presentacion:'',
+                    precio:0.0
                 }
             },
-            methods: {
-                submitForm() {
-                    // Obtener la información almacenada en localStorage
-                    let alumnos = JSON.parse(localStorage.getItem('alumnos')) || [];
-    
-                    // Agregar el nuevo alumno al array
-                    alumnos.push(this.alumno);
-    
-                    // Guardar el array actualizado en localStorage
-                    localStorage.setItem('alumnos', JSON.stringify(alumnos));
+            methods:{
+                buscarProducto(e){
+                    if( e.keyCode==8 ){
+                        this.listarProductos();
+                    }
+                    this.productos = this.productos.filter(producto=>producto.codigo.includes(this.valor) || producto.nombre.toLowerCase().includes(this.valor.toLowerCase()) || producto.marca.toLowerCase().includes(this.valor.toLowerCase()) || producto.presentacion.toLowerCase().includes(this.valor.toLowerCase()));
+                },
+                eliminarProducto(idProducto){
+                    if( confirm(`Esta seguro de elimina el producto?`) ){
+                        let buscar = this.productos.findIndex(producto=>producto.idProducto==idProducto);
+                        this.productos.splice(buscar,1);
+                        localStorage.setItem('productos', JSON.stringify(this.productos));
+                    }
+                },
+                modificarProducto(producto){
+                    this.accion = 'modificar';
+                    this.producto = producto;
+                },
+                guardarProducto(){
+                    //almacenamiento del objeto productos en localStorage
+                    if( this.accion == 'nuevo' ){
+                        this.productos.push(this.producto);
+                    }else if(this.accion == "modificar"){
+                        let buscar = this.productos.findIndex(producto => producto.idProducto==this.producto.idProducto);
+                        this.productos[buscar] = this.producto;
+                    }
+                    localStorage.setItem('productos', JSON.stringify(this.productos));
+                    this.nuevoProducto();
+                },
+                nuevoProducto(){
+                    this.accion = 'nuevo';
+                    this.producto = {
+                        idProducto: new Date().getTime(),
+                        codigo:'',
+                        nombre:'',
+                        marca:'',
+                        presentacion:'',
+                        precio:0.0
+                    }
+                },
+                listarProductos(){
+                    this.productos = JSON.parse(localStorage.getItem('productos') || "[]");
                 }
+            },
+            created(){
+                this.listarProductos();
             }
-        });
+        })
     </script>
 </body>
 </html>
-
