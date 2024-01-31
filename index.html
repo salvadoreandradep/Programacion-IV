@@ -227,6 +227,11 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('datosUsuarios', JSON.stringify(datos)); // Actualizar localStorage
         mostrarDatos(); // Refrescar la tabla
     }
+    function codigoExiste(codigo, indiceIgnorado) {
+        const datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
+        return datos.some((item, index) => item.codigo === codigo && index !== indiceIgnorado);
+    }
+
 
     // Manejador del evento submit del formulario
     form.addEventListener('submit', function(e) {
@@ -242,9 +247,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const fechaNacimiento = document.getElementById('fechaNacimiento').value;
         const sexo = document.getElementById('sexo').value;
 
+        let datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
+
+      
         const nuevoRegistro = { codigo, nombre, direccion, municipio, departamento, telefono, fechaNacimiento, sexo };
 
-        let datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
+        
 
         if (esActualizacion) {
             datos[indiceActualizacion] = nuevoRegistro; // Actualizar el registro existente
