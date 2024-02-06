@@ -82,7 +82,15 @@ body {
 <body>
     <div class="container mt-5">
         <h1>Registro de Alumnos</h1>
-        <form>
+        <button id="toggleButton" class="btn btn-primary">Mostrar/ocultar formulario</button>
+    </div>
+    <div class="container mt-5">
+        
+        <div id="formularioDiv" style="display: none;">
+            <form>
+
+
+
             <div class="form-group">
                 <label for="codigo">Código:</label>
                 <input type="text" class="form-control" id="codigo" autocomplete="off" required>
@@ -125,7 +133,7 @@ body {
 
 
     </div>
-
+    </div>
 
     <div class="table-responsive">
         <table class="table table-dark table-striped">
@@ -157,6 +165,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('form');
     let esActualizacion = false; 
     let indiceActualizacion;
+    const toggleButton = document.getElementById('toggleButton');
+    const formularioDiv = document.getElementById('formularioDiv');
+
+    toggleButton.addEventListener('click', function () {
+            if (formularioDiv.style.display === 'none') {
+                formularioDiv.style.display = 'block';
+            } else {
+                formularioDiv.style.display = 'none';
+                // Aquí puedes agregar código para limpiar los campos del formulario si es necesario
+            }
+        });
+ 
+ 
 
     function mostrarDatos() {
         const tablaDatos = document.getElementById('tablaDatos');
