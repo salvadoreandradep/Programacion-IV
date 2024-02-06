@@ -153,16 +153,16 @@ body {
 
     <script>
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('form');
-    let esActualizacion = false; // Bandera para saber si estamos actualizando
-    let indiceActualizacion; // Índice del elemento a actualizar
+    let esActualizacion = false; 
+    let indiceActualizacion;
 
-    // Función para mostrar los registros en la tabla
     function mostrarDatos() {
         const tablaDatos = document.getElementById('tablaDatos');
-        tablaDatos.innerHTML = ''; // Limpiar la tabla primero
-        const datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]'); // Obtener datos de localStorage
+        tablaDatos.innerHTML = '';
+
+        const datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
 
         datos.forEach((dato, index) => {
             const fila = document.createElement('tr');
@@ -186,90 +186,82 @@ document.addEventListener('DOMContentLoaded', function() {
         agregarEventosBotones();
     }
 
-    // Función para agregar eventos a los botones de actualizar y eliminar
     function agregarEventosBotones() {
-        // Eliminar registro
         document.querySelectorAll('.eliminar').forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function () {
                 const index = this.getAttribute('data-index');
                 eliminarRegistro(index);
             });
         });
 
-        // Cargar datos para actualizar
         document.querySelectorAll('.actualizar').forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function () {
                 const index = this.getAttribute('data-index');
                 cargarDatosParaActualizar(index);
             });
         });
     }
 
-    // Función para cargar los datos en el formulario para su actualización
     function cargarDatosParaActualizar(index) {
         const datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
-        document.getElementById('codigo').value = datos[index].codigo;
-        document.getElementById('nombre').value = datos[index].nombre;
-        document.getElementById('direccion').value = datos[index].direccion;
-        document.getElementById('municipio').value = datos[index].municipio;
-        document.getElementById('departamento').value = datos[index].departamento;
-        document.getElementById('telefono').value = datos[index].telefono;
-        document.getElementById('fechaNacimiento').value = datos[index].fechaNacimiento;
-        document.getElementById('sexo').value = datos[index].sexo;
+        const fields = ['codigo', 'nombre', 'direccion', 'municipio', 'departamento', 'telefono', 'fechaNacimiento', 'sexo'];
+
+        fields.forEach(field => {
+            document.getElementById(field).value = datos[index][field];
+        });
 
         esActualizacion = true;
         indiceActualizacion = index;
     }
 
-    // Función para eliminar un registro
     function eliminarRegistro(index) {
         let datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
-        datos.splice(index, 1); // Eliminar el registro específico
-        localStorage.setItem('datosUsuarios', JSON.stringify(datos)); // Actualizar localStorage
-        mostrarDatos(); // Refrescar la tabla
+        datos.splice(index, 1);
+        localStorage.setItem('datosUsuarios', JSON.stringify(datos));
+        mostrarDatos();
     }
+
     function codigoExiste(codigo, indiceIgnorado) {
         const datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
         return datos.some((item, index) => item.codigo === codigo && index !== indiceIgnorado);
     }
 
+    form.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-    // Manejador del evento submit del formulario
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
+    const fields = ['codigo', 'nombre', 'direccion', 'municipio', 'departamento', 'telefono', 'fechaNacimiento', 'sexo'];
+    const nuevoRegistro = {};
 
-        // Obtener los valores del formulario
-        const codigo = document.getElementById('codigo').value;
-        const nombre = document.getElementById('nombre').value;
-        const direccion = document.getElementById('direccion').value;
-        const municipio = document.getElementById('municipio').value;
-        const departamento = document.getElementById('departamento').value;
-        const telefono = document.getElementById('telefono').value;
-        const fechaNacimiento = document.getElementById('fechaNacimiento').value;
-        const sexo = document.getElementById('sexo').value;
+    fields.forEach(field => {
+        nuevoRegistro[field] = document.getElementById(field).value;
+    });
 
-        let datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
+    let datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
 
-      
-        const nuevoRegistro = { codigo, nombre, direccion, municipio, departamento, telefono, fechaNacimiento, sexo };
-
-        
-
-        if (esActualizacion) {
-            datos[indiceActualizacion] = nuevoRegistro; // Actualizar el registro existente
-            esActualizacion = false; // Resetear la bandera de actualización
-        } else {
-            datos.push(nuevoRegistro); // Agregar como nuevo registro
+    if (esActualizacion) {
+        datos[indiceActualizacion] = nuevoRegistro;
+        esActualizacion = false;
+    } else {
+        // Verificar si el código ya existe antes de agregar un nuevo registro
+        const codigoExistente = codigoExiste(nuevoRegistro.codigo, -1); // -1 para indicar que no se ignore ningún índice
+        if (codigoExistente) {
+            alert('El código ya está registrado. Por favor, elija otro código o actualice el registro existente.');
+            return; // No agregar el registro y salir de la función
         }
 
-        localStorage.setItem('datosUsuarios', JSON.stringify(datos));
-        form.reset();
-        mostrarDatos();
-        alert(esActualizacion ? 'Registro actualizado con éxito' : 'Registro agregado con éxito');
-    });
+        datos.push(nuevoRegistro);
+    }
+
+    localStorage.setItem('datosUsuarios', JSON.stringify(datos));
+    form.reset();
+    mostrarDatos();
+    alert(esActualizacion ? 'Registro actualizado con éxito' : 'Registro agregado con éxito');
+});
+
 
     mostrarDatos();
 });
+
 
 
 
