@@ -5,78 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Alumnos</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-<style>
 
-body {
-            background-color: #222;
-            color: #fff;
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-        }
-
-        .container {
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #333;
-            border-radius: 10px;
-        }
-
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-            
-        }
-
-        .form-group label {
-            display: block;
-            text-align: left;
-            margin-bottom: 5px;
-            
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-            margin-bottom: 10px;
-            border-radius: 50px;
-
-        }
-
-        .btn-primary {
-            background-color: #fff;
-            border: none;
-            border-radius: 50px;
-            color: black;
-            padding: 15px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            width: 100%;
-            
-        }
-
-        .btn-primary:hover {
-            background-color: #222;
-            
-        }
-
-
-        
-    </style>
-
-
-
-</style>
 
 </head>
 <body>
@@ -85,36 +14,36 @@ body {
         <form>
             <div class="form-group">
                 <label for="codigo">Código:</label>
-                <input type="text" class="form-control" id="codigo" autocomplete="off" required>
+                <input type="text" class="form-control" id="codigo" >
             </div>
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
-                <input type="text" class="form-control" id="nombre" autocomplete="off" required>
+                <input type="text" class="form-control" id="nombre" >
             </div>
             <div class="form-group">
                 <label for="direccion">Dirección:</label>
-                <input type="text" class="form-control" id="direccion" autocomplete="off" required>
+                <input type="text" class="form-control" id="direccion" >
             </div>
             <div class="form-group">
                 <label for="municipio">Municipio:</label>
-                <input type="text" class="form-control" id="municipio" autocomplete="off" required>
+                <input type="text" class="form-control" id="municipio" >
             </div>
             <div class="form-group">
                 <label for="departamento">Departamento:</label>
-                <input type="text" class="form-control" id="departamento" autocomplete="off" required>
+                <input type="text" class="form-control" id="departamento" >
             </div>
             <div class="form-group">
                 <label for="telefono">Teléfono:</label>
-                <input type="tel" class="form-control" id="telefono" autocomplete="off" required pattern="[0-9]+" title="Por favor, introduce solo números">
+                <input type="tel" class="form-control" id="telefono" >
             </div>
             
             <div class="form-group">
                 <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-                <input type="date" class="form-control" id="fechaNacimiento" autocomplete="off" required>
+                <input type="date" class="form-control" id="fechaNacimiento">
             </div>
             <div class="form-group">
                 <label for="sexo">Sexo:</label>
-                <select class="form-control" id="sexo" required>
+                <select class="form-control" id="sexo" >
                     <option value="">Selecciona una opción</option>
                     <option value="F">Femenino</option>
                     <option value="M">Masculino</option>
@@ -128,7 +57,7 @@ body {
 
 
     <div class="table-responsive">
-        <table class="table table-dark table-striped">
+        <table class="table">
             <thead>
                 <tr>
 
@@ -153,16 +82,16 @@ body {
 
     <script>
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('form');
-    let esActualizacion = false; 
-    let indiceActualizacion;
+    let esActualizacion = false; // Bandera para saber si estamos actualizando
+    let indiceActualizacion; // Índice del elemento a actualizar
 
+    // Función para mostrar los registros en la tabla
     function mostrarDatos() {
         const tablaDatos = document.getElementById('tablaDatos');
-        tablaDatos.innerHTML = '';
-
-        const datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
+        tablaDatos.innerHTML = ''; // Limpiar la tabla primero
+        const datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]'); // Obtener datos de localStorage
 
         datos.forEach((dato, index) => {
             const fila = document.createElement('tr');
@@ -186,78 +115,87 @@ document.addEventListener('DOMContentLoaded', function () {
         agregarEventosBotones();
     }
 
+    // Función para agregar eventos a los botones de actualizar y eliminar
     function agregarEventosBotones() {
+        // Eliminar registro
         document.querySelectorAll('.eliminar').forEach(button => {
-            button.addEventListener('click', function () {
+            button.addEventListener('click', function() {
                 const index = this.getAttribute('data-index');
                 eliminarRegistro(index);
             });
         });
 
+        // Cargar datos para actualizar
         document.querySelectorAll('.actualizar').forEach(button => {
-            button.addEventListener('click', function () {
+            button.addEventListener('click', function() {
                 const index = this.getAttribute('data-index');
                 cargarDatosParaActualizar(index);
             });
         });
     }
 
+    // Función para cargar los datos en el formulario para su actualización
     function cargarDatosParaActualizar(index) {
         const datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
-        const fields = ['codigo', 'nombre', 'direccion', 'municipio', 'departamento', 'telefono', 'fechaNacimiento', 'sexo'];
-
-        fields.forEach(field => {
-            document.getElementById(field).value = datos[index][field];
-        });
+        document.getElementById('codigo').value = datos[index].codigo;
+        document.getElementById('nombre').value = datos[index].nombre;
+        document.getElementById('direccion').value = datos[index].direccion;
+        document.getElementById('municipio').value = datos[index].municipio;
+        document.getElementById('departamento').value = datos[index].departamento;
+        document.getElementById('telefono').value = datos[index].telefono;
+        document.getElementById('fechaNacimiento').value = datos[index].fechaNacimiento;
+        document.getElementById('sexo').value = datos[index].sexo;
 
         esActualizacion = true;
         indiceActualizacion = index;
     }
 
+    // Función para eliminar un registro
     function eliminarRegistro(index) {
         let datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
-        datos.splice(index, 1);
-        localStorage.setItem('datosUsuarios', JSON.stringify(datos));
-        mostrarDatos();
+        datos.splice(index, 1); // Eliminar el registro específico
+        localStorage.setItem('datosUsuarios', JSON.stringify(datos)); // Actualizar localStorage
+        mostrarDatos(); // Refrescar la tabla
     }
-
     function codigoExiste(codigo, indiceIgnorado) {
         const datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
         return datos.some((item, index) => item.codigo === codigo && index !== indiceIgnorado);
     }
 
-    form.addEventListener('submit', function (e) {
-    e.preventDefault();
 
-    const fields = ['codigo', 'nombre', 'direccion', 'municipio', 'departamento', 'telefono', 'fechaNacimiento', 'sexo'];
-    const nuevoRegistro = {};
+    // Manejador del evento submit del formulario
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
 
-    fields.forEach(field => {
-        nuevoRegistro[field] = document.getElementById(field).value;
-    });
+        // Obtener los valores del formulario
+        const codigo = document.getElementById('codigo').value;
+        const nombre = document.getElementById('nombre').value;
+        const direccion = document.getElementById('direccion').value;
+        const municipio = document.getElementById('municipio').value;
+        const departamento = document.getElementById('departamento').value;
+        const telefono = document.getElementById('telefono').value;
+        const fechaNacimiento = document.getElementById('fechaNacimiento').value;
+        const sexo = document.getElementById('sexo').value;
 
-    let datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
+        let datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
 
-    if (esActualizacion) {
-        datos[indiceActualizacion] = nuevoRegistro;
-        esActualizacion = false;
-    } else {
-        // Verificar si el código ya existe antes de agregar un nuevo registro
-        const codigoExistente = codigoExiste(nuevoRegistro.codigo, -1); // -1 para indicar que no se ignore ningún índice
-        if (codigoExistente) {
-            alert('El código ya está registrado. Por favor, elija otro código o actualice el registro existente.');
-            return; // No agregar el registro y salir de la función
+      
+        const nuevoRegistro = { codigo, nombre, direccion, municipio, departamento, telefono, fechaNacimiento, sexo };
+
+        
+
+        if (esActualizacion) {
+            datos[indiceActualizacion] = nuevoRegistro; // Actualizar el registro existente
+            esActualizacion = false; // Resetear la bandera de actualización
+        } else {
+            datos.push(nuevoRegistro); // Agregar como nuevo registro
         }
 
-        datos.push(nuevoRegistro);
-    }
-
-    localStorage.setItem('datosUsuarios', JSON.stringify(datos));
-    form.reset();
-    mostrarDatos();
-    alert(esActualizacion ? 'Registro actualizado con éxito' : 'Registro agregado con éxito');
-});
-
+        localStorage.setItem('datosUsuarios', JSON.stringify(datos));
+        form.reset();
+        mostrarDatos();
+        alert(esActualizacion ? 'Registro actualizado con éxito' : 'Registro agregado con éxito');
+    });
 
     mostrarDatos();
 });
