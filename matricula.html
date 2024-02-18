@@ -99,7 +99,7 @@
     </div>
     <div class="container mt-5">
         <div id="formularioDiv" style="display: none;">
-            <form>
+            <form id="matriculaForm">
                 <div class="form-group">
                     <label for="codigo">Código de Estudiante:</label>
                     <input type="text" class="form-control" id="codigo" autocomplete="off" required>
@@ -107,7 +107,7 @@
                 <div class="form-group">
                     <label for="nombre">Nombre de Estudiante:</label>
                     <select class="form-control" id="usuarios" required>
-                        <option value="">Selecciona una Estudiante</option>
+                        <option value="">Selecciona un Estudiante</option>
                         <!-- Las opciones se agregarán dinámicamente desde el JavaScript -->
                     </select>
                 </div>
@@ -147,9 +147,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
-
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.querySelector('form');
+        document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('matriculaForm');
     let esActualizacion = false; 
     let indiceActualizacion;
     const toggleButton = document.getElementById('toggleButton');
@@ -185,13 +184,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     toggleButton.addEventListener('click', function () {
-            if (formularioDiv.style.display === 'none') {
-                formularioDiv.style.display = 'block';
-            } else {
-                formularioDiv.style.display = 'none';
-                // Aquí puedes agregar código para limpiar los campos del formulario si es necesario
-            }
-        });
+        if (formularioDiv.style.display === 'none') {
+            formularioDiv.style.display = 'block';
+        } else {
+            formularioDiv.style.display = 'none';
+            // Aquí puedes agregar código para limpiar los campos del formulario si es necesario
+        }
+    });
 
     function mostrarDatos() {
         const tablaDatos = document.getElementById('tablaDatos');
@@ -252,74 +251,64 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Función para actualizar el select de materias y usuarios
-function actualizarSelect(elementId, localStorageKey, valueKey, textKey) {
-    const selectElement = document.getElementById(elementId);
-    selectElement.innerHTML = '';
+    function actualizarSelect(elementId, localStorageKey, valueKey, textKey) {
+        const selectElement = document.getElementById(elementId);
+        selectElement.innerHTML = '';
 
-    const data = JSON.parse(localStorage.getItem(localStorageKey) || '[]');
+        const data = JSON.parse(localStorage.getItem(localStorageKey) || '[]');
 
-    data.forEach(item => {
-        const option = document.createElement('option');
-        option.value = item[valueKey];
-        option.textContent = item[textKey];
-        selectElement.appendChild(option);
-    });
-}
-
-// Evento de envío del formulario
-form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const fields = ['codigo', 'nombre', 'direccion', 'municipio', 'departamento', 'telefono', 'fechaNacimiento', 'sexo'];
-    const nuevoRegistro = {};
-
-    fields.forEach(field => {
-        nuevoRegistro[field] = document.getElementById(field).value;
-    });
-
-    let datos;
-    let localStorageKey;
-    let successMessage;
-
-    if (esActualizacion) {
-        datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
-        datos[indiceActualizacion] = nuevoRegistro;
-        localStorageKey = 'datosUsuarios';
-        successMessage = 'Registro actualizado con éxito';
-        esActualizacion = false;
-    } else {
-        // Verificar si el código ya existe antes de agregar un nuevo registro
-        const codigoExistente = codigoExiste(nuevoRegistro.codigo, -1); // -1 para indicar que no se ignore ningún índice
-        if (codigoExistente) {
-            alert('El código ya está registrado. Por favor, elija otro código o actualice el registro existente.');
-            return; // No agregar el registro y salir de la función
-        }
-
-        datos = JSON.parse(localStorage.getItem('datosMatriculas') || '[]');
-        datos.push(nuevoRegistro);
-        localStorageKey = 'datosMatriculas';
-        successMessage = 'Registro de matrícula agregado con éxito';
+        data.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item[valueKey];
+            option.textContent = item[textKey];
+            selectElement.appendChild(option);
+        });
     }
 
-    localStorage.setItem(localStorageKey, JSON.stringify(datos));
-    form.reset();
+    // Evento de envío del formulario
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const fields = ['codigo', 'nombre', 'materia'];
+        const nuevoRegistro = {};
+
+        fields.forEach(field => {
+            nuevoRegistro[field] = document.getElementById(field).value;
+        });
+
+        let datos;
+        let localStorageKey;
+        let successMessage;
+
+        if (esActualizacion) {
+            datos = JSON.parse(localStorage.getItem('datosMatriculas') || '[]');
+            datos[indiceActualizacion] = nuevoRegistro;
+            localStorageKey = 'datosMatriculas';
+            successMessage = 'Registro actualizado con éxito';
+            esActualizacion = false;
+        } else {
+            datos = JSON.parse(localStorage.getItem('datosMatriculas') || '[]');
+            datos.push(nuevoRegistro);
+            localStorageKey = 'datosMatriculas';
+            successMessage = 'Registro de matrícula agregado con éxito';
+        }
+
+        localStorage.setItem(localStorageKey, JSON.stringify(datos));
+        form.reset();
+        mostrarDatos();
+        actualizarSelect('usuarios', 'datosUsuarios', 'codigo', 'nombre'); // Llama a la función para actualizar el select de usuarios
+        alert(successMessage);
+    });
+
+    // Llama a la función para actualizar el select de materias al cargar la página
+    actualizarSelect('materia', 'datosMaterias', 'codigo', 'nombre');
+    // Llama a la función para actualizar el select de usuarios al cargar la página
+    actualizarSelect('usuarios', 'datosUsuarios', 'codigo', 'nombre');
+
     mostrarDatos();
-    actualizarSelect('usuarios', 'datosUsuarios', 'codigo', 'nombre'); // Llama a la función para actualizar el select de usuarios
-    alert(successMessage);
 });
-
-// Llama a la función para actualizar el select de materias al cargar la página
-actualizarSelect('materia', 'datosMaterias', 'codigo', 'nombre');
-// Llama a la función para actualizar el select de usuarios al cargar la página
-actualizarSelect('usuarios', 'datosUsuarios', 'codigo', 'nombre');
-
-
-    mostrarDatos();
-    actualizarSelectMaterias();
-});
-</script>
 
     </script>
-    
 </body>
 </html>
+
