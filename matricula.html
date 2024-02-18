@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Alumnos</title>
+    <title>Registro de Matrícula</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-<style>
-
-body {
+    <style>
+        body {
             background-color: #222;
             color: #fff;
             font-family: 'Arial', sans-serif;
@@ -34,14 +33,12 @@ body {
 
         .form-group {
             margin-bottom: 15px;
-            
         }
 
         .form-group label {
             display: block;
             text-align: left;
             margin-bottom: 5px;
-            
         }
 
         .form-control {
@@ -54,7 +51,6 @@ body {
             background-color: #444; /* Color de fondo del input */
             color: #fff; /* Color del texto del input */
             outline: none; /* Quita el contorno al hacer clic en el input */
-
         }
 
         .btn-primary {
@@ -70,126 +66,81 @@ body {
             margin: 4px 2px;
             cursor: pointer;
             width: 100%;
-            
         }
 
         .btn-primary:hover {
             background-color: #222;
-            
         }
-
-
-        
     </style>
-
-
-
-</style>
-
 </head>
 <body>
-
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Registro de Materias</a>
+        <a class="navbar-brand" href="#">Registro de Matrícula</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="matricula.html">Matrícula</a>
                 </li>
-                <li class="nav-item ">
+                <li class="nav-item">
                     <a class="nav-link" href="materia.html">Materia</a>
-
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Estudiante</a>
-                    </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Estudiante</a>
                 </li>
             </ul>
         </div>
     </nav>
-
     <div class="container mt-5">
-        <h1>Registro de Alumnos</h1>
+        <h1>Registro de Matrícula</h1>
         <button id="toggleButton" class="btn btn-primary">Mostrar/ocultar formulario</button>
     </div>
     <div class="container mt-5">
-        
         <div id="formularioDiv" style="display: none;">
             <form>
-            <div class="form-group">
-                <label for="codigo">Código:</label>
-                <input type="text" class="form-control" id="codigo" autocomplete="off" required>
-            </div>
-            <div class="form-group">
-                <label for="nombre">Nombre:</label>
-                <input type="text" class="form-control" id="nombre" autocomplete="off" required>
-            </div>
-            <div class="form-group">
-                <label for="direccion">Dirección:</label>
-                <input type="text" class="form-control" id="direccion" autocomplete="off" required>
-            </div>
-            <div class="form-group">
-                <label for="municipio">Municipio:</label>
-                <input type="text" class="form-control" id="municipio" autocomplete="off" required>
-            </div>
-            <div class="form-group">
-                <label for="departamento">Departamento:</label>
-                <input type="text" class="form-control" id="departamento" autocomplete="off" required>
-            </div>
-            <div class="form-group">
-                <label for="telefono">Teléfono:</label>
-                <input type="tel" class="form-control" id="telefono" autocomplete="off" required pattern="[0-9]+" title="Por favor, introduce solo números">
-            </div>
-            
-            <div class="form-group">
-                <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-                <input type="date" class="form-control" id="fechaNacimiento" autocomplete="off" required>
-            </div>
-            <div class="form-group">
-                <label for="sexo">Sexo:</label>
-                <select class="form-control" id="sexo" required>
-                    <option value="">Selecciona una opción</option>
-                    <option value="F">Femenino</option>
-                    <option value="M">Masculino</option>
-                </select>
-            </div>
-         <button type="submit" class="btn btn-primary">Registrar</button>
-        </form>
-
-
+                <div class="form-group">
+                    <label for="codigo">Código de Estudiante:</label>
+                    <input type="text" class="form-control" id="codigo" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Nombre de Estudiante:</label>
+                    <input type="text" class="form-control" id="nombre" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <label for="materia">Materia:</label>
+                    <select class="form-control" id="materia" required>
+                        <option value="">Selecciona una materia</option>
+                        <!-- Las opciones se agregarán dinámicamente desde el JavaScript -->
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Registrar Matrícula</button>
+            </form>
+        </div>
     </div>
-    </div>
-
     <div class="const1">
-    <div class="table-responsive">
-        <div class="form-group">  
-        <table class="table table-dark table-striped">
-            <input type="text" id="busquedaInput" class="form-control" placeholder="Ingresa tu búsqueda">
-            <thead>
-                <tr>
-
-                    <th>Código</th>
-                    <th>Nombre</th>
-                    <th>Dirección</th>
-                    <th>Municipio</th>
-                    <th>Departamento</th>
-                    <th>Teléfono</th>
-                    <th>Fecha de Nacimiento</th>
-                    <th>Sexo</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="tablaDatos"></tbody>
-        </table>
+        <div class="table-responsive">
+            <div class="form-group">  
+                <table class="table table-dark table-striped">
+                    <input type="text" id="busquedaInput" class="form-control" placeholder="Ingresa tu búsqueda">
+                    <thead>
+                        <tr>
+                            <th>Código de Estudiante</th>
+                            <th>Nombre de Estudiante</th>
+                            <th>Materia</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaDatos"></tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
     <script>
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -198,8 +149,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let indiceActualizacion;
     const toggleButton = document.getElementById('toggleButton');
     const formularioDiv = document.getElementById('formularioDiv');
-
-
 
     function filtrarRegistros() {
         const input = document.getElementById('busquedaInput');
@@ -238,26 +187,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Aquí puedes agregar código para limpiar los campos del formulario si es necesario
             }
         });
- 
- 
 
     function mostrarDatos() {
         const tablaDatos = document.getElementById('tablaDatos');
         tablaDatos.innerHTML = '';
 
-        const datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
+        const datos = JSON.parse(localStorage.getItem('datosMatriculas') || '[]');
 
         datos.forEach((dato, index) => {
             const fila = document.createElement('tr');
             fila.innerHTML = `
                 <td>${dato.codigo}</td>
                 <td>${dato.nombre}</td>
-                <td>${dato.direccion}</td>
-                <td>${dato.municipio}</td>
-                <td>${dato.departamento}</td>
-                <td>${dato.telefono}</td>
-                <td>${dato.fechaNacimiento}</td>
-                <td>${dato.sexo}</td>
+                <td>${dato.materia}</td>
                 <td>
                     <button class="btn btn-warning actualizar" data-index=${index}>Actualizar</button>
                     <button class="btn btn-danger eliminar" data-index=${index}>Eliminar</button>
@@ -286,8 +228,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function cargarDatosParaActualizar(index) {
-        const datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
-        const fields = ['codigo', 'nombre', 'direccion', 'municipio', 'departamento', 'telefono', 'fechaNacimiento', 'sexo'];
+        const datos = JSON.parse(localStorage.getItem('datosMatriculas') || '[]');
+        const fields = ['codigo', 'nombre', 'materia'];
 
         fields.forEach(field => {
             document.getElementById(field).value = datos[index][field];
@@ -298,59 +240,57 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function eliminarRegistro(index) {
-        let datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
+        let datos = JSON.parse(localStorage.getItem('datosMatriculas') || '[]');
         datos.splice(index, 1);
-        localStorage.setItem('datosUsuarios', JSON.stringify(datos));
+        localStorage.setItem('datosMatriculas', JSON.stringify(datos));
         mostrarDatos();
     }
 
-    function codigoExiste(codigo, indiceIgnorado) {
-        const datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
-        return datos.some((item, index) => item.codigo === codigo && index !== indiceIgnorado);
+    function actualizarSelectMaterias() {
+        const selectMaterias = document.getElementById('materia');
+        selectMaterias.innerHTML = '';
+
+        const materias = JSON.parse(localStorage.getItem('datosMaterias') || '[]');
+
+        materias.forEach(materia => {
+            const opcion = document.createElement('option');
+            opcion.value = materia.codigo;
+            opcion.textContent = materia.nombre;
+            selectMaterias.appendChild(opcion);
+        });
     }
 
     form.addEventListener('submit', function (e) {
-    e.preventDefault();
+        e.preventDefault();
 
-    const fields = ['codigo', 'nombre', 'direccion', 'municipio', 'departamento', 'telefono', 'fechaNacimiento', 'sexo'];
-    const nuevoRegistro = {};
+        const fields = ['codigo', 'nombre', 'materia'];
+        const nuevaMatricula = {};
 
-    fields.forEach(field => {
-        nuevoRegistro[field] = document.getElementById(field).value;
-    });
+        fields.forEach(field => {
+            nuevaMatricula[field] = document.getElementById(field).value;
+        });
 
-    let datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
+        let datos = JSON.parse(localStorage.getItem('datosMatriculas') || '[]');
 
-    if (esActualizacion) {
-        datos[indiceActualizacion] = nuevoRegistro;
-        esActualizacion = false;
-    } else {
-        // Verificar si el código ya existe antes de agregar un nuevo registro
-        const codigoExistente = codigoExiste(nuevoRegistro.codigo, -1); // -1 para indicar que no se ignore ningún índice
-        if (codigoExistente) {
-            alert('El código ya está registrado. Por favor, elija otro código o actualice el registro existente.');
-            return; // No agregar el registro y salir de la función
+        if (esActualizacion) {
+            datos[indiceActualizacion] = nuevaMatricula;
+            esActualizacion = false;
+        } else {
+            datos.push(nuevaMatricula);
         }
 
-        datos.push(nuevoRegistro);
-    }
-
-    localStorage.setItem('datosUsuarios', JSON.stringify(datos));
-    form.reset();
-    mostrarDatos();
-    alert(esActualizacion ? 'Registro actualizado con éxito' : 'Registro agregado con éxito');
-});
-
+        localStorage.setItem('datosMatriculas', JSON.stringify(datos));
+        form.reset();
+        mostrarDatos();
+        alert(esActualizacion ? 'Registro de matrícula actualizado con éxito' : 'Registro de matrícula agregado con éxito');
+    });
 
     mostrarDatos();
+    actualizarSelectMaterias();
 });
-
-
-
-
-
-
+</script>
 
     </script>
+    
 </body>
 </html>

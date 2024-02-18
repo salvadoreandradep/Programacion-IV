@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Materias</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #222;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+        }
+        .const1{
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 10px;
+            border-radius: 50px;
+            background-color: #444; /* Color de fondo del input */
+            color: #fff; /* Color del texto del input */
+            outline: none; /* Quita el contorno al hacer clic en el input */
+        }
+
+        .btn-primary {
+            background-color: #fff;
+            border: none;
+            border-radius: 50px;
+            color: black;
+            padding: 15px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: #222;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Registro de Materias</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="matricula.html">Matrícula</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="materia.html">Materia</a>
+
+                    <li class="nav-item ">
+                        <a class="nav-link" href="index.html">Estudiante</a>
+                    </li>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h1>Registro de Materias</h1>
+        <button id="toggleButton" class="btn btn-primary">Mostrar/ocultar formulario</button>
+    </div>
+    <div class="container mt-5">
+        <div id="formularioDiv" style="display: none;">
+            <form>
+                <div class="form-group">
+                    <label for="codigo">Código de Materia:</label>
+                    <input type="text" class="form-control" id="codigo" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Nombre de Materia:</label>
+                    <input type="text" class="form-control" id="nombre" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <label for="creditos">Créditos:</label>
+                    <input type="number" class="form-control" id="creditos" autocomplete="off" required>
+                </div>
+                <div class="form-group">
+                    <label for="docente">Docente:</label>
+                    <input type="text" class="form-control" id="docente" autocomplete="off" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Registrar Materia</button>
+            </form>
+        </div>
+    </div>
+    <div class="const1">
+        <div class="table-responsive">
+            <div class="form-group">  
+                <table class="table table-dark table-striped">
+                    <input type="text" id="busquedaInput" class="form-control" placeholder="Ingresa tu búsqueda">
+                    <thead>
+                        <tr>
+                            <th>Código de Materia</th>
+                            <th>Nombre de Materia</th>
+                            <th>Créditos</th>
+                            <th>Docente</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaDatos"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.querySelector('form');
+            let esActualizacion = false; 
+            let indiceActualizacion;
+            const toggleButton = document.getElementById('toggleButton');
+            const formularioDiv = document.getElementById('formularioDiv');
+    
+            function filtrarRegistros() {
+                const input = document.getElementById('busquedaInput');
+                const filtro = input.value.toUpperCase();
+                const tablaDatos = document.getElementById('tablaDatos');
+                const filas = tablaDatos.getElementsByTagName('tr');
+    
+                for (let i = 0; i < filas.length; i++) {
+                    const celdas = filas[i].getElementsByTagName('td');
+                    let mostrarFila = false;
+    
+                    for (let j = 0; j < celdas.length; j++) {
+                        if (celdas[j]) {
+                            const textoCelda = celdas[j].textContent || celdas[j].innerText;
+    
+                            if (textoCelda.toUpperCase().indexOf(filtro) > -1) {
+                                mostrarFila = true;
+                                break;
+                            }
+                        }
+                    }
+    
+                    filas[i].style.display = mostrarFila ? '' : 'none';
+                }
+            }
+    
+            document.getElementById('busquedaInput').addEventListener('input', function () {
+                filtrarRegistros();
+            });
+    
+            toggleButton.addEventListener('click', function () {
+                    if (formularioDiv.style.display === 'none') {
+                        formularioDiv.style.display = 'block';
+                    } else {
+                        formularioDiv.style.display = 'none';
+                        // Aquí puedes agregar código para limpiar los campos del formulario si es necesario
+                    }
+                });
+    
+            function mostrarDatos() {
+                const tablaDatos = document.getElementById('tablaDatos');
+                tablaDatos.innerHTML = '';
+    
+                const datos = JSON.parse(localStorage.getItem('datosMaterias') || '[]');
+    
+                datos.forEach((dato, index) => {
+                    const fila = document.createElement('tr');
+                    fila.innerHTML = `
+                        <td>${dato.codigo}</td>
+                        <td>${dato.nombre}</td>
+                        <td>${dato.creditos}</td>
+                        <td>${dato.docente}</td>
+                        <td>
+                            <button class="btn btn-warning actualizar" data-index=${index}>Actualizar</button>
+                            <button class="btn btn-danger eliminar" data-index=${index}>Eliminar</button>
+                        </td>
+                    `;
+                    tablaDatos.appendChild(fila);
+                });
+    
+                agregarEventosBotones();
+            }
+    
+            function agregarEventosBotones() {
+                document.querySelectorAll('.eliminar').forEach(button => {
+                    button.addEventListener('click', function () {
+                        const index = this.getAttribute('data-index');
+                        eliminarRegistro(index);
+                    });
+                });
+    
+                document.querySelectorAll('.actualizar').forEach(button => {
+                    button.addEventListener('click', function () {
+                        const index = this.getAttribute('data-index');
+                        cargarDatosParaActualizar(index);
+                    });
+                });
+            }
+    
+            function cargarDatosParaActualizar(index) {
+                const datos = JSON.parse(localStorage.getItem('datosMaterias') || '[]');
+                const fields = ['codigo', 'nombre', 'creditos', 'docente'];
+    
+                fields.forEach(field => {
+                    document.getElementById(field).value = datos[index][field];
+                });
+    
+                esActualizacion = true;
+                indiceActualizacion = index;
+            }
+    
+            function eliminarRegistro(index) {
+                let datos = JSON.parse(localStorage.getItem('datosMaterias') || '[]');
+                datos.splice(index, 1);
+                localStorage.setItem('datosMaterias', JSON.stringify(datos));
+                mostrarDatos();
+            }
+    
+            function codigoExiste(codigo, indiceIgnorado) {
+                const datos = JSON.parse(localStorage.getItem('datosMaterias') || '[]');
+                return datos.some((item, index) => item.codigo === codigo && index !== indiceIgnorado);
+            }
+    
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+    
+                const fields = ['codigo', 'nombre', 'creditos', 'docente'];
+                const nuevaMateria = {};
+    
+                fields.forEach(field => {
+                    nuevaMateria[field] = document.getElementById(field).value;
+                });
+    
+                let datos = JSON.parse(localStorage.getItem('datosMaterias') || '[]');
+    
+                if (esActualizacion) {
+                    datos[indiceActualizacion] = nuevaMateria;
+                    esActualizacion = false;
+                } else {
+                    // Verificar si el código ya existe antes de agregar una nueva materia
+                    const codigoExistente = codigoExiste(nuevaMateria.codigo, -1); // -1 para indicar que no se ignore ningún índice
+                    if (codigoExistente) {
+                        alert('El código de materia ya está registrado. Por favor, elija otro código o actualice el registro existente.');
+                        return; // No agregar el registro y salir de la función
+                    }
+    
+                    datos.push(nuevaMateria);
+                }
+    
+                localStorage.setItem('datosMaterias', JSON.stringify(datos));
+                form.reset();
+                mostrarDatos();
+                alert(esActualizacion ? 'Registro de materia actualizado con éxito' : 'Registro de materia agregado con éxito');
+            });
+    
+            mostrarDatos();
+        });
+    </script>
+    
+</body>
+</html>
