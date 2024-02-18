@@ -106,8 +106,13 @@
                 </div>
                 <div class="form-group">
                     <label for="nombre">Nombre de Estudiante:</label>
-                    <input type="text" class="form-control" id="nombre" autocomplete="off" required>
+                    <select class="form-control" id="usuarios" required>
+                        <option value="">Selecciona una Estudiante</option>
+                        <!-- Las opciones se agregarán dinámicamente desde el JavaScript -->
+                    </select>
                 </div>
+
+
                 <div class="form-group">
                     <label for="materia">Materia:</label>
                     <select class="form-control" id="materia" required>
@@ -246,44 +251,68 @@ document.addEventListener('DOMContentLoaded', function () {
         mostrarDatos();
     }
 
-    function actualizarSelectMaterias() {
-        const selectMaterias = document.getElementById('materia');
-        selectMaterias.innerHTML = '';
+    // Función para actualizar el select de materias y usuarios
+function actualizarSelect(elementId, localStorageKey, valueKey, textKey) {
+    const selectElement = document.getElementById(elementId);
+    selectElement.innerHTML = '';
 
-        const materias = JSON.parse(localStorage.getItem('datosMaterias') || '[]');
+    const data = JSON.parse(localStorage.getItem(localStorageKey) || '[]');
 
-        materias.forEach(materia => {
-            const opcion = document.createElement('option');
-            opcion.value = materia.codigo;
-            opcion.textContent = materia.nombre;
-            selectMaterias.appendChild(opcion);
-        });
-    }
+    data.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item[valueKey];
+        option.textContent = item[textKey];
+        selectElement.appendChild(option);
+    });
+}
 
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
+// Evento de envío del formulario
+form.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-        const fields = ['codigo', 'nombre', 'materia'];
-        const nuevaMatricula = {};
+    const fields = ['codigo', 'nombre', 'direccion', 'municipio', 'departamento', 'telefono', 'fechaNacimiento', 'sexo'];
+    const nuevoRegistro = {};
 
-        fields.forEach(field => {
-            nuevaMatricula[field] = document.getElementById(field).value;
-        });
+    fields.forEach(field => {
+        nuevoRegistro[field] = document.getElementById(field).value;
+    });
 
-        let datos = JSON.parse(localStorage.getItem('datosMatriculas') || '[]');
+    let datos;
+    let localStorageKey;
+    let successMessage;
 
-        if (esActualizacion) {
-            datos[indiceActualizacion] = nuevaMatricula;
-            esActualizacion = false;
-        } else {
-            datos.push(nuevaMatricula);
+    if (esActualizacion) {
+        datos = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
+        datos[indiceActualizacion] = nuevoRegistro;
+        localStorageKey = 'datosUsuarios';
+        successMessage = 'Registro actualizado con éxito';
+        esActualizacion = false;
+    } else {
+        // Verificar si el código ya existe antes de agregar un nuevo registro
+        const codigoExistente = codigoExiste(nuevoRegistro.codigo, -1); // -1 para indicar que no se ignore ningún índice
+        if (codigoExistente) {
+            alert('El código ya está registrado. Por favor, elija otro código o actualice el registro existente.');
+            return; // No agregar el registro y salir de la función
         }
 
-        localStorage.setItem('datosMatriculas', JSON.stringify(datos));
-        form.reset();
-        mostrarDatos();
-        alert(esActualizacion ? 'Registro de matrícula actualizado con éxito' : 'Registro de matrícula agregado con éxito');
-    });
+        datos = JSON.parse(localStorage.getItem('datosMatriculas') || '[]');
+        datos.push(nuevoRegistro);
+        localStorageKey = 'datosMatriculas';
+        successMessage = 'Registro de matrícula agregado con éxito';
+    }
+
+    localStorage.setItem(localStorageKey, JSON.stringify(datos));
+    form.reset();
+    mostrarDatos();
+    actualizarSelect('usuarios', 'datosUsuarios', 'codigo', 'nombre'); // Llama a la función para actualizar el select de usuarios
+    alert(successMessage);
+});
+
+// Llama a la función para actualizar el select de materias al cargar la página
+actualizarSelect('materia', 'datosMaterias', 'codigo', 'nombre');
+// Llama a la función para actualizar el select de usuarios al cargar la página
+actualizarSelect('usuarios', 'datosUsuarios', 'codigo', 'nombre');
+
 
     mostrarDatos();
     actualizarSelectMaterias();
