@@ -151,6 +151,7 @@
         <div class="form-group">  
             <table class="table table-dark table-striped">
                 <input type="text" id="busquedaInput" class="form-control" placeholder="Ingresa tu búsqueda">
+
                 <thead>
                     <tr>
                         <th>Código</th>
@@ -170,6 +171,36 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('form');
+    const busquedaInput = document.getElementById('busquedaInput');
+    const tablaMatriculas = document.getElementById('tablaMatriculas');
+
+    busquedaInput.addEventListener('input', function () {
+        const textoBusqueda = this.value.trim().toLowerCase();
+        const filas = tablaMatriculas.getElementsByTagName('tr');
+
+        for (let i = 0; i < filas.length; i++) {
+            const fila = filas[i];
+            const celdas = fila.getElementsByTagName('td');
+            let encontrado = false;
+
+            for (let j = 0; j < celdas.length; j++) {
+                const celda = celdas[j];
+                if (celda) {
+                    const contenido = celda.textContent.toLowerCase();
+                    if (contenido.includes(textoBusqueda)) {
+                        encontrado = true;
+                        break;
+                    }
+                }
+            }
+
+            if (encontrado) {
+                fila.style.display = '';
+            } else {
+                fila.style.display = 'none';
+            }
+        }
+    });
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();
