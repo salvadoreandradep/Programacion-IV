@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscripción</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #222;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 10px;
+            border-radius: 50px;
+            background-color: #444; 
+            color: #fff; 
+            outline: none; 
+        }
+
+        .btn-primary {
+            background-color: #fff;
+            border: none;
+            border-radius: 50px;
+            color: black;
+            padding: 15px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: #222;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            font-size: 20px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 40px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ffcc00;
+        }
+
+        #tablaInscripciones {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #tablaInscripciones th, #tablaInscripciones td {
+        border: 1px solid #333;
+        padding: 8px;
+        text-align: left;
+    }
+
+    #tablaInscripciones th {
+        background-color: #333;
+    }
+
+    /* Estilos para la tabla responsive */
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    /* Estilos para el campo de búsqueda */
+    #busquedaInput {
+        margin-bottom: 10px;
+    }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="inicio.html">Inicio</a></li>
+        <li><a href="estudiante.html">Estudiantes</a></li>
+        <li><a href="materia.html">Materia</a></li>
+        <li><a href="matricula.html">Matrícula</a></li>
+        <li><a href="inscripcion.html">Inscripción</a></li>
+    </ul>
+</nav>
+
+<div class="container mt-5">
+    <h1>Inscripción</h1>
+</div>
+
+<div class="container mt-5">
+    <form>
+        <div class="form-group">
+            <label for="nombreEstudiante">Nombre del Estudiante:</label>
+            <select class="form-control" id="nombreEstudiante" required>
+                <option value="">Selecciona un estudiante</option>
+                <!-- Opciones de estudiantes se cargarán dinámicamente desde matrícula.html -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="materia">Materia:</label>
+            <select class="form-control" id="materia" required>
+                <option value="">Selecciona una materia</option>
+                <!-- Opciones de materias se cargarán dinámicamente desde materia.html -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="fechaInscripcion">Fecha de Inscripción:</label>
+            <input type="date" class="form-control" id="fechaInscripcion" required>
+        </div>
+        <div class="form-group">
+            <label for="ciclo">Ciclo:</label>
+            <input type="text" class="form-control" id="ciclo" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Inscribir</button>
+    </form>
+</div>
+
+
+
+  
+
+
+<div class="table-responsive">
+    <table id="tablaInscripciones">
+        <input type="text" id="busquedaInput" class="form-control" placeholder="Ingresa tu búsqueda">
+        <thead>
+            <tr>
+                <th>Nombre del Estudiante</th>
+                <th>Materia</th>
+                <th>Fecha de Inscripción</th>
+                <th>Ciclo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los datos de inscripción se cargarán dinámicamente aquí -->
+        </tbody>
+    </table>
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const nombreEstudiante = document.getElementById('nombreEstudiante').value;
+        const materia = document.getElementById('materia').value;
+        const fechaInscripcion = document.getElementById('fechaInscripcion').value;
+        const ciclo = document.getElementById('ciclo').value;
+
+        const inscripcion = {
+            nombreEstudiante: nombreEstudiante,
+            materia: materia,
+            fechaInscripcion: fechaInscripcion,
+            ciclo: ciclo
+        };
+
+        let inscripciones = JSON.parse(localStorage.getItem('inscripciones') || '[]');
+        inscripciones.push(inscripcion);
+        localStorage.setItem('inscripciones', JSON.stringify(inscripciones));
+
+        alert('Inscripción guardada con éxito');
+
+        form.reset();
+    });
+
+    function mostrarInscripciones() {
+        const tablaInscripciones = document.getElementById('tablaInscripciones');
+        const inscripciones = JSON.parse(localStorage.getItem('inscripciones') || '[]');
+
+        tablaInscripciones.getElementsByTagName('tbody')[0].innerHTML = '';
+
+        inscripciones.forEach(inscripcion => {
+            const fila = document.createElement('tr');
+            fila.innerHTML = `
+                <td>${inscripcion.nombreEstudiante}</td>
+                <td>${inscripcion.materia}</td>
+                <td>${inscripcion.fechaInscripcion}</td>
+                <td>${inscripcion.ciclo}</td>
+            `;
+            tablaInscripciones.appendChild(fila);
+        });
+    }
+
+    mostrarInscripciones();
+
+    function cargarEstudiantes() {
+        const datosMatriculas = JSON.parse(localStorage.getItem('matriculas') || '[]');
+        const nombreEstudianteSelect = document.getElementById('nombreEstudiante');
+        datosMatriculas.forEach(matricula => {
+            const option = document.createElement('option');
+            option.value = matricula.nombreEstudiante;
+            option.textContent = matricula.nombreEstudiante;
+            nombreEstudianteSelect.appendChild(option);
+        });
+    }
+
+    function cargarMaterias() {
+        const datosMaterias = JSON.parse(localStorage.getItem('datosMaterias') || '[]');
+        const materiaSelect = document.getElementById('materia');
+        datosMaterias.forEach(materia => {
+            const option = document.createElement('option');
+            option.value = materia.nombre;
+            option.textContent = materia.nombre;
+            materiaSelect.appendChild(option);
+        });
+    }
+
+    cargarEstudiantes();
+    cargarMaterias();
+});
+
+</script>
+
+</body>
+</html>
