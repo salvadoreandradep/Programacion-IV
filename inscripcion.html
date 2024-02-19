@@ -167,13 +167,11 @@
 </div>
 
 
-
-  
-
-
 <div class="table-responsive">
-    <table id="tablaInscripciones">
+    <div class="form-group">  
         <input type="text" id="busquedaInput" class="form-control" placeholder="Ingresa tu búsqueda">
+    </div>
+    <table class="table table-dark table-striped">
         <thead>
             <tr>
                 <th>Nombre del Estudiante</th>
@@ -182,92 +180,91 @@
                 <th>Ciclo</th>
             </tr>
         </thead>
-        <tbody>
-            <!-- Los datos de inscripción se cargarán dinámicamente aquí -->
-        </tbody>
+        <tbody id="tablaInscripciones"></tbody>
     </table>
 </div>
-</div>
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.querySelector('form');
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form');
 
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
 
-        const nombreEstudiante = document.getElementById('nombreEstudiante').value;
-        const materia = document.getElementById('materia').value;
-        const fechaInscripcion = document.getElementById('fechaInscripcion').value;
-        const ciclo = document.getElementById('ciclo').value;
+            const nombreEstudiante = document.getElementById('nombreEstudiante').value;
+            const materia = document.getElementById('materia').value;
+            const fechaInscripcion = document.getElementById('fechaInscripcion').value;
+            const ciclo = document.getElementById('ciclo').value;
 
-        const inscripcion = {
-            nombreEstudiante: nombreEstudiante,
-            materia: materia,
-            fechaInscripcion: fechaInscripcion,
-            ciclo: ciclo
-        };
+            const inscripcion = {
+                nombreEstudiante: nombreEstudiante,
+                materia: materia,
+                fechaInscripcion: fechaInscripcion,
+                ciclo: ciclo
+            };
 
-        let inscripciones = JSON.parse(localStorage.getItem('inscripciones') || '[]');
-        inscripciones.push(inscripcion);
-        localStorage.setItem('inscripciones', JSON.stringify(inscripciones));
+            let inscripciones = JSON.parse(localStorage.getItem('inscripciones') || '[]');
+            inscripciones.push(inscripcion);
+            localStorage.setItem('inscripciones', JSON.stringify(inscripciones));
 
-        alert('Inscripción guardada con éxito');
+            alert('Inscripción guardada con éxito');
 
-        form.reset();
+            mostrarInscripciones();
+            form.reset();
+        });
+
+        function mostrarInscripciones() {
+            const tablaInscripciones = document.getElementById('tablaInscripciones');
+            const inscripciones = JSON.parse(localStorage.getItem('inscripciones') || '[]');
+
+            tablaInscripciones.innerHTML = '';
+
+            inscripciones.forEach(inscripcion => {
+                const fila = document.createElement('tr');
+                fila.innerHTML = `
+                    <td>${inscripcion.nombreEstudiante}</td>
+                    <td>${inscripcion.materia}</td>
+                    <td>${inscripcion.fechaInscripcion}</td>
+                    <td>${inscripcion.ciclo}</td>
+                `;
+                tablaInscripciones.appendChild(fila);
+            });
+        }
+
+        mostrarInscripciones();
+
+        function cargarEstudiantes() {
+            const datosMatriculas = JSON.parse(localStorage.getItem('matriculas') || '[]');
+            const nombreEstudianteSelect = document.getElementById('nombreEstudiante');
+            datosMatriculas.forEach(matricula => {
+                const option = document.createElement('option');
+                option.value = matricula.nombreEstudiante;
+                option.textContent = matricula.nombreEstudiante;
+                nombreEstudianteSelect.appendChild(option);
+            });
+        }
+
+        function cargarMaterias() {
+            const datosMaterias = JSON.parse(localStorage.getItem('datosMaterias') || '[]');
+            const materiaSelect = document.getElementById('materia');
+            datosMaterias.forEach(materia => {
+                const option = document.createElement('option');
+                option.value = materia.nombre;
+                option.textContent = materia.nombre;
+                materiaSelect.appendChild(option);
+            });
+        }
+
+        cargarEstudiantes();
+        cargarMaterias();
     });
-
-    function mostrarInscripciones() {
-        const tablaInscripciones = document.getElementById('tablaInscripciones');
-        const inscripciones = JSON.parse(localStorage.getItem('inscripciones') || '[]');
-
-        tablaInscripciones.getElementsByTagName('tbody')[0].innerHTML = '';
-
-        inscripciones.forEach(inscripcion => {
-            const fila = document.createElement('tr');
-            fila.innerHTML = `
-                <td>${inscripcion.nombreEstudiante}</td>
-                <td>${inscripcion.materia}</td>
-                <td>${inscripcion.fechaInscripcion}</td>
-                <td>${inscripcion.ciclo}</td>
-            `;
-            tablaInscripciones.appendChild(fila);
-        });
-    }
-
-    mostrarInscripciones();
-
-    function cargarEstudiantes() {
-        const datosMatriculas = JSON.parse(localStorage.getItem('matriculas') || '[]');
-        const nombreEstudianteSelect = document.getElementById('nombreEstudiante');
-        datosMatriculas.forEach(matricula => {
-            const option = document.createElement('option');
-            option.value = matricula.nombreEstudiante;
-            option.textContent = matricula.nombreEstudiante;
-            nombreEstudianteSelect.appendChild(option);
-        });
-    }
-
-    function cargarMaterias() {
-        const datosMaterias = JSON.parse(localStorage.getItem('datosMaterias') || '[]');
-        const materiaSelect = document.getElementById('materia');
-        datosMaterias.forEach(materia => {
-            const option = document.createElement('option');
-            option.value = materia.nombre;
-            option.textContent = materia.nombre;
-            materiaSelect.appendChild(option);
-        });
-    }
-
-    cargarEstudiantes();
-    cargarMaterias();
-});
-
 </script>
+
 
 </body>
 </html>
