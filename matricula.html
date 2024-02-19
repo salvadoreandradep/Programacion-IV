@@ -147,7 +147,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('matriculaForm');
     let esActualizacion = false; 
     let indiceActualizacion;
@@ -197,6 +197,7 @@
         tablaDatos.innerHTML = '';
 
         const datos = JSON.parse(localStorage.getItem('datosMatriculas') || '[]');
+        const datos2 = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
 
         datos.forEach((dato, index) => {
             const fila = document.createElement('tr');
@@ -273,8 +274,14 @@
         const nuevoRegistro = {};
 
         fields.forEach(field => {
-            nuevoRegistro[field] = document.getElementById(field).value;
-        });
+    const element = document.getElementById(field);
+    if (element) {
+        nuevoRegistro[field] = element.value;
+    } else {
+        console.error(`No se encontró ningún elemento con el ID '${field}' en el DOM.`);
+    }
+});
+
 
         let datos;
         let localStorageKey;
@@ -293,10 +300,12 @@
             successMessage = 'Registro de matrícula agregado con éxito';
         }
 
+        
+
         localStorage.setItem(localStorageKey, JSON.stringify(datos));
         form.reset();
         mostrarDatos();
-        actualizarSelect('usuarios', 'datosUsuarios', 'codigo', 'nombre'); // Llama a la función para actualizar el select de usuarios
+        actualizarSelect('usuarios', 'datosUsuarios', 'nombre', 'nombre'); // Llama a la función para actualizar el select de usuarios
         alert(successMessage);
     });
 
