@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulario de Lecturas</title>
+<!-- Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+  }
+  .container {
+      margin-top: 50px;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    }
+    
+  h2 {
+    color: #007bff;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  input[type="text"],
+  input[type="date"],
+  input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Mi Aplicación</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="clientes.html" onclick="showClients()">Clientes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="lectura.html" onclick="showReadings()">Lectura</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+<div class="container">
+  <h2>Formulario de Lecturas</h2>
+
+  <form action="procesar_lectura.php" method="post">
+      <div class="form-group">
+        <label for="cliente">Cliente:</label>
+        <input type="text" class="form-control" id="cliente" name="cliente" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="fecha">Fecha:</label>
+        <input type="date" class="form-control" id="fecha" name="fecha" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="lectura_anterior">Lectura Anterior:</label>
+        <input type="number" class="form-control" id="lectura_anterior" name="lectura_anterior" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="lectura_actual">Lectura Actual:</label>
+        <input type="number" class="form-control" id="lectura_actual" name="lectura_actual" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="pago">Pago:</label>
+        <input type="text" class="form-control" id="pago" name="pago" readonly>
+      </div>
+      
+      <input type="submit" class="btn btn-primary" value="Agregar Lectura">
+  </form>
+</div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+// Calcula el pago basado en los metros consumidos de agua potable
+document.getElementById('lectura_actual').addEventListener('change', function() {
+    var lectura_anterior = parseInt(document.getElementById('lectura_anterior').value);
+    var lectura_actual = parseInt(this.value);
+    var metros_consumidos = lectura_actual - lectura_anterior;
+    var precio_por_metro = 0.10; // Precio por metro consumido
+    var pago = metros_consumidos * precio_por_metro;
+    document.getElementById('pago').value = pago.toFixed(2); // Mostrar el pago con 2 decimales
+});
+</script>
+
+</body>
+</html>
+
