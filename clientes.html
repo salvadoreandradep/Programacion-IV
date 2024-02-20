@@ -6,6 +6,37 @@
   <title>Registro de Clientes</title>
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      margin-top: 50px;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #007bff;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: bold;
+    }
+    button[type="submit"] {
+      background-color: #007bff;
+      border: none;
+    }
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+    #buscar {
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -31,7 +62,22 @@
     </form>
     <hr>
     <h2>Clientes</h2>
-    <div id="clientesTable"></div>
+    <input type="text" id="buscar" class="form-control" placeholder="Buscar...">
+    <div id="clientesTable">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Zona</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Aquí se llenará dinámicamente la tabla con JavaScript -->
+        </tbody>
+      </table>
+    </div>
   </div>
   
   <!-- Bootstrap JS and jQuery -->
@@ -40,8 +86,21 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <!-- Custom JavaScript -->
   <script src="script.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Función para realizar la búsqueda
+      $('#buscar').on('keyup', function() {
+        var value = $(this).val().toLowerCase();
+        $('#clientesTable tbody tr').filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+  </script>
+  
 </body>
 </html>
+
 
 
 
