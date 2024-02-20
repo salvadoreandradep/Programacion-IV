@@ -47,6 +47,22 @@
   input[type="submit"]:hover {
     background-color: #0056b3;
   }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
 </style>
 </head>
 <body>
@@ -71,7 +87,7 @@
 <div class="container">
   <h2>Formulario de Lecturas</h2>
 
-  <form action="procesar_lectura.php" method="post">
+  <form id="lecturaForm">
       <div class="form-group">
         <label for="cliente">Cliente:</label>
         <input type="text" class="form-control" id="cliente" name="cliente" required>
@@ -99,6 +115,24 @@
       
       <input type="submit" class="btn btn-primary" value="Agregar Lectura">
   </form>
+
+
+
+
+<table>
+    <thead>
+      <tr>
+        <th>Cliente</th>
+        <th>Fecha</th>
+        <th>Lectura Anterior</th>
+        <th>Lectura Actual</th>
+        <th>Pago</th>
+      </tr>
+    </thead>
+    <tbody id="lecturasBody">
+      <!-- Aquí se agregarán las filas dinámicamente -->
+    </tbody>
+  </table>
 </div>
 
 <!-- Bootstrap JS and jQuery -->
@@ -106,8 +140,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-// Calcula el pago basado en los metros consumidos de agua potable
-document.getElementById('lectura_actual').addEventListener('change', function() {
+// Función para calcular el pago basado en los metros consumidos de agua potable
+document.getElementById('lectura_actual').addEventListener('input', function() {
     var lectura_anterior = parseInt(document.getElementById('lectura_anterior').value);
     var lectura_actual = parseInt(this.value);
     var metros_consumidos = lectura_actual - lectura_anterior;
@@ -115,8 +149,58 @@ document.getElementById('lectura_actual').addEventListener('change', function() 
     var pago = metros_consumidos * precio_por_metro;
     document.getElementById('pago').value = pago.toFixed(2); // Mostrar el pago con 2 decimales
 });
+
+function cargarLecturas() {
+    var lecturas = JSON.parse(localStorage.getItem('lecturas')) || [];
+    var tbody = document.getElementById('lecturasBody');
+    tbody.innerHTML = ''; // Limpiar el contenido anterior de la tabla
+    lecturas.forEach(function(lectura) {
+        var row = '<tr>' +
+                    '<td>' + lectura.cliente + '</td>' +
+                    '<td>' + lectura.fecha + '</td>' +
+                    '<td>' + lectura.lectura_anterior + '</td>' +
+                    '<td>' + lectura.lectura_actual + '</td>' +
+                    '<td>' + lectura.pago.toFixed(2) + '</td>' +
+                  '</tr>';
+        tbody.innerHTML += row;
+    });
+}
+
+// Event listener para el envío del formulario
+document.getElementById('lecturaForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    // Obtener los valores del formulario
+    var cliente = document.getElementById('cliente').value;
+    var fecha = document.getElementById('fecha').value;
+    var lectura_anterior = parseInt(document.getElementById('lectura_anterior').value);
+    var lectura_actual = parseInt(document.getElementById('lectura_actual').value);
+    var pago = parseFloat(document.getElementById('pago').value);
+
+    // Crear un objeto para representar los datos de la lectura
+    var lectura = {
+        cliente: cliente,
+        fecha: fecha,
+        lectura_anterior: lectura_anterior,
+        lectura_actual: lectura_actual,
+        pago: pago
+    };
+
+    // Guardar los datos de la lectura en la base de datos local
+    var lecturas = JSON.parse(localStorage.getItem('lecturas')) || [];
+    lecturas.push(lectura);
+    localStorage.setItem('lecturas', JSON.stringify(lecturas));
+
+    // Limpiar el formulario después de guardar los datos
+    document.getElementById('lecturaForm').reset();
+
+    // Opcional: mostrar un mensaje de éxito o realizar otras acciones después de guardar los datos
+    alert('Lectura agregada con éxito.');
+});
+
+cargarLecturas();
 </script>
 
 </body>
 </html>
+
 
