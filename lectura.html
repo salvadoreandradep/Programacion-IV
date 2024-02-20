@@ -118,13 +118,10 @@
     <button type="submit" class="btn btn-primary">Agregar</button>
   </form>
   
-
-
-
-
-<table>
+  <table>
     <thead>
       <tr>
+        <th>ID</th>
         <th>Cliente</th>
         <th>Fecha</th>
         <th>Lectura Anterior</th>
@@ -143,69 +140,100 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-// Función para calcular el pago basado en los metros consumidos de agua potable
-document.getElementById('lectura_actual').addEventListener('input', function() {
+  // Función para cargar las opciones de clientes en el menú desplegable
+  function loadClientsOptions() {
+    const clients = JSON.parse(localStorage.getItem('db_usss008322_usss026222_estudiante')) || [];
+    const selectElement = document.getElementById('cliente');
+  
+    // Limpiar opciones existentes
+    selectElement.innerHTML = '';
+  
+    // Agregar una opción por cada cliente
+    clients.forEach(client => {
+      const option = document.createElement('option');
+      option.text = client.nombre;
+      option.value = client.codigo;
+      selectElement.add(option);
+    });
+  }
+
+  // Llamar a la función para cargar opciones de clientes al cargar la página
+  window.onload = function() {
+    loadClientsOptions();
+    displayReadingsInTable(); // Mostrar lecturas al cargar la página
+  };
+
+  // Función para guardar la lectura en el almacenamiento local
+  function addReading(event) {
+    event.preventDefault();
+
+    // Obtener valores del formulario
+    const idLectura = document.getElementById('idLectura').value;
+    const cliente = document.getElementById('cliente').value;
+    const fecha = document.getElementById('fecha').value;
+    const lectura_anterior = document.getElementById('lectura_anterior').value;
+    const lectura_actual = document.getElementById('lectura_actual').value;
+    const pago = document.getElementById('pago').value;
+
+    // Crear objeto de lectura
+    const newReading = { idLectura, cliente, fecha, lectura_anterior, lectura_actual, pago };
+
+    // Obtener lecturas existentes del almacenamiento local
+    const existingReadings = JSON.parse(localStorage.getItem('lecturas')) || [];
+
+    // Agregar la nueva lectura al arreglo existente
+    existingReadings.push(newReading);
+
+    // Guardar en el almacenamiento local
+    localStorage.setItem('lecturas', JSON.stringify(existingReadings));
+
+    // Mostrar lecturas en la tabla
+    displayReadingsInTable();
+
+    // Limpiar formulario
+    document.getElementById('lecturaForm').reset();
+  }
+
+  // Función para mostrar las lecturas en la tabla
+  function displayReadingsInTable() {
+  const readingsTableBody = document.getElementById('lecturasBody');
+  readingsTableBody.innerHTML = ''; // Limpiar tabla antes de volver a mostrar
+
+  // Obtener lecturas del almacenamiento local
+  const readings = JSON.parse(localStorage.getItem('lecturas')) || [];
+  const clients = JSON.parse(localStorage.getItem('db_usss008322_usss026222_estudiante')) || [];
+
+  // Iterar sobre las lecturas y agregarlas a la tabla
+  readings.forEach(reading => {
+    const row = document.createElement('tr');
+    const clientName = clients.find(client => client.codigo === reading.cliente)?.nombre || 'Cliente desconocido'; // Buscar el nombre del cliente correspondiente al código
+    row.innerHTML = `
+    <td>${reading.idLectura}</td>
+      <td>${clientName}</td>
+      <td>${reading.fecha}</td>
+      <td>${reading.lectura_anterior}</td>
+      <td>${reading.lectura_actual}</td>
+      <td>${reading.pago}</td>
+    `;
+    readingsTableBody.appendChild(row);
+  });
+}
+  // Event listener para el formulario de lectura
+  document.getElementById('lecturaForm').addEventListener('submit', addReading);
+
+  // Función para calcular el pago basado en los metros consumidos de agua potable
+  document.getElementById('lectura_actual').addEventListener('input', function() {
     var lectura_anterior = parseInt(document.getElementById('lectura_anterior').value);
     var lectura_actual = parseInt(this.value);
     var metros_consumidos = lectura_actual - lectura_anterior;
     var precio_por_metro = 0.10; // Precio por metro consumido
     var pago = metros_consumidos * precio_por_metro;
     document.getElementById('pago').value = pago.toFixed(2); // Mostrar el pago con 2 decimales
-});
-
-function cargarLecturas() {
-    var lecturas = JSON.parse(localStorage.getItem('lecturas')) || [];
-    var tbody = document.getElementById('lecturasBody');
-    tbody.innerHTML = ''; // Limpiar el contenido anterior de la tabla
-    lecturas.forEach(function(lectura) {
-        var row = '<tr>' +
-                    '<td>' + lectura.cliente + '</td>' +
-                    '<td>' + lectura.fecha + '</td>' +
-                    '<td>' + lectura.lectura_anterior + '</td>' +
-                    '<td>' + lectura.lectura_actual + '</td>' +
-                    '<td>' + lectura.pago.toFixed(2) + '</td>' +
-                  '</tr>';
-        tbody.innerHTML += row;
-    });
-}
-
-
-
-// Event listener para el envío del formulario
-document.getElementById('lecturaForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    // Obtener los valores del formulario
-    var cliente = document.getElementById('cliente').value;
-    var fecha = document.getElementById('fecha').value;
-    var lectura_anterior = parseInt(document.getElementById('lectura_anterior').value);
-    var lectura_actual = parseInt(document.getElementById('lectura_actual').value);
-    var pago = parseFloat(document.getElementById('pago').value);
-
-    // Crear un objeto para representar los datos de la lectura
-    var lectura = {
-        cliente: cliente,
-        fecha: fecha,
-        lectura_anterior: lectura_anterior,
-        lectura_actual: lectura_actual,
-        pago: pago
-    };
-
-    // Guardar los datos de la lectura en la base de datos local
-    var lecturas = JSON.parse(localStorage.getItem('lecturas')) || [];
-    lecturas.push(lectura);
-    localStorage.setItem('lecturas', JSON.stringify(lecturas));
-
-    // Limpiar el formulario después de guardar los datos
-    document.getElementById('lecturaForm').reset();
-
-    // Opcional: mostrar un mensaje de éxito o realizar otras acciones después de guardar los datos
-    alert('Lectura agregada con éxito.');
-});
-
-cargarLecturas();
+  });
 </script>
 
 </body>
 </html>
+
 
 
