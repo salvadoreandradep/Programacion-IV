@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrícula de Estudiantes</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #222;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+        }
+
+        .const1{
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            
+        }
+
+        .form-group label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+            
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 10px;
+            border-radius: 50px;
+            background-color: #444; /* Color de fondo del input */
+            color: #fff; /* Color del texto del input */
+            outline: none; /* Quita el contorno al hacer clic en el input */
+
+        }
+
+        .btn-primary {
+            background-color: #fff;
+            border: none;
+            border-radius: 50px;
+            color: black;
+            padding: 15px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            width: 100%;
+            
+        }
+
+        .btn-primary:hover {
+            background-color: #222;
+            
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            font-size: 20px;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 40px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="inicio.html">Inicio</a></li>
+        <li><a href="estudiante.html">Estudiantes</a></li>
+        <li><a href="materia.html">Materia</a></li>
+        <li><a href="matricula.html">Matrícula</a></li>
+        <li><a href="inscripcion.html">Inscripción</a></li>
+    </ul>
+</nav>
+
+<div class="container mt-5">
+    <h1>Matrícula de Estudiantes</h1>
+</div>
+
+
+<div class="container mt-5">
+    <form>
+        <div class="form-group">
+            <label for="codigo">Código de inscripcion:</label>
+            <input type="text" class="form-control" autocomplete="off" id="codigo" required>
+        </div>
+        <div class="form-group">
+            <label for="nombreEstudiante">Nombre del Estudiante:</label>
+            <select class="form-control" id="nombreEstudiante" required>
+                <option value="">Selecciona un estudiante</option>
+                <!-- Opciones de estudiantes se agregarán dinámicamente aquí -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="edad">Edad:</label>
+            <input type="number" class="form-control" id="edad" required>
+        </div>
+        <div class="form-group">
+            <label for="fechaMatricula">Fecha de Matrícula:</label>
+            <input type="date" class="form-control" id="fechaMatricula" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Matricular</button>
+    </form>
+</div>
+
+
+<div class="const1">
+    <div class="table-responsive">
+        <div class="form-group">  
+            <table class="table table-dark table-striped">
+                <input type="text" id="busquedaInput" class="form-control" placeholder="Ingresa tu búsqueda">
+
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre del Estudiante</th>
+                        <th>Edad</th>
+                        <th>Fecha de Matrícula</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+        <tbody id="tablaMatriculas"></tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
+    const busquedaInput = document.getElementById('busquedaInput');
+    const tablaMatriculas = document.getElementById('tablaMatriculas');
+
+    busquedaInput.addEventListener('input', function () {
+        const textoBusqueda = this.value.trim().toLowerCase();
+        const filas = tablaMatriculas.getElementsByTagName('tr');
+
+        for (let i = 0; i < filas.length; i++) {
+            const fila = filas[i];
+            const celdas = fila.getElementsByTagName('td');
+            let encontrado = false;
+
+            for (let j = 0; j < celdas.length; j++) {
+                const celda = celdas[j];
+                if (celda) {
+                    const contenido = celda.textContent.toLowerCase();
+                    if (contenido.includes(textoBusqueda)) {
+                        encontrado = true;
+                        break;
+                    }
+                }
+            }
+
+            if (encontrado) {
+                fila.style.display = '';
+            } else {
+                fila.style.display = 'none';
+            }
+        }
+    });
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const codigo = document.getElementById('codigo').value;
+        const nombreEstudiante = document.getElementById('nombreEstudiante').value;
+        const edad = document.getElementById('edad').value;
+        const fechaMatricula = document.getElementById('fechaMatricula').value;
+
+        const matricula = {
+            codigo: codigo,
+            nombreEstudiante: nombreEstudiante,
+            edad: edad,
+            fechaMatricula: fechaMatricula
+        };
+
+        let matriculas = JSON.parse(localStorage.getItem('matriculas') || '[]');
+        matriculas.push(matricula);
+        localStorage.setItem('matriculas', JSON.stringify(matriculas));
+
+        alert('Matrícula guardada con éxito');
+
+        form.reset();
+
+        mostrarMatriculas();
+    });
+
+    const nombreEstudianteSelect = document.getElementById('nombreEstudiante');
+
+    function cargarEstudiantes() {
+        const datosEstudiantes = JSON.parse(localStorage.getItem('datosUsuarios') || '[]');
+        datosEstudiantes.forEach(estudiante => {
+            const option = document.createElement('option');
+            option.value = estudiante.nombre;
+            option.textContent = estudiante.nombre;
+            nombreEstudianteSelect.appendChild(option);
+        });
+    }
+
+    function mostrarMatriculas() {
+        const tablaMatriculas = document.getElementById('tablaMatriculas');
+        tablaMatriculas.innerHTML = '';
+
+        const matriculas = JSON.parse(localStorage.getItem('matriculas') || '[]');
+        matriculas.forEach((matricula, index) => {
+            const fila = document.createElement('tr');
+            fila.innerHTML = `
+                <td>${matricula.codigo}</td>
+                <td>${matricula.nombreEstudiante}</td>
+                <td>${matricula.edad}</td>
+                <td>${matricula.fechaMatricula}</td>
+                <td>
+                    <button class="btn btn-warning modificar" data-index="${index}">Modificar</button>
+                    <button class="btn btn-danger eliminar" data-index="${index}">Eliminar</button>
+                </td>
+            `;
+            tablaMatriculas.appendChild(fila);
+        });
+
+        agregarEventosBotones();
+    }
+
+    function agregarEventosBotones() {
+        document.querySelectorAll('.eliminar').forEach(button => {
+            button.addEventListener('click', function () {
+                const index = this.getAttribute('data-index');
+                eliminarMatricula(index);
+            });
+        });
+
+        document.querySelectorAll('.modificar').forEach(button => {
+            button.addEventListener('click', function () {
+                const index = this.getAttribute('data-index');
+                modificarMatricula(index);
+            });
+        });
+    }
+
+    function eliminarMatricula(index) {
+        let matriculas = JSON.parse(localStorage.getItem('matriculas') || '[]');
+        matriculas.splice(index, 1);
+        localStorage.setItem('matriculas', JSON.stringify(matriculas));
+        mostrarMatriculas();
+    }
+
+    function modificarMatricula(index) {
+        let matriculas = JSON.parse(localStorage.getItem('matriculas') || '[]');
+        const matricula = matriculas[index];
+        document.getElementById('codigo').value = matricula.codigo;
+        document.getElementById('nombreEstudiante').value = matricula.nombreEstudiante;
+        document.getElementById('edad').value = matricula.edad;
+        document.getElementById('fechaMatricula').value = matricula.fechaMatricula;
+
+        // Eliminar la matrícula antigua después de cargarla en el formulario de matrícula
+        matriculas.splice(index, 1);
+        localStorage.setItem('matriculas', JSON.stringify(matriculas));
+    }
+
+    cargarEstudiantes();
+    mostrarMatriculas();
+});
+
+</script>
+
+</body>
+</html>
+
