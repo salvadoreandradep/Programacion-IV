@@ -197,33 +197,35 @@
         tbody.innerHTML = '';
 
         const busquedaInput = document.getElementById('busquedaInput');
-    busquedaInput.addEventListener('input', function () {
-        const searchText = busquedaInput.value.toLowerCase();
-        const rows = document.querySelectorAll('.table tbody tr');
+        busquedaInput.addEventListener('input', function () {
+            const searchText = busquedaInput.value.toLowerCase();
+            const rows = document.querySelectorAll('.table tbody tr');
 
-        rows.forEach(row => {
-            const nombre = row.children[0].textContent.toLowerCase();
-            const materia = row.children[1].textContent.toLowerCase();
-            const fecha = row.children[2].textContent.toLowerCase();
-            const ciclo = row.children[3].textContent.toLowerCase();
+            rows.forEach(row => {
+                const nombre = row.children[0].textContent.toLowerCase();
+                const materia = row.children[1].textContent.toLowerCase();
+                const fecha = row.children[2].textContent.toLowerCase();
+                const ciclo = row.children[3].textContent.toLowerCase();
 
-            if (nombre.includes(searchText) || materia.includes(searchText) || fecha.includes(searchText) || ciclo.includes(searchText)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
+                if (nombre.includes(searchText) || materia.includes(searchText) || fecha.includes(searchText) || ciclo.includes(searchText)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
         });
-    });
-    inscripciones.forEach(inscripcion => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td>${inscripcion.nombreEstudiante}</td>
-            <td>${inscripcion.materia}</td>
-            <td>${inscripcion.fechaInscripcion}</td>
-            <td>${inscripcion.ciclo}</td>
-        `;
-        tbody.appendChild(tr);
-    });
+
+        inscripciones.forEach((inscripcion, index) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${inscripcion.nombreEstudiante}</td>
+                <td>${inscripcion.materia}</td>
+                <td>${inscripcion.fechaInscripcion}</td>
+                <td>${inscripcion.ciclo}</td>
+                <td><button class="btn btn-danger btnEliminar" data-index="${index}">Eliminar</button></td>
+            `;
+            tbody.appendChild(tr);
+        });
 
         form.addEventListener('submit', function (e) {
             e.preventDefault();
@@ -256,13 +258,14 @@
 
             tablaInscripciones.innerHTML = '';
 
-            inscripciones.forEach(inscripcion => {
+            inscripciones.forEach((inscripcion, index) => {
                 const fila = document.createElement('tr');
                 fila.innerHTML = `
                     <td>${inscripcion.nombreEstudiante}</td>
                     <td>${inscripcion.materia}</td>
                     <td>${inscripcion.fechaInscripcion}</td>
                     <td>${inscripcion.ciclo}</td>
+                    <td><button class="btn btn-danger btnEliminar" data-index="${index}">Eliminar</button></td>
                 `;
                 tablaInscripciones.appendChild(fila);
             });
@@ -294,8 +297,20 @@
 
         cargarEstudiantes();
         cargarMaterias();
+
+        // Eliminar inscripción al hacer clic en el botón eliminar
+        tbody.addEventListener('click', function (e) {
+            if (e.target.classList.contains('btnEliminar')) {
+                const index = e.target.getAttribute('data-index');
+                let inscripciones = JSON.parse(localStorage.getItem('inscripciones') || '[]');
+                inscripciones.splice(index, 1);
+                localStorage.setItem('inscripciones', JSON.stringify(inscripciones));
+                mostrarInscripciones();
+            }
+        });
     });
 </script>
+
 
 
 </body>
