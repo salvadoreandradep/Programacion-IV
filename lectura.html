@@ -85,36 +85,39 @@
   </nav>
 
 <div class="container">
-  <h2>Formulario de Lecturas</h2>
+ 
 
+  <h2>Registro de Lecturas</h2>
   <form id="lecturaForm">
-      <div class="form-group">
-        <label for="cliente">Cliente:</label>
-        <input type="text" class="form-control" id="cliente" name="cliente" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="fecha">Fecha:</label>
-        <input type="date" class="form-control" id="fecha" name="fecha" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="lectura_anterior">Lectura Anterior:</label>
-        <input type="number" class="form-control" id="lectura_anterior" name="lectura_anterior" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="lectura_actual">Lectura Actual:</label>
-        <input type="number" class="form-control" id="lectura_actual" name="lectura_actual" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="pago">Pago:</label>
-        <input type="text" class="form-control" id="pago" name="pago" readonly>
-      </div>
-      
-      <input type="submit" class="btn btn-primary" value="Agregar Lectura">
+    <div class="form-group">
+      <label for="idLectura">ID de Lectura:</label>
+      <input type="text" class="form-control" id="idLectura" required>
+    </div>
+    <div class="form-group">
+      <label for="cliente">Cliente:</label>
+      <select class="form-control" id="cliente" required>
+        <!-- Opciones de clientes se cargarán dinámicamente -->
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="fecha">Fecha:</label>
+      <input type="date" class="form-control" id="fecha" required>
+    </div>
+    <div class="form-group">
+      <label for="lectura_anterior">Lectura Anterior:</label>
+      <input type="number" class="form-control" id="lectura_anterior" required>
+    </div>
+    <div class="form-group">
+      <label for="lectura_actual">Lectura Actual:</label>
+      <input type="number" class="form-control" id="lectura_actual" required>
+    </div>
+    <div class="form-group">
+      <label for="pago">Pago:</label>
+      <input type="number" class="form-control" id="pago" readonly>
+    </div>
+    <button type="submit" class="btn btn-primary">Agregar</button>
   </form>
+  
 
 
 
@@ -165,6 +168,8 @@ function cargarLecturas() {
         tbody.innerHTML += row;
     });
 }
+
+
 
 // Event listener para el envío del formulario
 document.getElementById('lecturaForm').addEventListener('submit', function(event) {
