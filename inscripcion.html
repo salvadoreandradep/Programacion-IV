@@ -167,21 +167,24 @@
 </div>
 
 
-<div class="table-responsive">
-    <div class="form-group">  
-        <input type="text" id="busquedaInput" class="form-control" placeholder="Ingresa tu búsqueda">
+<div class="const1">
+    <div class="table-responsive">
+        <div class="form-group">  
+        <table class="table table-dark table-striped">
+            <input type="text" id="busquedaInput" class="form-control" placeholder="Ingresa tu búsqueda">
+            <thead>
+                <tr>
+
+                    <th>Nombre</th>
+                    <th>Materia</th>
+                    <th>Fecha de Maticula</th>
+                    <th>Ciclo</th>
+
+                </tr>
+            </thead>
+            <tbody> </tbody>
+        </table>
     </div>
-    <table class="table table-dark table-striped">
-        <thead>
-            <tr>
-                <th>Nombre del Estudiante</th>
-                <th>Materia</th>
-                <th>Fecha de Inscripción</th>
-                <th>Ciclo</th>
-            </tr>
-        </thead>
-        <tbody id="tablaInscripciones"></tbody>
-    </table>
 </div>
 
 
@@ -192,7 +195,42 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.querySelector('form');
+        const inscripciones = JSON.parse(localStorage.getItem('inscripciones') || '[]');
+        const tbody = document.querySelector('.table tbody');
+        tbody.innerHTML = '';
 
+        const busquedaInput = document.getElementById('busquedaInput');
+    busquedaInput.addEventListener('input', function () {
+        const searchText = busquedaInput.value.toLowerCase();
+        const rows = document.querySelectorAll('.table tbody tr');
+
+        rows.forEach(row => {
+            const nombre = row.children[0].textContent.toLowerCase();
+            const materia = row.children[1].textContent.toLowerCase();
+            const fecha = row.children[2].textContent.toLowerCase();
+            const ciclo = row.children[3].textContent.toLowerCase();
+
+            if (nombre.includes(searchText) || materia.includes(searchText) || fecha.includes(searchText) || ciclo.includes(searchText)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+
+    inscripciones.forEach(inscripcion => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${inscripcion.nombreEstudiante}</td>
+            <td>${inscripcion.materia}</td>
+            <td>${inscripcion.fechaInscripcion}</td>
+            <td>${inscripcion.ciclo}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+
+
+    mostrarInscripciones();
         form.addEventListener('submit', function (e) {
             e.preventDefault();
 
@@ -218,25 +256,6 @@
             form.reset();
         });
 
-        function mostrarInscripciones() {
-            const tablaInscripciones = document.getElementById('tablaInscripciones');
-            const inscripciones = JSON.parse(localStorage.getItem('inscripciones') || '[]');
-
-            tablaInscripciones.innerHTML = '';
-
-            inscripciones.forEach(inscripcion => {
-                const fila = document.createElement('tr');
-                fila.innerHTML = `
-                    <td>${inscripcion.nombreEstudiante}</td>
-                    <td>${inscripcion.materia}</td>
-                    <td>${inscripcion.fechaInscripcion}</td>
-                    <td>${inscripcion.ciclo}</td>
-                `;
-                tablaInscripciones.appendChild(fila);
-            });
-        }
-
-        mostrarInscripciones();
 
         function cargarEstudiantes() {
             const datosMatriculas = JSON.parse(localStorage.getItem('matriculas') || '[]');
