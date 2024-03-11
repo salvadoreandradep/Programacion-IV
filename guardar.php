@@ -22,7 +22,7 @@ $creditos = $_POST['creditos'];
 $sql = "INSERT INTO datos (codigo, nombre, creditos) VALUES ('$codigo', '$nombre', '$creditos')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "Los datos se han guardado correctamente en la base de datos.";
+    echo "<script>alert('Materia registrado correctamente'); window.location.href='materia.html';</script>";
 } else {
     echo "Error al guardar los datos: " . $conn->error;
 }
