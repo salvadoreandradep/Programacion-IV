@@ -3,200 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Alumnos</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-<style>
-
-body {
-            background-color: #222;
-            color: #fff;
-            font-family: 'Arial', sans-serif;
-            text-align: center;
+    <title>Estudiantes</title>
+    <style>
+            body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
-
-        .container {
-            max-width: 400px;
-            margin: 50px auto;
+        /* Estilos para el formulario */
+        form {
+            width: 50%;
+            margin: 20px auto;
             padding: 20px;
-            background-color: #333;
-            border-radius: 10px;
-        }
-        .const1{
-            padding: 20px;
-            background-color: #333;
-            border-radius: 10px;
-        }
-
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-            
-        }
-
-        .form-group label {
-            display: block;
-            text-align: left;
-            margin-bottom: 5px;
-            
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px;
+            background-color: #f9f9f9;
             border-radius: 5px;
-            border: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
             margin-bottom: 10px;
-            border-radius: 50px;
-            background-color: #444; /* Color de fondo del input */
-            color: #fff; /* Color del texto del input */
-            outline: none; /* Quita el contorno al hacer clic en el input */
-
         }
-
-        .btn-primary {
-            background-color: #fff;
-            border: none;
-            border-radius: 50px;
-            color: black;
-            padding: 15px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
+        input[type="text"], input[type="tel"], input[type="date"], select {
             width: 100%;
-            
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
-
-        .btn-primary:hover {
-            background-color: #222;
-            
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
         }
-
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
         nav {
             background-color: #333;
             color: #fff;
-            padding: 20px 0;
-            font-size: 20px;
+            text-align: center;
+            padding: 10px 0;
         }
         nav ul {
             list-style-type: none;
-            padding: 0;
             margin: 0;
-            text-align: center;
+            padding: 0;
         }
         nav ul li {
             display: inline;
-            margin-right: 40px;
+            margin-right: 20px;
         }
         nav ul li a {
             color: #fff;
             text-decoration: none;
-            transition: color 0.3s ease;
         }
         nav ul li a:hover {
-            color: #ffcc00;
+            text-decoration: underline;
         }
-
-
-        
     </style>
-
-
-
-</style>
-
 </head>
 <body>
-
 
     <nav>
         <ul>
             <li><a href="inicio.html">Inicio</a></li>
             <li><a href="estudiante.html">Estudiantes</a></li>
-            <li><a href="materia.html">Materia</a></li>
-            <li><a href="matricula.html">Matrícula</a></li>
-            <li><a href="inscripcion.html">Inscripción</a></li>
+            <li><a href="#materia">Materia</a></li>
+            <li><a href="#matricula">Matrícula</a></li>
+            <li><a href="#inscripcion">Inscripción</a></li>
         </ul>
     </nav>
-  
-    <div class="container mt-5">
-        <h1>Registro de Estudiantes</h1>
-       
-    </div>
-    <div class="container mt-5">
-        
-       
-            <form>
-            <div class="form-group">
-                <label for="codigo">Código:</label>
-                <input type="text" class="form-control" id="codigo" autocomplete="off" required>
-            </div>
-            <div class="form-group">
-                <label for="nombre">Nombre:</label>
-                <input type="text" class="form-control" id="nombre" autocomplete="off" required>
-            </div>
-            <div class="form-group">
-                <label for="direccion">Dirección:</label>
-                <input type="text" class="form-control" id="direccion" autocomplete="off" required>
-            </div>
-            <div class="form-group">
-                <label for="municipio">Municipio:</label>
-                <input type="text" class="form-control" id="municipio" autocomplete="off" required>
-            </div>
-            <div class="form-group">
-                <label for="departamento">Departamento:</label>
-                <input type="text" class="form-control" id="departamento" autocomplete="off" required>
-            </div>
-            <div class="form-group">
-                <label for="telefono">Teléfono:</label>
-                <input type="tel" class="form-control" id="telefono" autocomplete="off" required pattern="[0-9]+" title="Por favor, introduce solo números">
-            </div>
-            
-            <div class="form-group">
-                <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-                <input type="date" class="form-control" id="fechaNacimiento" autocomplete="off" required>
-            </div>
-            <div class="form-group">
-                <label for="sexo">Sexo:</label>
-                <select class="form-control" id="sexo" required>
-                    <option value="">Selecciona una opción</option>
-                    <option value="F">Femenino</option>
-                    <option value="M">Masculino</option>
-                </select>
-            </div>
-         <button type="submit" class="btn btn-primary">Registrar</button>
-        </form>
 
+<form action="guardar_estudiante.php" method="post">
+    <label for="codigo">Código:</label>
+    <input type="text" id="codigo" name="codigo" required>
 
-   
-    </div>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required>
 
-    <div class="const1">
-    <div class="table-responsive">
-        <div class="form-group">  
-        <table class="table table-dark table-striped">
-            <input type="text" id="busquedaInput" class="form-control" placeholder="Ingresa tu búsqueda">
-            <thead>
-                <tr>
+    <label for="direccion">Dirección:</label>
+    <input type="text" id="direccion" name="direccion" required>
 
-                    <th>Código</th>
-                    <th>Nombre</th>
-                    <th>Dirección</th>
-                    <th>Municipio</th>
-                    <th>Departamento</th>
-                    <th>Teléfono</th>
-                    <th>Fecha de Nacimiento</th>
-                    <th>Sexo</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="tablaDatos"></tbody>
-        </table>
-    </div>
-</div>
+    <label for="municipio">Municipio:</label>
+    <input type="text" id="municipio" name="municipio" required>
+
+    <label for="departamento">Departamento:</label>
+    <input type="text" id="departamento" name="departamento" required>
+
+    <label for="telefono">Teléfono:</label>
+    <input type="tel" id="telefono" name="telefono" required>
+
+    <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+
+    <label for="sexo">Sexo:</label>
+    <select id="sexo" name="sexo" required>
+        <option value="Masculino">Masculino</option>
+        <option value="Femenino">Femenino</option>
+        <option value="Otro">Otro</option>
+    </select>
+
+    <input type="submit" value="Guardar">
+</form>
+
+</body>
+</html>

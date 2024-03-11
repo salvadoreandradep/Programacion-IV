@@ -3,56 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Sitio Web</title>
+    <title>Menú de Navegación</title>
     <style>
-
-        
-        /* Estilos básicos para el navbar */
+        /* Estilos básicos para el menú */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #444;
         }
         nav {
             background-color: #333;
             color: #fff;
-            padding: 20px 0;
-            font-size: 20px;
+            text-align: center;
+            padding: 10px 0;
         }
         nav ul {
             list-style-type: none;
-            padding: 0;
             margin: 0;
-            text-align: center;
+            padding: 0;
         }
         nav ul li {
             display: inline;
-            margin-right: 40px;
+            margin-right: 20px;
         }
         nav ul li a {
             color: #fff;
             text-decoration: none;
-            transition: color 0.3s ease;
         }
         nav ul li a:hover {
-            color: #ffcc00;
+            text-decoration: underline;
         }
-       
     </style>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="inicio.html">Inicio</a></li>
-            <li><a href="estudiante.html">Estudiantes</a></li>
-            <li><a href="materia.html">Materia</a></li>
-            <li><a href="matricula.html">Matrícula</a></li>
-            <li><a href="inscripcion.html">Inscripción</a></li>
-        </ul>
-    </nav>
-    <div id="container">
-        
-    </div>
+
+<nav>
+    <ul>
+        <li><a href="inicio.html">Inicio</a></li>
+        <li><a href="estudiante.html">Estudiantes</a></li>
+        <li><a href="#materia">Materia</a></li>
+        <li><a href="#matricula">Matrícula</a></li>
+        <li><a href="#inscripcion">Inscripción</a></li>
+    </ul>
+</nav>
+
+
+<CENTER>
+<section id="inicio">
+    <h2>Inicio</h2>
+    <p>Contenido de la página de inicio.</p>
+</section>
+
+<section id="estudiantes">
+    <h2>Estudiantes</h2>
+    <p>Contenido relacionado con los estudiantes.</p>
+</section>
+
+<section id="materia">
+    <h2>Materia</h2>
+    <p>Contenido relacionado con las materias.</p>
+</section>
+
+<section id="matricula">
+    <h2>Matrícula</h2>
+    <p>Contenido relacionado con la matrícula.</p>
+</section>
+
+<section id="inscripcion">
+    <h2>Inscripción</h2>
+    <p>Contenido relacionado con la inscripción.</p>
+</section>
+</CENTER>
 </body>
 </html>
