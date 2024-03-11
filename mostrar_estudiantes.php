@@ -19,6 +19,10 @@
         th {
             background-color: #f2f2f2;
         }
+        .acciones {
+            display: flex;
+            justify-content: space-between;
+        }
     </style>
 </head>
 <body>
@@ -36,6 +40,7 @@
             <th>Teléfono</th>
             <th>Fecha de Nacimiento</th>
             <th>Sexo</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -69,6 +74,10 @@
                 echo "<td>" . $row["telefono"] . "</td>";
                 echo "<td>" . $row["fecha_nacimiento"] . "</td>";
                 echo "<td>" . $row["sexo"] . "</td>";
+                echo "<td class='acciones'>";
+                echo "<button onclick='eliminarEstudiante(" . $row["id"] . ")'>Eliminar</button>";
+                echo "<button onclick='modificarEstudiante(" . $row["id"] . ")'>Modificar</button>";
+                echo "</td>";
                 echo "</tr>";
             }
         } else {
@@ -79,9 +88,33 @@
     </tbody>
 </table>
 
-<form>
-    <li><a href="estudiante.html">Volver</a></li>
-</form>
+<script>
+    // Función para eliminar un estudiante
+    function eliminarEstudiante(id) {
+        if (confirm("¿Estás seguro de que deseas eliminar este estudiante?")) {
+            // Realizar una solicitud AJAX para eliminar el estudiante
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    // Eliminar la fila de la tabla
+                    var fila = document.getElementById("fila-" + id);
+                    fila.parentNode.removeChild(fila);
+                    alert("Estudiante eliminado correctamente");
+                }
+            };
+            xhttp.open("GET", "eliminar_estudiante.php?id=" + id, true);
+            xhttp.send();
+        }
+    }
+
+    // Función para redirigir a la página de modificación de estudiante
+    function modificarEstudiante(id) {
+        // Redirigir a una página de edición con el ID del estudiante
+        window.location.href = "editar_estudiante.php?id=" + id;
+    }
+</script>
+
 
 </body>
 </html>
+
