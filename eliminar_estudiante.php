@@ -19,7 +19,7 @@ $id = $_GET['id'];
 $sql = "DELETE FROM estudiantes WHERE id=$id";
 
 if ($conn->query($sql) === TRUE) {
-    echo "Estudiante eliminado correctamente";
+    echo "<script>alert('Estudiante Eliminado correctamente'); window.location.href='estudiante.html';</script>";
 } else {
     echo "Error al eliminar el estudiante: " . $conn->error;
 }

@@ -64,6 +64,7 @@
     </nav>
 <center> 
 <h2>Listado de Estudiantes</h2>
+
     </center>
 <table>
     <thead>
@@ -117,6 +118,7 @@
                 echo "</tr>";
             }
         } else {
+            
             echo "0 resultados";
         }
         $conn->close();
@@ -136,6 +138,7 @@
                     var fila = document.getElementById("fila-" + id);
                     fila.parentNode.removeChild(fila);
                     alert("Estudiante eliminado correctamente");
+                 
                 }
             };
             xhttp.open("GET", "eliminar_estudiante.php?id=" + id, true);
