@@ -81,6 +81,21 @@
         th {
             background-color: #f2f2f2;
         }
+        .boton-redireccionador {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .boton-redireccionador:hover {
+      background-color: #45a049;
+    }
     </style>
 </head>
 <body>
@@ -127,10 +142,13 @@
     <input type="submit" value="Guardar">
 </form>
 
+<center>
 
 
-    <button onclick="window.location.href = 'mostrar_estudiantes.php';">Ir a otro archivo HTML</button>
+<div>
 
+<button class="boton-redireccionador" onclick="window.location.href = 'mostrar_estudiantes.php';">Tabla</button>
 
-
+</div>
+</center>
 </html>
