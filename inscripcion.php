@@ -156,6 +156,12 @@
         Fecha de Inscripción: <input type="date" name="fecha_inscripcion"><br><br>
         <input type="submit" value="Inscribir">
     </form>
+
+    <div>
+
+        <button class="boton-redireccionador" onclick="window.location.href = 'mostrar_inscripciones.php';">Tabla</button>
+        
+        </div>
 </body>
 </html>
 
