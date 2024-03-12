@@ -115,7 +115,7 @@
 
 <form action="guardar_estudiante.php" method="post">
     <label for="codigo">Código:</label>
-    <input type="text" id="codigo" name="codigo" autocomplete="off" required>
+    <input type="text" id="codigo" name="codigo" autocomplete="off" required pattern="^\S[^ ]*$" title="No se permiten espacios en blanco">
 
     <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="nombre" autocomplete="off" required>
