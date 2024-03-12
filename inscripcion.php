@@ -104,7 +104,9 @@
             <li><a href="inscripcion.php">Inscripción</a></li>
         </ul>
     </nav>
-    <h2>Inscripción de Estudiante</h2>
+    <center>
+    <h2>Inscripción </h2>
+   </center>
     <form method="POST" action="procesar_inscripcion.php">
         Nombre del Estudiante: 
         <select name="codigo_estudiante" autocomplete="off" required>
@@ -116,12 +118,12 @@
             }
 
             // Consulta para obtener los estudiantes
-            $query_estudiantes = "SELECT id, nombre FROM estudiantes";
+            $query_estudiantes = "SELECT id, codigo_estudiante FROM matriculas";
             $result_estudiantes = $conexion->query($query_estudiantes);
 
             // Generar las opciones del select con los nombres de los estudiantes
             while ($row = $result_estudiantes->fetch_assoc()) {
-                echo "<option value='" . $row['id'] . "'>" . $row['nombre'] . "</option>";
+                echo "<option value='" . $row['id'] . "'>" . $row['codigo_estudiante'] . "</option>";
             }
 
             // Cerrar conexión
@@ -158,9 +160,9 @@
     </form>
 
     <div>
-
+    <center>
         <button class="boton-redireccionador" onclick="window.location.href = 'mostrar_inscripciones.php';">Tabla</button>
-        
+        </center>
         </div>
 </body>
 </html>

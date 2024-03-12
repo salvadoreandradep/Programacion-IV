@@ -142,10 +142,10 @@
         }
 
         // Consulta SQL para obtener las inscripciones
-        $sql = "SELECT inscripcion.id, estudiantes.nombre as estudiante, datos.nombre as datos, inscripcion.ciclo, inscripcion.fecha_matricula 
-                FROM inscripcion
-                INNER JOIN estudiantes ON inscripcion.codigo_estudiante = estudiantes.id
-                INNER JOIN datos ON inscripcion.codigo_materia = datos.id";
+        $sql = "SELECT inscripcion.id, matriculas.codigo_estudiante as codigo_estudiante, datos.nombre as materia, inscripcion.ciclo, inscripcion.fecha_matricula 
+        FROM inscripcion
+        INNER JOIN matriculas ON inscripcion.codigo_estudiante = matriculas.id
+        INNER JOIN datos ON inscripcion.codigo_materia = datos.id";
         $result = $conn->query($sql);
 
         // Verificar si la consulta tuvo éxito
@@ -157,13 +157,13 @@
                 while($row = $result->fetch_assoc()) {
                     echo "<tr>";
                     echo "<td>" . $row['id'] . "</td>";
-                    echo "<td>" . $row['estudiante'] . "</td>";
-                    echo "<td>" . (isset($row['materia']) ? $row['materia'] : 'No definida') . "</td>";
+                    echo "<td>" . $row['codigo_estudiante'] . "</td>";
+                    echo "<td>" . $row['materia'] . "</td>";
                     echo "<td>" . $row['ciclo'] . "</td>";
                     echo "<td>" . $row['fecha_matricula'] . "</td>";
                     echo "<td>";
                 echo "<a href='eliminar_inscripcion.php?id=" . $row['id'] . "'>Eliminar</a> | ";
-                echo "<a href='modificar_inscripcion.php?id=" . $row['id'] . "'>Modificar</a>";
+            
                 echo "</td>";
                 echo "</tr>";
                 }
