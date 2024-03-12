@@ -110,7 +110,7 @@
                 echo "</tr>";
             }
         } else {
-            echo "<tr><td colspan='9'>No hay estudiantes registrados</td></tr>";
+            echo "<tr><td colspan='5'>0 Resultados.</td></tr>";
         }
         $conn->close();
         ?>

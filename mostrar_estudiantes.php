@@ -119,7 +119,7 @@
             }
         } else {
             
-            echo "0 resultados";
+            echo "<tr><td colspan='5'>0 Resultados.</td></tr>";
         }
         $conn->close();
         ?>

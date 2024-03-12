@@ -168,7 +168,7 @@
                 echo "</tr>";
                 }
             } else {
-                echo "<tr><td colspan='5'>No hay inscripciones.</td></tr>";
+                echo "<tr><td colspan='5'>0 Resultados.</td></tr>";
             }
         }
         // Cerrar conexión

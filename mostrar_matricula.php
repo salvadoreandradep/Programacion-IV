@@ -146,7 +146,7 @@ background-color: #45a049;
         $query = "SELECT m.*, e.nombre FROM matriculas m
                   INNER JOIN estudiantes e ON m.codigo_estudiante = e.codigo";
         $result = $conexion->query($query);
-
+    if ($result->num_rows > 0) {
         // Mostrar las matrículas en la tabla
         while ($row = $result->fetch_assoc()) {
             echo "<tr id='fila-" . $row['id'] . "'>";
@@ -161,7 +161,9 @@ background-color: #45a049;
             echo "</tr>";
 
         }
-
+    } else {
+        echo "<tr><td colspan='5'>0 Resultados.</td></tr>";
+    }
         // Cerrar la conexión
         $conexion->close();
         ?>
