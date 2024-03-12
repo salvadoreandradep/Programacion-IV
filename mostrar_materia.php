@@ -50,6 +50,19 @@
             margin: 0;
             padding: 0;
         }
+        #busqueda {
+  padding: 10px;
+  width: 700px;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  font-size: 16px;
+  outline: none;
+}
+
+/* Estilos para el placeholder */
+#busqueda::placeholder {
+  color: #999;
+}
     </style>
 </head>
 <body>
@@ -64,6 +77,8 @@
     </nav>
 <center> 
 <h2>Listado de Estudiantes</h2>
+
+<input type="text" id="busqueda" onkeyup="buscarEstudiante()" placeholder="Buscar por nombre...">
 </center>
 <table>
     <thead>
@@ -141,6 +156,30 @@
         // Redirigir a una página de edición con el ID del estudiante
         window.location.href = "editar_materia.php?id=" + id;
     }
+
+
+    function buscarEstudiante() {
+        var input, filtro, tabla, tr, td, i, txtValue;
+        input = document.getElementById("busqueda");
+        filtro = input.value.toUpperCase();
+        tabla = document.querySelector("table");
+        tr = tabla.getElementsByTagName("tr");
+
+        // Iterar sobre todas las filas y ocultar aquellas que no coincidan con la búsqueda
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1]; // Cambia el índice si quieres buscar en otra columna
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filtro) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
 </script>
 
 
