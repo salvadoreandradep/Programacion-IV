@@ -111,7 +111,7 @@
 
 <form method="post" action="guardar_matricula.php">
     <label for="codigo">Código del Estudiante:</label><br>
-    <select name="codigo" id="codigo">
+    <select name="codigo" id="codigo" required>
         <?php
         // Conexión a la base de datos
         $conexion = new mysqli("localhost", "root", "", "appacademica");
@@ -136,10 +136,10 @@
     </select><br><br>
 
     <label for="ciclo">Ciclo:</label><br>
-    <input type="text" name="ciclo" id="ciclo"><br><br>
+    <input type="text" name="ciclo" id="ciclo" autocomplete="off" required><br><br>
 
     <label for="fecha_matricula">Fecha de Matrícula:</label><br>
-    <input type="date" name="fecha_matricula" id="fecha_matricula"><br><br>
+    <input type="date" name="fecha_matricula" id="fecha_matricula" autocomplete="off" required><br><br>
 
     <input type="submit" value="Registrar Matrícula">
 </form>

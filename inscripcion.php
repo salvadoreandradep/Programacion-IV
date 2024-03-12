@@ -107,7 +107,7 @@
     <h2>Inscripción de Estudiante</h2>
     <form method="POST" action="procesar_inscripcion.php">
         Nombre del Estudiante: 
-        <select name="codigo_estudiante">
+        <select name="codigo_estudiante" autocomplete="off" required>
             <?php
             // Conexión a la base de datos
             $conexion = new mysqli("localhost", "root", "", "appacademica");
@@ -152,8 +152,8 @@
             ?>
         </select>
         <br><br>
-        Ciclo: <input type="text" name="ciclo"><br><br>
-        Fecha de Inscripción: <input type="date" name="fecha_inscripcion"><br><br>
+        Ciclo: <input type="text" name="ciclo" autocomplete="off" required><br><br>
+        Fecha de Inscripción: <input type="date" name="fecha_inscripcion" autocomplete="off" required><br><br>
         <input type="submit" value="Inscribir">
     </form>
 
