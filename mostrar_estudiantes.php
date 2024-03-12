@@ -50,6 +50,19 @@
             margin: 0;
             padding: 0;
         }
+        #busqueda {
+  padding: 10px;
+  width: 700px;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  font-size: 16px;
+  outline: none;
+}
+
+/* Estilos para el placeholder */
+#busqueda::placeholder {
+  color: #999;
+}
     </style>
 </head>
 <body>
