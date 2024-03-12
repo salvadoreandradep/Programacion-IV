@@ -139,7 +139,7 @@
     // Función para redirigir a la página de modificación de estudiante
     function modificarEstudiante(id) {
         // Redirigir a una página de edición con el ID del estudiante
-        window.location.href = "editar_estudiante.php?id=" + id;
+        window.location.href = "editar_materia.php?id=" + id;
     }
 </script>
 
