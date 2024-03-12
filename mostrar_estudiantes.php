@@ -65,7 +65,8 @@
 <center> 
 <h2>Listado de Estudiantes</h2>
 
-    </center>
+<input type="text" id="busqueda" placeholder="Buscar estudiantes...">
+</center>
 <table>
     <thead>
         <tr>
@@ -80,7 +81,7 @@
             <th>Acciones</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="tablaEstudiantes">
         <?php
         // Conexión a la base de datos
         $servername = "localhost";
@@ -118,8 +119,7 @@
                 echo "</tr>";
             }
         } else {
-            
-            echo "<tr><td colspan='5'>0 Resultados.</td></tr>";
+            echo "<tr><td colspan='9'>0 Resultados.</td></tr>";
         }
         $conn->close();
         ?>
@@ -127,6 +127,39 @@
 </table>
 
 <script>
+    // Obtener referencia al campo de búsqueda
+    var inputBusqueda = document.getElementById('busqueda');
+    // Obtener referencia a la tabla de estudiantes
+    var tablaEstudiantes = document.getElementById('tablaEstudiantes');
+
+    // Función para filtrar estudiantes según la búsqueda
+    function filtrarEstudiantes() {
+        var filtro = inputBusqueda.value.toUpperCase();
+        var filas = tablaEstudiantes.getElementsByTagName('tr');
+        
+        for (var i = 0; i < filas.length; i++) {
+            var datosEstudiante = filas[i].getElementsByTagName('td');
+            var mostrarFila = false;
+
+            for (var j = 0; j < datosEstudiante.length; j++) {
+                var texto = datosEstudiante[j].innerText.toUpperCase();
+                if (texto.indexOf(filtro) > -1) {
+                    mostrarFila = true;
+                    break;
+                }
+            }
+
+            if (mostrarFila) {
+                filas[i].style.display = "";
+            } else {
+                filas[i].style.display = "none";
+            }
+        }
+    }
+
+    // Escuchar el evento de cambio en el campo de búsqueda
+    inputBusqueda.addEventListener('input', filtrarEstudiantes);
+
     // Función para eliminar un estudiante
     function eliminarEstudiante(id) {
         if (confirm("¿Estás seguro de que deseas eliminar este estudiante?")) {
@@ -138,7 +171,6 @@
                     var fila = document.getElementById("fila-" + id);
                     fila.parentNode.removeChild(fila);
                     alert("Estudiante eliminado correctamente");
-                 
                 }
             };
             xhttp.open("GET", "eliminar_estudiante.php?id=" + id, true);
@@ -153,7 +185,7 @@
     }
 </script>
 
-
 </body>
 </html>
+
 

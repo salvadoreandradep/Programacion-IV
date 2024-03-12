@@ -112,11 +112,12 @@ background-color: #45a049;
 </center>
     <form action="guardar.php" method="POST">
         <label for="codigo">Código:</label><br>
-        <textarea id="codigo" name="codigo" rows="4" cols="50"></textarea><br>
+        <input type="text" id="codigo" name="codigo" autocomplete="off" required><br>
+       
         <label for="nombre">Nombre:</label><br>
-        <input type="text" id="nombre" name="nombre"><br>
+        <input type="text" id="nombre" name="nombre" autocomplete="off" required><br>
         <label for="creditos">Créditos:</label><br>
-        <input type="text" id="creditos" name="creditos"><br><br>
+        <input type="text" id="creditos" name="creditos" autocomplete="off" required><br><br>
         <input type="submit" value="Guardar">
     </form>
     <h1>Tabla de Datos</h1>
