@@ -106,17 +106,25 @@
     }
     #busqueda {
   padding: 10px;
-  width: 700px;
-  border: 1px solid #ccc;
-  border-radius: 50px;
-  font-size: 16px;
+  width: 100%;
+  max-width: 700px; 
+  border: 2px solid #ccc; 
+  border-radius: 25px; 
+  font-size: 18px; 
   outline: none;
+  transition: border-color 0.3s ease; 
 }
 
 /* Estilos para el placeholder */
 #busqueda::placeholder {
   color: #999;
 }
+
+/* Estilos para cuando el campo de búsqueda está enfocado */
+#busqueda:focus {
+  border-color: #66afe9; 
+}
+
     </style>
 </head>
 <body>
@@ -131,7 +139,7 @@
     </nav>
     <h2>Lista de Inscripciones</h2>
     <center>
-    <input type="text" id="busqueda" placeholder="Buscar Inscripciones...">
+    <input type="text" id="busqueda" placeholder="Buscar Inscripciones..." autocomplete="off">
     </center>
 </form>
 <table id="tabla-inscripciones">

@@ -106,6 +106,27 @@ transition: background-color 0.3s ease;
 .boton-redireccionador:hover {
 background-color: #45a049;
 }
+#busqueda {
+  padding: 10px;
+  width: 100%;
+  max-width: 700px; 
+  border: 2px solid #ccc; 
+  border-radius: 25px; 
+  font-size: 18px; 
+  outline: none;
+  transition: border-color 0.3s ease; 
+}
+
+/* Estilos para el placeholder */
+#busqueda::placeholder {
+  color: #999;
+}
+
+/* Estilos para cuando el campo de búsqueda está enfocado */
+#busqueda:focus {
+  border-color: #66afe9; 
+}
+
     </style>
 </head>
 <body>
@@ -118,9 +139,10 @@ background-color: #45a049;
             <li><a href="inscripcion.php">Inscripción</a></li>
         </ul>
     </nav>
-
+<center>
 <h2>Lista de Matrículas</h2>
-
+<input type="text" id="busqueda" placeholder="Buscar Matricula..." autocomplete="off">
+</center>
 <table>
 <table>
     <thead>
@@ -172,6 +194,24 @@ background-color: #45a049;
 
 </body>
 <script>
+
+document.getElementById("busqueda").addEventListener("input", function() {
+        var searchTerm = this.value.trim(); // Obtener el término de búsqueda
+        // Lógica de búsqueda y filtrado de resultados aquí (puedes usar JavaScript para filtrar la tabla directamente)
+        // Por ejemplo:
+        var rows = document.querySelectorAll("table tbody tr");
+        for (var i = 0; i < rows.length; i++) {
+            var codigoEstudiante = rows[i].querySelector("td:first-child").textContent.toLowerCase();
+            var nombreEstudiante = rows[i].querySelector("td:nth-child(2)").textContent.toLowerCase();
+            if (codigoEstudiante.indexOf(searchTerm.toLowerCase()) === -1 && nombreEstudiante.indexOf(searchTerm.toLowerCase()) === -1) {
+                rows[i].style.display = "none"; // Ocultar filas que no coincidan con el término de búsqueda
+            } else {
+                rows[i].style.display = ""; // Mostrar filas que coincidan con el término de búsqueda
+            }
+        }
+    });
+
+    
     function editarMatricula(id) {
         // Redirige a la página de edición con el ID de la matrícula
         window.location.href = "editar_matricula.php?id=" + id;
@@ -194,6 +234,8 @@ background-color: #45a049;
             xhr.send("id=" + id);
         }
     }
+
+
 </script>
 
 </html>
