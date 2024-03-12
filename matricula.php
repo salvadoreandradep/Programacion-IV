@@ -1,12 +1,11 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudiantes</title>
-    <style>
+    <title>Registro de Matrículas</title>
+</head>
+<style>
             body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -97,61 +96,58 @@
       background-color: #45a049;
     }
     </style>
-</head>
 <body>
+<nav>
+    <ul>
+        <li><a href="inicio.html">Inicio</a></li>
+        <li><a href="estudiante.html">Estudiantes</a></li>
+        <li><a href="materia.html">Materia</a></li>
+        <li><a href="matricula.php">Matrícula</a></li>
+        <li><a href="#inscripcion">Inscripción</a></li>
+    </ul>
+</nav>
 
-    <nav>
-        <ul>
-            <li><a href="inicio.html">Inicio</a></li>
-            <li><a href="estudiante.html">Estudiantes</a></li>
-            <li><a href="materia.html">Materia</a></li>
-            <li><a href="matricula.php">Matrícula</a></li>
-            <li><a href="#inscripcion">Inscripción</a></li>
-        </ul>
-    </nav>
-    <center>
-        <h1>Estudiantes</h1>
-    </center>
+<h2>Registro de Matrículas</h2>
 
-<form action="guardar_estudiante.php" method="post">
-    <label for="codigo">Código:</label>
-    <input type="text" id="codigo" name="codigo" required>
+<form method="post" action="guardar_matricula.php">
+    <label for="codigo">Código del Estudiante:</label><br>
+    <select name="codigo" id="codigo">
+        <?php
+        // Conexión a la base de datos
+        $conexion = new mysqli("localhost", "root", "", "appacademica");
 
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" name="nombre" required>
+        // Verificar la conexión
+        if ($conexion->connect_error) {
+            die("Error de conexión: " . $conexion->connect_error);
+        }
 
-    <label for="direccion">Dirección:</label>
-    <input type="text" id="direccion" name="direccion" required>
+        // Consulta para obtener los nombres de los estudiantes
+        $query = "SELECT codigo, nombre FROM estudiantes";
+        $result = $conexion->query($query);
 
-    <label for="municipio">Municipio:</label>
-    <input type="text" id="municipio" name="municipio" required>
+        // Mostrar los nombres de los estudiantes en un menú desplegable
+        while ($row = $result->fetch_assoc()) {
+            echo "<option value='" . $row['codigo'] . "'>" . $row['nombre'] . "</option>";
+        }
 
-    <label for="departamento">Departamento:</label>
-    <input type="text" id="departamento" name="departamento" required>
+        // Cerrar la conexión
+        $conexion->close();
+        ?>
+    </select><br><br>
 
-    <label for="telefono">Teléfono:</label>
-    <input type="tel" id="telefono" name="telefono" required>
+    <label for="ciclo">Ciclo:</label><br>
+    <input type="text" name="ciclo" id="ciclo"><br><br>
 
-    <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+    <label for="fecha_matricula">Fecha de Matrícula:</label><br>
+    <input type="date" name="fecha_matricula" id="fecha_matricula"><br><br>
 
-    <label for="sexo">Sexo:</label>
-    <select id="sexo" name="sexo" required>
-        <option value="Masculino">Masculino</option>
-        <option value="Femenino">Femenino</option>
-        <option value="Otro">Otro</option>
-    </select>
-
-    <input type="submit" value="Guardar">
+    <input type="submit" value="Registrar Matrícula">
 </form>
-
-<center>
-
 
 <div>
 
-<button class="boton-redireccionador" onclick="window.location.href = 'mostrar_estudiantes.php';">Tabla</button>
+<button class="boton-redireccionador" onclick="window.location.href = 'mostrar_matricula.php';">Tabla</button>
 
 </div>
-</center>
+</body>
 </html>
