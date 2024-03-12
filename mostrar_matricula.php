@@ -122,12 +122,14 @@ background-color: #45a049;
 <h2>Lista de Matrículas</h2>
 
 <table>
+<table>
     <thead>
         <tr>
             <th>Código Estudiante</th>
             <th>Nombre Estudiante</th>
             <th>Ciclo</th>
             <th>Fecha de Matrícula</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -147,12 +149,17 @@ background-color: #45a049;
 
         // Mostrar las matrículas en la tabla
         while ($row = $result->fetch_assoc()) {
-            echo "<tr>";
+            echo "<tr id='fila-" . $row['id'] . "'>";
             echo "<td>" . $row['codigo_estudiante'] . "</td>";
             echo "<td>" . $row['nombre'] . "</td>";
             echo "<td>" . $row['ciclo'] . "</td>";
             echo "<td>" . $row['fecha_matricula'] . "</td>";
+            echo "<td>";
+            echo "<button class='btn btn-editar' onclick='editarMatricula(" . $row['id'] . ")'>Editar</button>";
+            echo "<button class='btn btn-eliminar' onclick='eliminarMatricula(" . $row['id'] . ")'>Eliminar</button>";
+            echo "</td>";
             echo "</tr>";
+
         }
 
         // Cerrar la conexión
@@ -162,4 +169,29 @@ background-color: #45a049;
 </table>
 
 </body>
+<script>
+    function editarMatricula(id) {
+        // Redirige a la página de edición con el ID de la matrícula
+        window.location.href = "editar_matricula.php?id=" + id;
+    }
+
+    function eliminarMatricula(id) {
+        if (confirm("¿Estás seguro de que deseas eliminar esta matrícula?")) {
+            // Envia una solicitud POST al servidor para eliminar la matrícula
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "eliminar_matricula.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Elimina la fila de la tabla si la eliminación fue exitosa
+                    var fila = document.getElementById("fila-" + id);
+                    fila.parentNode.removeChild(fila);
+                    alert("Matrícula eliminada exitosamente.");
+                }
+            };
+            xhr.send("id=" + id);
+        }
+    }
+</script>
+
 </html>
