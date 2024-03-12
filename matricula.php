@@ -106,9 +106,9 @@
             <li><a href="inscripcion.php">Inscripción</a></li>
         </ul>
     </nav>
-
+<center>
 <h2>Registro de Matrículas</h2>
-
+</center>
 <form method="post" action="guardar_matricula.php">
     <label for="codigo">Código del Estudiante:</label><br>
     <select name="codigo" id="codigo" required>
@@ -145,9 +145,9 @@
 </form>
 
 <div>
-
+<center>
 <button class="boton-redireccionador" onclick="window.location.href = 'mostrar_matricula.php';">Tabla</button>
-
+</center>
 </div>
 </body>
 </html>
