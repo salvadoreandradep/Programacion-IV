@@ -134,8 +134,8 @@ if ($result->num_rows > 0) {
             <li><a href="inicio.html">Inicio</a></li>
             <li><a href="estudiante.html">Estudiantes</a></li>
             <li><a href="materia.html">Materia</a></li>
-            <li><a href="#matricula">Matrícula</a></li>
-            <li><a href="#inscripcion">Inscripción</a></li>
+            <li><a href="matricula.php">Matrícula</a></li>
+            <li><a href="inscripcion.php">Inscripción</a></li>
         </ul>
     </nav>
     <center>

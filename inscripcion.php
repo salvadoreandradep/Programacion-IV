@@ -1,38 +1,9 @@
-<?php
-// Conexión a la base de datos
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "appacademica";
-
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Verificar la conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
-
-// Obtener el ID del estudiante a editar
-$id = $_GET['id'];
-
-// Consulta SQL para obtener los datos del estudiante
-$sql = "SELECT * FROM datos WHERE id=$id";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    // Aquí puedes mostrar un formulario prellenado con los datos del estudiante para permitir su edición
-    // Por ejemplo:
-    ?>
-    <!DOCTYPE html>
-    <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Editar Estudiante</title>
-    </head>
-
-    <style>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inscripción de Estudiante</title>
+</head>
+<style>
             body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -123,11 +94,8 @@ if ($result->num_rows > 0) {
       background-color: #45a049;
     }
     </style>
-
-
-    <body>
-
-    <nav>
+<body>
+<nav>
         <ul>
             <li><a href="inicio.html">Inicio</a></li>
             <li><a href="estudiante.html">Estudiantes</a></li>
@@ -136,31 +104,58 @@ if ($result->num_rows > 0) {
             <li><a href="inscripcion.php">Inscripción</a></li>
         </ul>
     </nav>
-    <center>
+    <h2>Inscripción de Estudiante</h2>
+    <form method="POST" action="procesar_inscripcion.php">
+        Nombre del Estudiante: 
+        <select name="codigo_estudiante">
+            <?php
+            // Conexión a la base de datos
+            $conexion = new mysqli("localhost", "root", "", "appacademica");
+            if ($conexion->connect_error) {
+                die("Error de conexión: " . $conexion->connect_error);
+            }
 
-        <h2>Editar Estudiante</h2>
-        </center>
-        <form action="guardar_edicion_materia.php" method="post">
-    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-    <label for="codigo">Código:</label>
-    <input type="text" id="codigo" name="codigo" value="<?php echo $row['codigo']; ?>"><br>
-    
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" name="nombre" value="<?php echo $row['nombre']; ?>"><br>
-    
-    <label for="creditos">Dirección:</label>
-    <input type="text" id="crditos" name="creditos" value="<?php echo $row['creditos']; ?>"><br>
-    
-    
-    <input type="submit" value="Guardar Cambios">
-</form>
+            // Consulta para obtener los estudiantes
+            $query_estudiantes = "SELECT id, nombre FROM estudiantes";
+            $result_estudiantes = $conexion->query($query_estudiantes);
 
-    </body>
-    </html>
-    <?php
-} else {
-    echo "No se encontró ningún estudiante con ese ID.";
-}
+            // Generar las opciones del select con los nombres de los estudiantes
+            while ($row = $result_estudiantes->fetch_assoc()) {
+                echo "<option value='" . $row['id'] . "'>" . $row['nombre'] . "</option>";
+            }
 
-$conn->close();
-?>
+            // Cerrar conexión
+            $conexion->close();
+            ?>
+        </select>
+        <br><br>
+        Materia: 
+        <select name="materia">
+            <?php
+            // Conexión a la base de datos (puedes modificar los datos de conexión según tu configuración)
+            $conexion = new mysqli("localhost", "root", "", "appacademica");
+            if ($conexion->connect_error) {
+                die("Error de conexión: " . $conexion->connect_error);
+            }
+
+            // Consulta para obtener las materias
+            $query_materias = "SELECT id, nombre FROM datos";
+            $result_materias = $conexion->query($query_materias);
+
+            // Generar las opciones del select con los nombres de las materias
+            while ($row = $result_materias->fetch_assoc()) {
+                echo "<option value='" . $row['id'] . "'>" . $row['nombre'] . "</option>";
+            }
+
+            // Cerrar conexión
+            $conexion->close();
+            ?>
+        </select>
+        <br><br>
+        Ciclo: <input type="text" name="ciclo"><br><br>
+        Fecha de Inscripción: <input type="date" name="fecha_inscripcion"><br><br>
+        <input type="submit" value="Inscribir">
+    </form>
+</body>
+</html>
+
