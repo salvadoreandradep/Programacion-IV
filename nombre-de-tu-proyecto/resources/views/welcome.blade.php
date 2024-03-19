@@ -50,8 +50,8 @@
     <body class="antialiased">
     <nav>
         <ul>
-            <li><a href="inicio.html">Inicio</a></li>
-            <li><a href="estudiante.html">Estudiantes</a></li>
+            <li><a href="">Inicio</a></li>
+            <li><a href="estudiante">Estudiantes</a></li>
             <li><a href="materia.html">Materia</a></li>
             <li><a href="matricula.php">Matrícula</a></li>
             <li><a href="inscripcion.php">Inscripción</a></li>
