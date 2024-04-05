@@ -13,14 +13,17 @@
             padding: 0;
         }
         /* Estilos para el formulario */
-        form {
-            width: 50%;
+        
+      div{
+        width: 50%;
             margin: 20px auto;
             padding: 20px;
             background-color: #f9f9f9;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+      }
+
+
         label {
             display: block;
             margin-bottom: 10px;
@@ -96,6 +99,45 @@
     .boton-redireccionador:hover {
       background-color: #45a049;
     }
+
+    table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .acciones {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #busqueda {
+  padding: 10px;
+  width: 100%;
+  max-width: 700px; 
+  border: 2px solid #ccc; 
+  border-radius: 25px; 
+  font-size: 18px; 
+  outline: none;
+  transition: border-color 0.3s ease; 
+}
+
+/* Estilos para el placeholder */
+#busqueda::placeholder {
+  color: #999;
+}
+
+/* Estilos para cuando el campo de búsqueda está enfocado */
+#busqueda:focus {
+  border-color: #66afe9; 
+}
     </style>
 </head>
 <body>
@@ -112,7 +154,7 @@
     <center>
         <h1>Estudiantes</h1>
     </center>
-
+<div>
     <form method="POST" action="/estudiantes">
     @csrf
     <label>Código:</label>
@@ -136,8 +178,109 @@
     </select><br>
     <button type="submit">Guardar</button>
 </form>
+</div>
+<center>
+<input type="text" id="busqueda" placeholder="Buscar estudiantes..." autocomplete="off">
+</center>
+<table>
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Municipio</th>
+            <th>Departamento</th>
+            <th>Teléfono</th>
+            <th>Fecha de Nacimiento</th>
+            <th>Sexo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody id="tablaEstudiantes" >
+        @foreach($estudiantes as $estudiante)
+        <tr>
+            <td>{{ $estudiante->codigo }}</td>
+            <td>{{ $estudiante->nombre }}</td>
+            <td>{{ $estudiante->direccion }}</td>
+            <td>{{ $estudiante->municipio }}</td>
+            <td>{{ $estudiante->departamento }}</td>
+            <td>{{ $estudiante->telefono }}</td>
+            <td>{{ $estudiante->fecha_nacimiento }}</td>
+            <td>{{ $estudiante->sexo }}</td>
+            <td>
+                <form action="{{ route('estudiantes.destroy', $estudiante->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Eliminar</button>
+                </form>
+                <a href="{{ route('estudiantes.edit', $estudiante->id) }}">Modificar</a>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 
 
+
+
+<script>
+    // Obtener referencia al campo de búsqueda
+    var inputBusqueda = document.getElementById('busqueda');
+    // Obtener referencia a la tabla de estudiantes
+    var tablaEstudiantes = document.getElementById('tablaEstudiantes');
+
+    // Función para filtrar estudiantes según la búsqueda
+    function filtrarEstudiantes() {
+        var filtro = inputBusqueda.value.toUpperCase();
+        var filas = tablaEstudiantes.getElementsByTagName('tr');
+        
+        for (var i = 0; i < filas.length; i++) {
+            var datosEstudiante = filas[i].getElementsByTagName('td');
+            var mostrarFila = false;
+
+            for (var j = 0; j < datosEstudiante.length; j++) {
+                var texto = datosEstudiante[j].innerText.toUpperCase();
+                if (texto.indexOf(filtro) > -1) {
+                    mostrarFila = true;
+                    break;
+                }
+            }
+
+            if (mostrarFila) {
+                filas[i].style.display = "";
+            } else {
+                filas[i].style.display = "none";
+            }
+        }
+    }
+
+    // Escuchar el evento de cambio en el campo de búsqueda
+    inputBusqueda.addEventListener('input', filtrarEstudiantes);
+
+    // Función para eliminar un estudiante
+    function eliminarEstudiante(id) {
+        if (confirm("¿Estás seguro de que deseas eliminar este estudiante?")) {
+            // Realizar una solicitud AJAX para eliminar el estudiante
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    // Eliminar la fila de la tabla
+                    var fila = document.getElementById("fila-" + id);
+                    fila.parentNode.removeChild(fila);
+                    alert("Estudiante eliminado correctamente");
+                }
+            };
+            xhttp.open("GET", "eliminar_estudiante.php?id=" + id, true);
+            xhttp.send();
+        }
+    }
+
+    // Función para redirigir a la página de modificación de estudiante
+    function modificarEstudiante(id) {
+        // Redirigir a una página de edición con el ID del estudiante
+        window.location.href = "editar_estudiante.php?id=" + id;
+    }
+</script>
 
 </html>
 
