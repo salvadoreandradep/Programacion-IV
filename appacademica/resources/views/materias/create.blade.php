@@ -129,6 +129,22 @@ table {
     <button type="submit">Guardar</button>
 </form>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <center>
 <input type="text" id="busqueda" onkeyup="buscarEstudiante()" placeholder="Buscar Materia..." autocomplete="off">
 </center>
@@ -144,7 +160,8 @@ table {
         </tr>
     </thead>
     <tbody>
-        <?php
+
+       <?php
         // Conexión a la base de datos
         $servername = "localhost";
         $username = "root";
@@ -186,21 +203,12 @@ table {
 <script>
     // Función para eliminar un estudiante
     function eliminarEstudiante(id) {
-        if (confirm("¿Estás seguro de que deseas eliminar este estudiante?")) {
-            // Realizar una solicitud AJAX para eliminar el estudiante
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    // Eliminar la fila de la tabla
-                    var fila = document.getElementById("fila-" + id);
-                    fila.parentNode.removeChild(fila);
-                    alert("Estudiante eliminado correctamente");
-                }
-            };
-            xhttp.open("GET", "eliminar_materia.php?id=" + id, true);
-            xhttp.send();
-        }
+        
+     
+
+       
     }
+    
 
     // Función para redirigir a la página de modificación de estudiante
     function modificarEstudiante(id) {
