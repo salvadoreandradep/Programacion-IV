@@ -174,7 +174,7 @@
     <button type="submit">Guardar</button>
 </form>
 
-
+<button class="boton-redireccionador" onclick="window.location.href = 'estudiantes/create';">Tabla</button>
 
 <center>
 

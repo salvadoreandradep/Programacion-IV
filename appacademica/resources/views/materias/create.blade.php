@@ -132,7 +132,7 @@ table {
 
 
 
-
+<button class="boton-redireccionador" onclick="window.location.href = 'materias';">Tabla</button>
 
 
 

@@ -30,6 +30,10 @@ Route::get('/materia', function () {
     return view('/materias/create');
 });
 
+Route::get('/mostrarN', function () {
+    return view('/materias');
+});
+
 Route::get('/materias/create', [MateriaController::class, 'create'])->name('materias.create');
 Route::post('/materias', [MateriaController::class, 'store'])->name('materias.store');
 
