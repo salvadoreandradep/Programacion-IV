@@ -173,61 +173,11 @@
     </select><br>
     <button type="submit">Guardar</button>
 </form>
-
+<center>
 <button class="boton-redireccionador" onclick="window.location.href = 'estudiantes/create';">Tabla</button>
 
-<center>
+</center>
 
-
-
-
-
-<script>
-    // Obtener referencia al campo de búsqueda
-    var inputBusqueda = document.getElementById('busqueda');
-    // Obtener referencia a la tabla de estudiantes
-    var tablaEstudiantes = document.getElementById('tablaEstudiantes');
-
-    // Función para filtrar estudiantes según la búsqueda
-    function filtrarEstudiantes() {
-        var filtro = inputBusqueda.value.toUpperCase();
-        var filas = tablaEstudiantes.getElementsByTagName('tr');
-        
-        for (var i = 0; i < filas.length; i++) {
-            var datosEstudiante = filas[i].getElementsByTagName('td');
-            var mostrarFila = false;
-
-            for (var j = 0; j < datosEstudiante.length; j++) {
-                var texto = datosEstudiante[j].innerText.toUpperCase();
-                if (texto.indexOf(filtro) > -1) {
-                    mostrarFila = true;
-                    break;
-                }
-            }
-
-            if (mostrarFila) {
-                filas[i].style.display = "";
-            } else {
-                filas[i].style.display = "none";
-            }
-        }
-    }
-
-    // Escuchar el evento de cambio en el campo de búsqueda
-    inputBusqueda.addEventListener('input', filtrarEstudiantes);
-
-    // Función para eliminar un estudiante
-    function eliminarEstudiante(id) {
-
-
-     
-    }
-
-    // Función para redirigir a la página de modificación de estudiante
-    function modificarEstudiante(id) {
-        
-    }
-</script>
 
 </body>
 </html>

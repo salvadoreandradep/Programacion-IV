@@ -104,6 +104,21 @@ table {
 #busqueda:focus {
   border-color: #66afe9; 
 }
+.boton-redireccionador {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .boton-redireccionador:hover {
+      background-color: #45a049;
+    }
 </style>
 <body>
 
@@ -131,110 +146,10 @@ table {
 
 
 
-
-<button class="boton-redireccionador" onclick="window.location.href = 'materias';">Tabla</button>
-
-
-
-
-
-
-
-
-
-
-
-
 <center>
-<input type="text" id="busqueda" onkeyup="buscarEstudiante()" placeholder="Buscar Materia..." autocomplete="off">
+<button class="boton-redireccionador" onclick="window.location.href = 'materias';">Tabla</button>
 </center>
-<table>
-    <thead>
-        <tr>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Credito</th>
-            
-
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-
-       <?php
-        // Conexión a la base de datos
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $database = "laravel";
-
-        $conn = new mysqli($servername, $username, $password, $database);
-
-        // Verificar la conexión
-        if ($conn->connect_error) {
-            die("Conexión fallida: " . $conn->connect_error);
-        }
-
-        // Consulta SQL para obtener los datos de los estudiantes
-        $sql = "SELECT * FROM materias";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            // Mostrar los datos en la tabla
-            while($row = $result->fetch_assoc()) {
-                echo "<tr id='fila-" . $row["id"] . "'>";
-                echo "<td>" . $row["codigo"] . "</td>";
-                echo "<td>" . $row["nombre"] . "</td>";
-                echo "<td>" . $row["creditos"] . "</td>";
-                 echo "<td class='acciones'>";
-                echo "<button onclick='eliminarEstudiante(" . $row["id"] . ")'>Eliminar</button>";
-                echo "<button onclick='modificarEstudiante(" . $row["id"] . ")'>Modificar</button>";
-                echo "</td>";
-                echo "</tr>";
-            }
-        } else {
-            echo "<tr><td colspan='5'>0 Resultados.</td></tr>";
-        }
-        $conn->close();
-        ?>
-    </tbody>
-</table>
-
-<script>
-    // Función para eliminar un estudiante
-    function eliminarEstudiante(id) {
-        
-     
-
-       
-    }
-    
-
-    // Función para redirigir a la página de modificación de estudiante
-    function modificarEstudiante(id) {
-        // Redirigir a una página de edición con el ID del estudiante
-        window.location.href = "editar_materia.php?id=" + id;
-    }
 
 
-    function buscarEstudiante() {
-        var input, filtro, tabla, tr, td, i, txtValue;
-        input = document.getElementById("busqueda");
-        filtro = input.value.toUpperCase();
-        tabla = document.querySelector("table");
-        tr = tabla.getElementsByTagName("tr");
 
-        // Iterar sobre todas las filas y ocultar aquellas que no coincidan con la búsqueda
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1]; // Cambia el índice si quieres buscar en otra columna
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filtro) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
-            }
-        }
-    }
-</script>
+
