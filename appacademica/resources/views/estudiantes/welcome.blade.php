@@ -48,8 +48,6 @@
     </nav>
 
 
-<CENTER>
-    <img src="95010-blue-purple-simple_background-748x468.png" alt="Descripción de la imagen" width="1280" height="500">
-</CENTER>
+
 </body>
 </html>

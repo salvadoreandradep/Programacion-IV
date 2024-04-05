@@ -2,13 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EstudianteController;
-
-Route::get('/estudiantes/create', [EstudianteController::class, 'create']);
-Route::post('/estudiantes', [EstudianteController::class, 'store']);
-Route::delete('/estudiantes/{estudiante}', [EstudianteController::class, 'destroy'])->name('estudiantes.destroy');
-Route::get('/estudiantes/{estudiante}/edit', [EstudianteController::class, 'edit'])->name('estudiantes.edit');
-Route::put('/estudiantes/{estudiante}', [EstudianteController::class, 'update'])->name('estudiantes.update');
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,11 +14,16 @@ Route::put('/estudiantes/{estudiante}', [EstudianteController::class, 'update'])
 */
 
 Route::get('/', function () {
-    return view('inicio');
+    return view('/estudiantes/welcome');
+});
+Route::get('/inicio', function () {
+    return view('/estudiantes/welcome');
 });
 
 Route::get('/estudiante', function () {
-    return view('estudiantes/create');
+    return view('/estudiantes/create');
 });
 
 
+Route::get('/estudiantes/create', [EstudianteController::class, 'create']);
+Route::post('/estudiantes', [EstudianteController::class, 'store']);
