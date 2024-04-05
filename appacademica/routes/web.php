@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\MateriaController;
+use App\Http\Controllers\MatriculaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,9 +31,24 @@ Route::get('/materia', function () {
     return view('/materias/create');
 });
 
+
+Route::get('/matricula', function () {
+    return view('/matriculas/create');
+});
+
+
 Route::get('/mostrarN', function () {
     return view('/materias');
 });
+
+
+Route::get('/matriculas/create', [MatriculaController::class, 'create'])->name('matriculas.create');
+Route::post('/matriculas', [MatriculaController::class, 'store'])->name('matriculas.store');
+
+
+
+
+
 
 Route::get('/materias/create', [MateriaController::class, 'create'])->name('materias.create');
 Route::post('/materias', [MateriaController::class, 'store'])->name('materias.store');
