@@ -116,19 +116,19 @@
     <form method="POST" action="/estudiantes">
     @csrf
     <label>Código:</label>
-    <input type="text" name="codigo"><br>
+    <input type="text" name="codigo" autocomplete="off" required ><br>
     <label>Nombre:</label>
-    <input type="text" name="nombre"><br>
+    <input type="text" name="nombre" autocomplete="off" required ><br>
     <label>Dirección:</label>
-    <input type="text" name="direccion"><br>
+    <input type="text" name="direccion" autocomplete="off" required ><br>
     <label>Municipio:</label>
-    <input type="text" name="municipio"><br>
+    <input type="text" name="municipio" autocomplete="off" required><br>
     <label>Departamento:</label>
-    <input type="text" name="departamento"><br>
+    <input type="text" name="departamento" autocomplete="off" required><br>
     <label>Teléfono:</label>
-    <input type="text" name="telefono"><br>
+    <input type="text" name="telefono" autocomplete="off" required><br>
     <label>Fecha de Nacimiento:</label>
-    <input type="date" name="fecha_nacimiento"><br>
+    <input type="date" name="fecha_nacimiento" autocomplete="off" required><br>
     <label>Sexo:</label>
     <select name="sexo">
         <option value="M">Masculino</option>
