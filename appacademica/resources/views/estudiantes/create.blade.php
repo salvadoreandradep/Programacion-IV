@@ -179,66 +179,8 @@
 <center>
 
 
-<input type="text" id="busqueda" placeholder="Buscar estudiantes..." autocomplete="off">
-</center>
-<table>
-    <thead>
-        <tr>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Dirección</th>
-            <th>Municipio</th>
-            <th>Departamento</th>
-            <th>Teléfono</th>
-            <th>Fecha de Nacimiento</th>
-            <th>Sexo</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody id="tablaEstudiantes">
-        <?php
-        // Conexión a la base de datos
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $database = "laravel";
 
-        $conn = new mysqli($servername, $username, $password, $database);
 
-        // Verificar la conexión
-        if ($conn->connect_error) {
-            die("Conexión fallida: " . $conn->connect_error);
-        }
-
-        // Consulta SQL para obtener los datos de los estudiantes
-        $sql = "SELECT * FROM estudiantes";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            // Mostrar los datos en la tabla
-            while($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>" . $row["codigo"] . "</td>";
-                echo "<td>" . $row["nombre"] . "</td>";
-                echo "<td>" . $row["direccion"] . "</td>";
-                echo "<td>" . $row["municipio"] . "</td>";
-                echo "<td>" . $row["departamento"] . "</td>";
-                echo "<td>" . $row["telefono"] . "</td>";
-                echo "<td>" . $row["fecha_nacimiento"] . "</td>";
-                echo "<td>" . $row["sexo"] . "</td>";
-                echo "<td class='acciones'>";
-                echo "<button onclick='eliminarEstudiante(" . $row["id"] . ")'>Eliminar</button>";
-                echo "<button onclick='modificarEstudiante(" . $row["id"] . ")'>Modificar</button>";
-                echo "</td>";
-                echo "</tr>";
-            }
-        } else {
-            echo "<tr><td colspan='9'>0 Resultados.</td></tr>";
-        }
-        $conn->close();
-        ?>
-    </tbody>
-</table>
 
 <script>
     // Obtener referencia al campo de búsqueda

@@ -77,16 +77,17 @@
 <nav>
 
         <ul>
-            <li><a href="inicio">Inicio</a></li>
-            <li><a href="estudiante">Estudiantes</a></li>
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/estudiante">Estudiantes</a></li>
             <li><a href="materia.html">Materia</a></li>
             <li><a href="matricula.php">Matrícula</a></li>
             <li><a href="inscripcion.php">Inscripción</a></li>
         </ul>
     </nav>
-
-
-<table>
+<center>
+    <input type="text" id="busqueda" placeholder="Buscar estudiantes..." autocomplete="off">
+    </center>
+<table  >
     <thead>
         <tr>
             <th>Código</th>
@@ -100,7 +101,8 @@
             <th>Acciones</th>
         </tr>
     </thead>
-    <tbody>
+    
+    <tbody id="tablaEstudiantes">
         @foreach($estudiantes as $estudiante)
         <tr>
             <td>{{ $estudiante->codigo }}</td>
@@ -124,3 +126,49 @@
     </tbody>
 </table>
 
+<script>
+    // Obtener referencia al campo de búsqueda
+    var inputBusqueda = document.getElementById('busqueda');
+    // Obtener referencia a la tabla de estudiantes
+    var tablaEstudiantes = document.getElementById('tablaEstudiantes');
+
+    // Función para filtrar estudiantes según la búsqueda
+    function filtrarEstudiantes() {
+        var filtro = inputBusqueda.value.toUpperCase();
+        var filas = tablaEstudiantes.getElementsByTagName('tr');
+        
+        for (var i = 0; i < filas.length; i++) {
+            var datosEstudiante = filas[i].getElementsByTagName('td');
+            var mostrarFila = false;
+
+            for (var j = 0; j < datosEstudiante.length; j++) {
+                var texto = datosEstudiante[j].innerText.toUpperCase();
+                if (texto.indexOf(filtro) > -1) {
+                    mostrarFila = true;
+                    break;
+                }
+            }
+
+            if (mostrarFila) {
+                filas[i].style.display = "";
+            } else {
+                filas[i].style.display = "none";
+            }
+        }
+    }
+
+    // Escuchar el evento de cambio en el campo de búsqueda
+    inputBusqueda.addEventListener('input', filtrarEstudiantes);
+
+    // Función para eliminar un estudiante
+    function eliminarEstudiante(id) {
+
+
+     
+    }
+
+    // Función para redirigir a la página de modificación de estudiante
+    function modificarEstudiante(id) {
+        
+    }
+</script>
