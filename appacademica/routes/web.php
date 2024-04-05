@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EstudianteController;
+use App\Http\Controllers\MateriaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,9 +25,14 @@ Route::get('/estudiante', function () {
     return view('/estudiantes/create');
 });
 
-Route::get('/mostrare', function () {
-    return view('/estudiantes/index');
+
+Route::get('/materia', function () {
+    return view('/estudiantes/materia');
 });
+
+
+Route::get('/materias/create', [MateriaController::class, 'create'])->name('materias.create');
+Route::post('/materias', [MateriaController::class, 'store'])->name('materias.store');
 
 Route::get('/estudiantes/create', [EstudianteController::class, 'create'])->name('estudiantes.create');
 Route::get('/estudiantes/create', [EstudianteController::class, 'create']);
