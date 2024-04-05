@@ -12,16 +12,6 @@ class MateriaController extends Controller
         return view('materias.create');
     }
 
-    public function index()
-    {
-        $materias = Materia::all();
-        return view('materias.index', compact('materias'));
-    }
-
- 
-    
-
-
     public function store(Request $request)
     {
         $request->validate([
@@ -36,36 +26,37 @@ class MateriaController extends Controller
             'creditos' => $request->creditos,
         ]);
 
-        return redirect()->route('materias.create')->with('success', 'Materia creada exitosamente');
+        return redirect()->route('materias')->with('success', 'Materia creada exitosamente');
     }
 
+    public function index()
+    {
+        $materias = Materia::all();
+        return view('materias.index', compact('materias'));
+    }
 
     public function destroy(Materia $materia)
     {
         $materia->delete();
-        return redirect()->back()->with('success', 'Materia eliminada exitosamente');
+        return redirect()->route('materias.index')->with('success', 'Materia eliminada exitosamente');
     }
 
     public function edit(Materia $materia)
     {
-        $materias = Materia::all();
         return view('materias.edit', compact('materia'));
     }
-    
-
     public function update(Request $request, Materia $materia)
     {
         $request->validate([
-            'codigo' => 'required|unique:materias,codigo,'.$materia->id,
+            'codigo' => 'required|unique:materias,codigo,' . $materia->id,
             'nombre' => 'required',
             'creditos' => 'required|integer',
         ]);
 
-        $materia->update([
-            'codigo' => $request->codigo,
-            'nombre' => $request->nombre,
-            'creditos' => $request->creditos,
-        ]);
+        $materia->codigo = $request->codigo;
+        $materia->nombre = $request->nombre;
+        $materia->creditos = $request->creditos;
+        $materia->save();
 
         return redirect()->route('materias.index')->with('success', 'Materia actualizada exitosamente');
     }

@@ -30,14 +30,13 @@ Route::get('/materia', function () {
     return view('/materias/create');
 });
 
-
-Route::get('/materias', [MateriaController::class, 'create'])->name('materias.create');
+Route::get('/materias/create', [MateriaController::class, 'create'])->name('materias.create');
 Route::post('/materias', [MateriaController::class, 'store'])->name('materias.store');
 
+Route::get('/materias', [MateriaController::class, 'index'])->name('materias.index');
 Route::delete('/materias/{materia}', [MateriaController::class, 'destroy'])->name('materias.destroy');
 Route::get('/materias/{materia}/edit', [MateriaController::class, 'edit'])->name('materias.edit');
 Route::put('/materias/{materia}', [MateriaController::class, 'update'])->name('materias.update');
-
 
 
 Route::get('/estudiantes/create', [EstudianteController::class, 'create'])->name('estudiantes.create');
