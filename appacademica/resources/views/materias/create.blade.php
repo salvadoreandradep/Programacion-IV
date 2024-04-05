@@ -127,7 +127,7 @@ table {
             <li><a href="inicio">Inicio</a></li>
             <li><a href="estudiante">Estudiantes</a></li>
             <li><a href="">Materia</a></li>
-            <li><a href="matricula.php">Matrícula</a></li>
+            <li><a href="matricula">Matrícula</a></li>
             <li><a href="inscripcion.php">Inscripción</a></li>
         </ul>
     </nav>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -83,73 +84,32 @@
             <li><a href="inscripcion.php">Inscripción</a></li>
         </ul>
     </nav>
-
-
-    <center>
-<input type="text" id="busqueda" onkeyup="buscarEstudiante()" placeholder="Buscar Materia..." autocomplete="off">
-</center>
 <table>
     <thead>
         <tr>
             <th>Código</th>
-            <th>Nombre</th>
-            <th>Créditos</th>
+            <th>Estudiante</th>
+            <th>Ciclo</th>
+            <th>Fecha de Matrícula</th>
             <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-        @foreach($materias as $materia)
+        @foreach($matriculas as $matricula)
         <tr>
-            <td>{{ $materia->codigo }}</td>
-            <td>{{ $materia->nombre }}</td>
-            <td>{{ $materia->creditos }}</td>
+            <td>{{ $matricula->codigo }}</td>
+            <td>{{ $matricula->estudiante->nombre }}</td>
+            <td>{{ $matricula->ciclo }}</td>
+            <td>{{ $matricula->fecha_matricula }}</td>
             <td>
-                <form action="{{ route('materias.destroy', $materia->id) }}" method="POST">
+                <form action="{{ route('matriculas.destroy', $matricula->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit">Eliminar</button>
                 </form>
-                <a href="{{ route('materias.edit', $materia->id) }}">Modificar</a>
+                <a href="{{ route('matriculas.edit', $matricula->id) }}">Modificar</a>
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
-<script>
-    // Función para eliminar un estudiante
-    function eliminarEstudiante(id) {
-        
-     
-
-       
-    }
-    
-
-    // Función para redirigir a la página de modificación de estudiante
-    function modificarEstudiante(id) {
-        // Redirigir a una página de edición con el ID del estudiante
-        window.location.href = "editar_materia.php?id=" + id;
-    }
-
-
-    function buscarEstudiante() {
-        var input, filtro, tabla, tr, td, i, txtValue;
-        input = document.getElementById("busqueda");
-        filtro = input.value.toUpperCase();
-        tabla = document.querySelector("table");
-        tr = tabla.getElementsByTagName("tr");
-
-        // Iterar sobre todas las filas y ocultar aquellas que no coincidan con la búsqueda
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1]; // Cambia el índice si quieres buscar en otra columna
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filtro) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
-            }
-        }
-    }
-</script>

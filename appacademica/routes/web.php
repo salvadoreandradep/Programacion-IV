@@ -42,9 +42,14 @@ Route::get('/mostrarN', function () {
 });
 
 
+Route::get('/matriculas', [MatriculaController::class, 'index'])->name('matriculas.index');
 Route::get('/matriculas/create', [MatriculaController::class, 'create'])->name('matriculas.create');
 Route::post('/matriculas', [MatriculaController::class, 'store'])->name('matriculas.store');
 
+// Rutas para editar y eliminar matrículas
+Route::get('/matriculas/{matricula}/edit', [MatriculaController::class, 'edit'])->name('matriculas.edit');
+Route::put('/matriculas/{matricula}', [MatriculaController::class, 'update'])->name('matriculas.update');
+Route::delete('/matriculas/{matricula}', [MatriculaController::class, 'destroy'])->name('matriculas.destroy');
 
 
 

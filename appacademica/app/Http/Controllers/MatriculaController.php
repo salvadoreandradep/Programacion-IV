@@ -15,7 +15,11 @@ class MatriculaController extends Controller
     }
     
     
-
+    public function index()
+    {
+        $matriculas = Matricula::all();
+        return view('matriculas.index', compact('matriculas'));
+    }
     
 
     
@@ -32,6 +36,33 @@ class MatriculaController extends Controller
         Matricula::create($request->all());
 
         return redirect()->route('matriculas.create')->with('success', 'Matrícula creada exitosamente');
+    }
+
+
+
+    public function destroy(Matricula $matricula)
+    {
+        $matricula->delete();
+        return redirect()->back()->with('success', 'Matrícula eliminada exitosamente');
+    }
+
+    public function edit(Matricula $matricula)
+    {
+        return view('matriculas.edit', compact('matricula'));
+    }
+
+    public function update(Request $request, Matricula $matricula)
+    {
+        $request->validate([
+            'codigo' => 'required',
+            'estudiante_id' => 'required',
+            'ciclo' => 'required',
+            'fecha_matricula' => 'required|date',
+        ]);
+
+        $matricula->update($request->all());
+
+        return redirect()->route('matriculas.index')->with('success', 'Matrícula actualizada exitosamente');
     }
 }
 
