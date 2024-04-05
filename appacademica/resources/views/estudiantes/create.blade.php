@@ -96,6 +96,43 @@
     .boton-redireccionador:hover {
       background-color: #45a049;
     }
+    table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .acciones {
+            display: flex;
+            justify-content: space-between;
+        }
+        #busqueda {
+  padding: 10px;
+  width: 100%;
+  max-width: 700px; 
+  border: 2px solid #ccc; 
+  border-radius: 25px; 
+  font-size: 18px; 
+  outline: none;
+  transition: border-color 0.3s ease; 
+}
+
+/* Estilos para el placeholder */
+#busqueda::placeholder {
+  color: #999;
+}
+
+/* Estilos para cuando el campo de búsqueda está enfocado */
+#busqueda:focus {
+  border-color: #66afe9; 
+}
     </style>
 </head>
 <body>
@@ -140,6 +177,118 @@
 
 
 <center>
+
+
+<input type="text" id="busqueda" placeholder="Buscar estudiantes..." autocomplete="off">
+</center>
+<table>
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Municipio</th>
+            <th>Departamento</th>
+            <th>Teléfono</th>
+            <th>Fecha de Nacimiento</th>
+            <th>Sexo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody id="tablaEstudiantes">
+        <?php
+        // Conexión a la base de datos
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $database = "laravel";
+
+        $conn = new mysqli($servername, $username, $password, $database);
+
+        // Verificar la conexión
+        if ($conn->connect_error) {
+            die("Conexión fallida: " . $conn->connect_error);
+        }
+
+        // Consulta SQL para obtener los datos de los estudiantes
+        $sql = "SELECT * FROM estudiantes";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            // Mostrar los datos en la tabla
+            while($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . $row["codigo"] . "</td>";
+                echo "<td>" . $row["nombre"] . "</td>";
+                echo "<td>" . $row["direccion"] . "</td>";
+                echo "<td>" . $row["municipio"] . "</td>";
+                echo "<td>" . $row["departamento"] . "</td>";
+                echo "<td>" . $row["telefono"] . "</td>";
+                echo "<td>" . $row["fecha_nacimiento"] . "</td>";
+                echo "<td>" . $row["sexo"] . "</td>";
+                echo "<td class='acciones'>";
+                echo "<button onclick='eliminarEstudiante(" . $row["id"] . ")'>Eliminar</button>";
+                echo "<button onclick='modificarEstudiante(" . $row["id"] . ")'>Modificar</button>";
+                echo "</td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='9'>0 Resultados.</td></tr>";
+        }
+        $conn->close();
+        ?>
+    </tbody>
+</table>
+
+<script>
+    // Obtener referencia al campo de búsqueda
+    var inputBusqueda = document.getElementById('busqueda');
+    // Obtener referencia a la tabla de estudiantes
+    var tablaEstudiantes = document.getElementById('tablaEstudiantes');
+
+    // Función para filtrar estudiantes según la búsqueda
+    function filtrarEstudiantes() {
+        var filtro = inputBusqueda.value.toUpperCase();
+        var filas = tablaEstudiantes.getElementsByTagName('tr');
+        
+        for (var i = 0; i < filas.length; i++) {
+            var datosEstudiante = filas[i].getElementsByTagName('td');
+            var mostrarFila = false;
+
+            for (var j = 0; j < datosEstudiante.length; j++) {
+                var texto = datosEstudiante[j].innerText.toUpperCase();
+                if (texto.indexOf(filtro) > -1) {
+                    mostrarFila = true;
+                    break;
+                }
+            }
+
+            if (mostrarFila) {
+                filas[i].style.display = "";
+            } else {
+                filas[i].style.display = "none";
+            }
+        }
+    }
+
+    // Escuchar el evento de cambio en el campo de búsqueda
+    inputBusqueda.addEventListener('input', filtrarEstudiantes);
+
+    // Función para eliminar un estudiante
+    function eliminarEstudiante(id) {
+
+
+     
+    }
+
+    // Función para redirigir a la página de modificación de estudiante
+    function modificarEstudiante(id) {
+        
+    }
+</script>
+
+</body>
+</html>
 
 </html>
 

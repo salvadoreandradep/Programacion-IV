@@ -24,6 +24,13 @@ Route::get('/estudiante', function () {
     return view('/estudiantes/create');
 });
 
+Route::get('/mostrare', function () {
+    return view('/estudiantes/index');
+});
 
+Route::get('/estudiantes/create', [EstudianteController::class, 'create'])->name('estudiantes.create');
 Route::get('/estudiantes/create', [EstudianteController::class, 'create']);
 Route::post('/estudiantes', [EstudianteController::class, 'store']);
+Route::delete('/estudiantes/{estudiante}', [EstudianteController::class, 'destroy'])->name('estudiantes.destroy');
+Route::get('/estudiantes/{estudiante}/edit', [EstudianteController::class, 'edit'])->name('estudiantes.edit');
+Route::put('/estudiantes/{estudiante}', [EstudianteController::class, 'update'])->name('estudiantes.update');

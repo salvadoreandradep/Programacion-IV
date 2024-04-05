@@ -8,9 +8,11 @@ use App\Models\Estudiante;
 class EstudianteController extends Controller
 {
     public function create()
-    {
-        return view('estudiantes.create');
-    }
+{
+    $estudiantes = Estudiante::all();
+    return view('estudiantes.index', compact('estudiantes'));
+}
+
 
     public function store(Request $request)
     {
@@ -27,4 +29,22 @@ class EstudianteController extends Controller
 
         return redirect('/estudiantes/create')->with('success', 'Estudiante guardado exitosamente');
     }
+
+    public function destroy(Estudiante $estudiante)
+{
+    $estudiante->delete();
+    return redirect('/estudiantes/create')->with('success', 'Estudiante eliminado exitosamente');
+}
+
+public function edit(Estudiante $estudiante)
+{
+    return view('estudiantes.edit', compact('estudiante'));
+}
+
+public function update(Request $request, Estudiante $estudiante)
+{
+    $estudiante->update($request->all());
+    return redirect('/estudiantes/create')->with('success', 'Estudiante actualizado exitosamente');
+}
+
 }
