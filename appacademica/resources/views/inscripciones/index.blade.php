@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Inscripción de Estudiante</title>
-</head>
-<style>
-            body {
+    <title>Lista de Inscripciones</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
         /* Estilos para el formulario */
-        form {
-            width: 50%;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+        
         label {
             display: block;
             margin-bottom: 10px;
@@ -93,64 +97,66 @@
     .boton-redireccionador:hover {
       background-color: #45a049;
     }
+    #busqueda {
+  padding: 10px;
+  width: 100%;
+  max-width: 700px; 
+  border: 2px solid #ccc; 
+  border-radius: 25px; 
+  font-size: 18px; 
+  outline: none;
+  transition: border-color 0.3s ease; 
+}
+
+/* Estilos para el placeholder */
+#busqueda::placeholder {
+  color: #999;
+}
+
+/* Estilos para cuando el campo de búsqueda está enfocado */
+#busqueda:focus {
+  border-color: #66afe9; 
+}
+
     </style>
+</head>
 <body>
 <nav>
         <ul>
-            <li><a href="/inicio">Inicio</a></li>
-            <li><a href="/estudiante">Estudiantes</a></li>
-            <li><a href="materia">Materia</a></li>
-            <li><a href="/matricula">Matrícula</a></li>
-            <li><a href="">Inscripción</a></li>
+            <li><a href="inicio.html">Inicio</a></li>
+            <li><a href="estudiante.html">Estudiantes</a></li>
+            <li><a href="materia.html">Materia</a></li>
+            <li><a href="matricula.php">Matrícula</a></li>
+            <li><a href="inscripcion.php">Inscripción</a></li>
         </ul>
     </nav>
 
-<form method="POST" action="{{ route('inscripciones.store') }}">
-    @csrf
-    <label>Estudiante:</label>
-    <select name="estudiante_id">
-        <?php
-        $conexion = new mysqli("localhost", "root", "", "laravel");
-        if ($conexion->connect_error) {
-            die("Error de conexión: " . $conexion->connect_error);
-        }
-
-        $query = "SELECT id, nombre FROM estudiantes";
-        $result = $conexion->query($query);
-
-        while ($row = $result->fetch_assoc()) {
-            echo "<option value='" . $row['id'] . "'>" . $row['nombre'] . "</option>";
-        }
-
-        $conexion->close();
-        ?>
-    </select><br>
-    <label>Materia:</label>
-    <select name="materia_id">
-            <?php
-        $conexion = new mysqli("localhost", "root", "", "laravel");
-        if ($conexion->connect_error) {
-            die("Error de conexión: " . $conexion->connect_error);
-        }
-
-        $query = "SELECT id, nombre FROM materias";
-        $result = $conexion->query($query);
-
-        while ($row = $result->fetch_assoc()) {
-            echo "<option value='" . $row['id'] . "'>" . $row['nombre'] . "</option>";
-        }
-
-        $conexion->close();
-        ?>
-    </select><br>
- 
-    <label>Ciclo:</label>
-    <input type="text" name="ciclo"><br>
-    <label>Fecha de Inscripción:</label>
-    <input type="date" name="fecha_inscripcion"><br>
-    <button type="submit">Guardar</button>
-</form>
-
-<center>
-<button class="boton-redireccionador" onclick="window.location.href = '/inscripciones';">Tabla</button>
-</center>
+<table>
+    <thead>
+        <tr>
+            <th>Estudiante</th>
+            <th>Materia</th>
+            <th>Ciclo</th>
+            <th>Fecha de Inscripción</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($inscripciones as $inscripcion)
+        <tr>
+            <td>{{ $inscripcion->estudiante->nombre }}</td>
+            <td>{{ $inscripcion->materia->nombre }}</td>
+            <td>{{ $inscripcion->ciclo }}</td>
+            <td>{{ $inscripcion->fecha_inscripcion }}</td>
+            <td>
+                <form action="{{ route('inscripciones.destroy', $inscripcion->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Eliminar</button>
+                </form>
+                <a href="{{ route('inscripciones.edit', $inscripcion->id) }}">Modificar</a>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>

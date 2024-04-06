@@ -50,12 +50,18 @@ Route::get('/inscricion', function () {
     return view('/inscripciones/create');
 });
 
+Route::get('/inscriciones', function () {
+    return view('/inscripciones/index');
+});
 
 
+
+Route::get('/inscripciones', [InscripcionController::class, 'index'])->name('inscripciones.index');
 Route::get('/inscripciones/create', [InscripcionController::class, 'create'])->name('inscripciones.create');
 Route::post('/inscripciones', [InscripcionController::class, 'store'])->name('inscripciones.store');
-
-
+Route::get('/inscripciones/{inscripcion}/edit', [InscripcionController::class, 'edit'])->name('inscripciones.edit');
+Route::put('/inscripciones/{inscripcion}', [InscripcionController::class, 'update'])->name('inscripciones.update');
+Route::delete('/inscripciones/{inscripcion}', [InscripcionController::class, 'destroy'])->name('inscripciones.destroy');
 
 
 
