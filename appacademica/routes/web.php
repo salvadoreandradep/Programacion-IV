@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\MatriculaController;
+use App\Http\Controllers\InscripcionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +41,21 @@ Route::get('/matricula', function () {
 Route::get('/mostrarN', function () {
     return view('/materias');
 });
+
+Route::get('/inscricion', function () {
+    return view('/inscripciones/create');
+});
+
+
+
+Route::get('/inscripciones/create', [InscripcionController::class, 'create'])->name('inscripciones.create');
+Route::post('/inscripciones', [InscripcionController::class, 'store'])->name('inscripciones.store');
+
+
+
+
+
+
 
 
 Route::get('/matriculas', [MatriculaController::class, 'index'])->name('matriculas.index');
