@@ -28,10 +28,14 @@ Route::get('/estudiante', function () {
 });
 
 
-Route::get('/materia', function () {
+
+Route::get('/materias', function () {
     return view('/materias/create');
 });
 
+Route::get('/materia', function () {
+    return view('/materias/create');
+});
 
 Route::get('/matricula', function () {
     return view('/matriculas/create');
@@ -55,6 +59,11 @@ Route::post('/inscripciones', [InscripcionController::class, 'store'])->name('in
 
 
 
+Route::get('/materias/create', [MateriaController::class, 'create'])->name('materias.create');
+Route::post('/materias', [MateriaController::class, 'store'])->name('materias.store');
+Route::delete('/materias/{materia}', [MateriaController::class, 'destroy'])->name('materias.destroy');
+Route::get('/materias/{materia}/edit', [MateriaController::class, 'edit'])->name('materias.edit');
+Route::put('/materias/{materia}', [MateriaController::class, 'update'])->name('materias.update');
 
 
 

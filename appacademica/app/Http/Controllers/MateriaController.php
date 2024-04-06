@@ -26,7 +26,7 @@ class MateriaController extends Controller
             'creditos' => $request->creditos,
         ]);
 
-        return redirect()->route('materia')->with('success', 'Materia creada exitosamente');
+        return redirect()->route('materias.create')->with('success', 'Materia creada exitosamente');
     }
 
     public function index()

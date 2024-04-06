@@ -147,7 +147,7 @@ table {
 
 
 <center>
-<button class="boton-redireccionador" onclick="window.location.href = 'materias';">Tabla</button>
+<button class="boton-redireccionador" onclick="window.location.href = '/materias';">Tabla</button>
 </center>
 
 
