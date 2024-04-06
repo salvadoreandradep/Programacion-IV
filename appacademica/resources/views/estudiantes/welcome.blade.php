@@ -41,7 +41,7 @@
 
     <nav>
         <ul>
-            <li><a href="inicio">Inicio</a></li>
+            <li><a href="/">Inicio</a></li>
             <li><a href="estudiante">Estudiantes</a></li>
             <li><a href="materia">Materia</a></li>
             <li><a href="/matricula">Matrícula</a></li>

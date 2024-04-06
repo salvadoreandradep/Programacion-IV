@@ -103,7 +103,7 @@
             <li><a href="/estudiante">Estudiantes</a></li>
             <li><a href="/materia">Materia</a></li>
             <li><a href="">Matrícula</a></li>
-            <li><a href="inscripcion.php">Inscripción</a></li>
+            <li><a href="inscricion">Inscripción</a></li>
         </ul>
     </nav>
 
