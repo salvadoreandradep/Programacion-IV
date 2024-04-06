@@ -142,7 +142,7 @@
             <li><a href="inicio">Inicio</a></li>
             <li><a href="">Estudiantes</a></li>
             <li><a href="materia">Materia</a></li>
-            <li><a href="matricula.php">Matrícula</a></li>
+            <li><a href="matricula">Matrícula</a></li>
             <li><a href="inscripcion.php">Inscripción</a></li>
         </ul>
     </nav>
@@ -153,7 +153,7 @@
     <form method="POST" action="/estudiantes">
     @csrf
     <label>Código:</label>
-    <input type="text" name="codigo"><br>
+    <input type="text" name="codigo" required><br>
     <label>Nombre:</label>
     <input type="text" name="nombre"><br>
     <label>Dirección:</label>
