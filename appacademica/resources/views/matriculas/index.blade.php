@@ -25,27 +25,38 @@
             justify-content: space-between;
         }
         nav {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
-        }
-        nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-        }
-        nav ul li a:hover {
-            text-decoration: underline;
-        }
+    background-color: #2c3e50; /* Cambia el color de fondo según tu preferencia */
+    color: #fff;
+    text-align: center;
+    padding: 20px 0; /* Incrementé el padding para un aspecto más espaciado */
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px; /* Aumenté el tamaño del texto */
+    font-weight: bold; /* Hice el texto más audaz */
+    padding: 10px; /* Agregué un espacio interno para mejorar la apariencia */
+    transition: box-shadow 0.3s ease; /* Añadí una transición para suavizar el efecto */
+}
+
+nav ul li a:hover {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.7); /* Aumenté el radio de desenfoque y la opacidad */
+    border-radius: 5px; /* Añadí bordes redondeados para un aspecto más suave */
+    padding: 15px; /* Agregué relleno adicional al pasar el mouse */
+}
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
