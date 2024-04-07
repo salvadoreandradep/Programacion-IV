@@ -134,15 +134,17 @@ nav ul li a:hover {
 <body>
 <nav>
         <ul>
-            <li><a href="inicio.html">Inicio</a></li>
-            <li><a href="estudiante.html">Estudiantes</a></li>
-            <li><a href="materia.html">Materia</a></li>
-            <li><a href="matricula.php">Matrícula</a></li>
-            <li><a href="inscripcion.php">Inscripción</a></li>
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/estudiante">Estudiantes</a></li>
+            <li><a href="/materia">Materia</a></li>
+            <li><a href="/matricula">Matrícula</a></li>
+            <li><a href="/inscricion">Inscripción</a></li>
         </ul>
     </nav>
 
-<table>
+
+    <input type="text" id="busqueda" placeholder="Buscar Inscripciones..." autocomplete="off">   
+<table id="tabla-inscripciones">
     <thead>
         <tr>
             <th>Estudiante</th>
@@ -171,3 +173,36 @@ nav ul li a:hover {
         @endforeach
     </tbody>
 </table>
+<script>
+    // Obtener el campo de búsqueda y la tabla
+    var inputBusqueda = document.getElementById('busqueda');
+    var tablaInscripciones = document.getElementById('tabla-inscripciones');
+
+    // Agregar un evento de entrada al campo de búsqueda
+    inputBusqueda.addEventListener('input', function() {
+        var filtro = inputBusqueda.value.toLowerCase(); // Obtener el valor del campo de búsqueda y convertirlo a minúsculas
+        var filas = tablaInscripciones.getElementsByTagName('tr'); // Obtener todas las filas de la tabla
+
+        // Iterar sobre las filas de la tabla, comenzando desde el índice 1 para omitir la fila de encabezado
+        for (var i = 1; i < filas.length; i++) {
+            var celdas = filas[i].getElementsByTagName('td'); // Obtener todas las celdas de la fila
+            var coincidencia = false;
+
+            // Iterar sobre las celdas de la fila y verificar si alguna contiene el texto de búsqueda
+            for (var j = 0; j < celdas.length; j++) {
+                var contenido = celdas[j].textContent.toLowerCase(); // Obtener el texto de la celda y convertirlo a minúsculas
+                if (contenido.indexOf(filtro) !== -1) { // Verificar si el texto de la celda contiene el texto de búsqueda
+                    coincidencia = true;
+                    break; // No es necesario seguir buscando en esta fila si ya se encontró una coincidencia
+                }
+            }
+
+            // Mostrar u ocultar la fila según si hay una coincidencia
+            if (coincidencia) {
+                filas[i].style.display = '';
+            } else {
+                filas[i].style.display = 'none';
+            }
+        }
+    });
+</script>

@@ -95,7 +95,10 @@ nav ul li a:hover {
             <li><a href="inscripcion.php">Inscripción</a></li>
         </ul>
     </nav>
-<table>
+
+    <input type="text" id="busqueda" onkeyup="buscarEstudiante()" placeholder="Buscar Materia..." autocomplete="off">
+
+<table id="tablaEstudiantes">
     <thead>
         <tr>
             <th>Código</th>
@@ -124,3 +127,30 @@ nav ul li a:hover {
         @endforeach
     </tbody>
 </table>
+<script>
+        function buscarEstudiante() {
+            var input, filtro, tabla, tr, td, i, j, txtValor;
+            input = document.getElementById("busqueda");
+            filtro = input.value.toUpperCase();
+            tabla = document.getElementById("tablaEstudiantes");
+            tr = tabla.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td");
+                for (j = 0; j < td.length; j++) {
+                    txtValor = td[j].textContent || td[j].innerText;
+                    if (txtValor.toUpperCase().indexOf(filtro) > -1) {
+                        tr[i].style.display = "";
+                        break;
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        function eliminarEstudiante(btn) {
+            var fila = btn.parentNode.parentNode;
+            fila.parentNode.removeChild(fila);
+        }
+    </script>
