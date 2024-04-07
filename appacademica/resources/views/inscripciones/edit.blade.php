@@ -162,7 +162,7 @@ nav ul li a:hover {
         ?>
     </select><br>
     <label>Ciclo:</label>
-    <input type="text" name="ciclo" value="{{ $inscripcion->ciclo }}"><br>
+    <input type="text" name="ciclo" value="{{ $inscripcion->ciclo }}" autocomplete="off" required><br>
     <label>Fecha de Inscripción:</label>
     <input type="date" name="fecha_inscripcion" value="{{ $inscripcion->fecha_inscripcion }}"><br>
     <button type="submit">Actualizar</button>

@@ -121,7 +121,7 @@ nav ul li a:hover {
 <form method="POST" action="{{ route('matriculas.store') }}">
     @csrf
     <label>Código:</label>
-    <input type="text" name="codigo"><br>
+    <input type="text" name="codigo" autocomplete="off" required><br>
     <label>Estudiante:</label>
     <select name="estudiante_id">
         <?php
@@ -141,7 +141,7 @@ nav ul li a:hover {
         ?>
     </select><br>
     <label>Ciclo:</label>
-    <input type="text" name="ciclo"><br>
+    <input type="text" name="ciclo" autocomplete="off" required><br>
     <label>Fecha de Matrícula:</label>
     <input type="date" name="fecha_matricula"><br>
     <button type="submit">Guardar</button>

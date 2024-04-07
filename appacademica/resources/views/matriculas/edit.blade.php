@@ -126,7 +126,7 @@ nav ul li a:hover {
     @csrf
     @method('PUT')
     <label>Código:</label>
-    <input type="text" name="codigo" value="{{ $matricula->codigo }}"><br>
+    <input type="text" name="codigo" value="{{ $matricula->codigo }}" autocomplete="off" required><br>
     <label>Estudiante:</label>
     <select name="estudiante_id">
         <?php
@@ -148,7 +148,7 @@ nav ul li a:hover {
 
 
     <label>Ciclo:</label>
-    <input type="text" name="ciclo" value="{{ $matricula->ciclo }}"><br>
+    <input type="text" name="ciclo" value="{{ $matricula->ciclo }}" autocomplete="off" required><br>
     <label>Fecha de Matrícula:</label>
     <input type="date" name="fecha_matricula" value="{{ $matricula->fecha_matricula }}"><br>
     <button type="submit">Actualizar</button>

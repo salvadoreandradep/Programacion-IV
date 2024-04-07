@@ -126,10 +126,10 @@ nav ul li a:hover {
     @csrf
     @method('PUT')
     <label>Código:</label>
-    <input type="text" name="codigo" value="{{ $materia->codigo }}"><br>
+    <input type="text" name="codigo" value="{{ $materia->codigo }}" autocomplete="off" required><br>
     <label>Nombre:</label>
-    <input type="text" name="nombre" value="{{ $materia->nombre }}"><br>
+    <input type="text" name="nombre" value="{{ $materia->nombre }}" autocomplete="off" required><br>
     <label>Créditos:</label>
-    <input type="number" name="creditos" value="{{ $materia->creditos }}"><br>
+    <input type="number" name="creditos" value="{{ $materia->creditos }}" autocomplete="off" required><br>
     <button type="submit">Actualizar</button>
 </form>

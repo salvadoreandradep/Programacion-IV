@@ -147,11 +147,11 @@ table {
 <form method="POST" action="{{ route('materias.store') }}">
     @csrf
     <label>Código:</label>
-    <input type="text" name="codigo" value="{{ old('codigo') }}"><br>
+    <input type="text" name="codigo" value="{{ old('codigo') }}" autocomplete="off" required><br>
     <label>Nombre:</label>
-    <input type="text" name="nombre" value="{{ old('nombre') }}"><br>
+    <input type="text" name="nombre" value="{{ old('nombre') }}" autocomplete="off" required><br>
     <label>Creditos:</label>
-    <input type="number" name="creditos" value="{{ old('creditos') }}"><br>
+    <input type="number" name="creditos" value="{{ old('creditos') }}" autocomplete="off" required><br>
     <button type="submit">Guardar</button>
 </form>
 
