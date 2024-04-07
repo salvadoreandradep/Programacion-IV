@@ -135,11 +135,11 @@ table {
 
     <nav>
         <ul>
-            <li><a href="inicio">Inicio</a></li>
-            <li><a href="estudiante">Estudiantes</a></li>
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/estudiante">Estudiantes</a></li>
             <li><a href="">Materia</a></li>
-            <li><a href="matricula">Matrícula</a></li>
-            <li><a href="inscricion">Inscripción</a></li>
+            <li><a href="/matricula">Matrícula</a></li>
+            <li><a href="/inscricion">Inscripción</a></li>
         </ul>
     </nav>
   

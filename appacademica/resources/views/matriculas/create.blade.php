@@ -114,7 +114,7 @@ nav ul li a:hover {
             <li><a href="/estudiante">Estudiantes</a></li>
             <li><a href="/materia">Materia</a></li>
             <li><a href="">Matrícula</a></li>
-            <li><a href="inscricion">Inscripción</a></li>
+            <li><a href="/inscricion">Inscripción</a></li>
         </ul>
     </nav>
 
