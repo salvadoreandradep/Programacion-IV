@@ -126,17 +126,17 @@ nav ul li a:hover {
     @csrf
     @method('PUT')
     <label>Código:</label>
-    <input type="text" name="codigo" value="{{ $estudiante->codigo }}"><br>
+    <input type="text" name="codigo" value="{{ $estudiante->codigo }}" autocomplete="off" required><br>
     <label>Nombre:</label>
-    <input type="text" name="nombre" value="{{ $estudiante->nombre }}"><br>
+    <input type="text" name="nombre" value="{{ $estudiante->nombre }}" autocomplete="off" required><br>
     <label>Dirección:</label>
-    <input type="text" name="direccion" value="{{ $estudiante->direccion }}"><br>
+    <input type="text" name="direccion" value="{{ $estudiante->direccion }}" autocomplete="off" required><br>
     <label>Municipio:</label>
-    <input type="text" name="municipio" value="{{ $estudiante->municipio }}"><br>
+    <input type="text" name="municipio" value="{{ $estudiante->municipio }}" autocomplete="off" required><br>
     <label>Departamento:</label>
-    <input type="text" name="departamento" value="{{ $estudiante->departamento }}"><br>
+    <input type="text" name="departamento" value="{{ $estudiante->departamento }}" autocomplete="off" required><br>
     <label>Teléfono:</label>
-    <input type="text" name="telefono" value="{{ $estudiante->telefono }}"><br>
+    <input type="text" name="telefono" value="{{ $estudiante->telefono }}" autocomplete="off" required><br>
     <label>Fecha de Nacimiento:</label>
     <input type="date" name="fecha_nacimiento" value="{{ $estudiante->fecha_nacimiento }}"><br>
     <label>Sexo:</label>
