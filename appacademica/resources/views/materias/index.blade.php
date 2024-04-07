@@ -81,6 +81,14 @@ nav ul li a:hover {
 #busqueda:focus {
   border-color: #66afe9; 
 }
+div {
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
     </style>
 </head>
@@ -95,7 +103,7 @@ nav ul li a:hover {
         </ul>
     </nav>
 
-
+<div>
     <center>
 <input type="text" id="busqueda" onkeyup="buscarEstudiante()" placeholder="Buscar Materia..." autocomplete="off">
 </center>
@@ -126,24 +134,10 @@ nav ul li a:hover {
         @endforeach
     </tbody>
 </table>
+
+</div>
 <script>
-    // Función para eliminar un estudiante
-    function eliminarEstudiante(id) {
-        
-     
-
-       
-    }
-    
-
-    // Función para redirigir a la página de modificación de estudiante
-    function modificarEstudiante(id) {
-        // Redirigir a una página de edición con el ID del estudiante
-        window.location.href = "editar_materia.php?id=" + id;
-    }
-
-
-    function buscarEstudiante() {
+      function buscarEstudiante() {
         var input, filtro, tabla, tr, td, i, txtValue;
         input = document.getElementById("busqueda");
         filtro = input.value.toUpperCase();

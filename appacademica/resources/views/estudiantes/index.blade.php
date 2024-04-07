@@ -82,6 +82,15 @@ nav ul li a:hover {
   border-color: #66afe9; 
 }
 
+div {
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
     </style>
 </head>
 <body>
@@ -95,7 +104,9 @@ nav ul li a:hover {
             <li><a href="/inscricion">Inscripción</a></li>
         </ul>
     </nav>
+    <div>
 <center>
+
     <input type="text" id="busqueda" placeholder="Buscar estudiantes..." autocomplete="off">
     </center>
 <table  >
@@ -136,7 +147,7 @@ nav ul li a:hover {
         @endforeach
     </tbody>
 </table>
-
+</div>
 <script>
     // Obtener referencia al campo de búsqueda
     var inputBusqueda = document.getElementById('busqueda');

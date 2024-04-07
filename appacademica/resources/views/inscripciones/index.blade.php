@@ -128,6 +128,14 @@ nav ul li a:hover {
 #busqueda:focus {
   border-color: #66afe9; 
 }
+div {
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
     </style>
 </head>
@@ -141,9 +149,10 @@ nav ul li a:hover {
             <li><a href="/inscricion">Inscripción</a></li>
         </ul>
     </nav>
-
-
+<div>
+<center>
     <input type="text" id="busqueda" placeholder="Buscar Inscripciones..." autocomplete="off">   
+    </center>
 <table id="tabla-inscripciones">
     <thead>
         <tr>
@@ -173,6 +182,7 @@ nav ul li a:hover {
         @endforeach
     </tbody>
 </table>
+</div>
 <script>
     // Obtener el campo de búsqueda y la tabla
     var inputBusqueda = document.getElementById('busqueda');

@@ -83,6 +83,15 @@ nav ul li a:hover {
   border-color: #66afe9; 
 }
 
+div {
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
     </style>
 </head>
 <body>
@@ -96,8 +105,10 @@ nav ul li a:hover {
         </ul>
     </nav>
 
+    <div>
+        <center>
     <input type="text" id="busqueda" onkeyup="buscarEstudiante()" placeholder="Buscar Materia..." autocomplete="off">
-
+        </center>
 <table id="tablaEstudiantes">
     <thead>
         <tr>
@@ -127,6 +138,7 @@ nav ul li a:hover {
         @endforeach
     </tbody>
 </table>
+    </div>
 <script>
         function buscarEstudiante() {
             var input, filtro, tabla, tr, td, i, j, txtValor;
