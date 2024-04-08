@@ -15,11 +15,14 @@ return new class extends Migration
     {
         Schema::create('inscripcions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('estudiante_id')->constrained()->onDelete('cascade');
-            $table->foreignId('materia_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('estudiante_id');
+            $table->unsignedBigInteger('materia_id');
             $table->string('ciclo');
             $table->date('fecha_inscripcion');
             $table->timestamps();
+
+            $table->foreign('estudiante_id')->references('id')->on('estudiantes')->onDelete('cascade');
+            $table->foreign('materia_id')->references('id')->on('materias')->onDelete('cascade');
         });
     }
 

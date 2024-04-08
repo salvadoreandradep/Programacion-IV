@@ -120,21 +120,28 @@ nav ul li a:hover {
     @csrf
     <label>Estudiante:</label>
     <select name="estudiante_id">
-        <?php
-        $conexion = new mysqli("localhost", "root", "", "laravel");
-        if ($conexion->connect_error) {
-            die("Error de conexión: " . $conexion->connect_error);
-        }
+    <?php
+$conexion = new mysqli("localhost", "root", "", "laravel");
+if ($conexion->connect_error) {
+    die("Error de conexión: " . $conexion->connect_error);
+}
 
-        $query = "SELECT id, nombre FROM estudiantes";
-        $result = $conexion->query($query);
+$query = "SELECT m.id, e.nombre FROM matriculas m
+          INNER JOIN estudiantes e ON m.estudiante_id = e.id";
+$result = $conexion->query($query);
 
-        while ($row = $result->fetch_assoc()) {
-            echo "<option value='" . $row['id'] . "'>" . $row['nombre'] . "</option>";
-        }
+while ($row = $result->fetch_assoc()) {
+    // Obtener el nombre del estudiante y el ID de la matrícula
+    $id_matricula = $row['id'];
+    $nombre_estudiante = $row['nombre'];
+    
+    // Salida de la opción con el nombre del estudiante y el ID de la matrícula
+    echo "<option value='" . $id_matricula . "'>" . $nombre_estudiante . "</option>";
+}
 
-        $conexion->close();
-        ?>
+$conexion->close();
+?>
+
     </select><br>
     <label>Materia:</label>
     <select name="materia_id">
