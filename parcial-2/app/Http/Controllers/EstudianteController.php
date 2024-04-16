@@ -27,7 +27,7 @@ class EstudianteController extends Controller
         $estudiante->sexo = $request->input('sexo');
         $estudiante->save();
 
-        return redirect('/abogados/create')->with('success', 'Estudiante guardado exitosamente');
+        return response()->json(['success' => true]);
     }
 
     public function destroy(Estudiante $estudiante)

@@ -189,7 +189,28 @@ nav ul li a:hover {
 
 
 </body>
-</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('form').submit(function(e){
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr('action'),
+                method: 'POST',
+                data: $(this).serialize(),
+                success: function(response){
+                    // Si la respuesta indica éxito, muestra la notificación popup
+                    if(response.success){
+                        alert('¡Abogado guardado correctamente!');
+                        form[0].reset();
+                        window.location.reload();
+                    }
+                }
+            });
+        });
+    });
+</script>
 
 </html>
+
 
