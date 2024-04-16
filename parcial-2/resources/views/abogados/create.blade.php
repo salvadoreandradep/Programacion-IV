@@ -159,7 +159,7 @@ nav ul li a:hover {
         <h1>Registrar abogado</h1>
     </center>
 
-    <form method="POST" action="/estudiantes">
+    <form method="POST" action="/abogados">
     @csrf
     <label>Código de abogado:</label>
     <input type="text" name="codigo" autocomplete="off" required><br>
@@ -183,7 +183,7 @@ nav ul li a:hover {
     <button type="submit">Guardar</button>
 </form>
 <center>
-<button class="boton-redireccionador" onclick="window.location.href = 'estudiantes/create';">Tabla</button>
+<button class="boton-redireccionador" onclick="window.location.href = 'abogados/create';">Tabla</button>
 
 </center>
 

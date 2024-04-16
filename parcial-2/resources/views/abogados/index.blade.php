@@ -111,7 +111,7 @@ div {
         <tr>
             <th>Código</th>
             <th>Nombre</th>
-            <th>Dirección</th>
+            <th>Correo</th>
             <th>Municipio</th>
             <th>Departamento</th>
             <th>Teléfono</th>

@@ -33,18 +33,18 @@ class EstudianteController extends Controller
     public function destroy(Estudiante $estudiante)
 {
     $estudiante->delete();
-    return redirect('/estudiantes/create')->with('success', 'Estudiante eliminado exitosamente');
+    return redirect('/abogados/create')->with('success', 'Estudiante eliminado exitosamente');
 }
 
 public function edit(Estudiante $estudiante)
 {
-    return view('estudiantes.edit', compact('estudiante'));
+    return view('abogados.edit', compact('estudiante'));
 }
 
 public function update(Request $request, Estudiante $estudiante)
 {
     $estudiante->update($request->all());
-    return redirect('/estudiantes/create')->with('success', 'Estudiante actualizado exitosamente');
+    return redirect('/abogados/create')->with('success', 'Estudiante actualizado exitosamente');
 }
 
 }
