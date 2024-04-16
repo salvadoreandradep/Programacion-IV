@@ -165,9 +165,9 @@ nav ul li a:hover {
     <input type="text" name="codigo" autocomplete="off" required><br>
     <label>Nombre de abogado:</label>
     <input type="text" name="nombre" autocomplete="off" required><br>
-    <label>Oficio:</label>
-    <input type="text" name="direccion" autocomplete="off" required><br>
     <label>Correo Electronico:</label>
+    <input type="text" name="direccion" autocomplete="off" required><br>
+    <label>municipio:</label>
     <input type="text" name="municipio" autocomplete="off" required><br>
     <label>Departamento:</label>
     <input type="text" name="departamento" autocomplete="off" required><br>

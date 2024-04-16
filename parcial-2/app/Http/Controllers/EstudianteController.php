@@ -10,7 +10,7 @@ class EstudianteController extends Controller
     public function create()
 {
     $estudiantes = Estudiante::all();
-    return view('estudiantes.index', compact('estudiantes'));
+    return view('abogados.index', compact('estudiantes'));
 }
 
 
@@ -27,7 +27,7 @@ class EstudianteController extends Controller
         $estudiante->sexo = $request->input('sexo');
         $estudiante->save();
 
-        return redirect('/estudiantes/create')->with('success', 'Estudiante guardado exitosamente');
+        return redirect('/abogados/create')->with('success', 'Estudiante guardado exitosamente');
     }
 
     public function destroy(Estudiante $estudiante)
