@@ -46,7 +46,7 @@
             background-color: #45a049;
         }
         nav {
-    background-color: #2c3e50; /* Cambia el color de fondo según tu preferencia */
+            background-color: #161947; 
     color: #fff;
     text-align: center;
     padding: 20px 0; /* Incrementé el padding para un aspecto más espaciado */
@@ -151,7 +151,7 @@ nav ul li a:hover {
     <nav>
         <ul>
             <li><a href="inicio">Inicio</a></li>
-            <li><a href="">Abogado</a></li>
+            <li><a href="">Abogados</a></li>
          
         </ul>
     </nav>

@@ -24,7 +24,7 @@
             justify-content: space-between;
         }
         nav {
-    background-color: #2c3e50; /* Cambia el color de fondo según tu preferencia */
+    background-color: #161947; /* Cambia el color de fondo según tu preferencia */
     color: #fff;
     text-align: center;
     padding: 20px 0; /* Incrementé el padding para un aspecto más espaciado */
@@ -98,20 +98,20 @@ div {
 
         <ul>
             <li><a href="/">Inicio</a></li>
-            <li><a href="/abogado">Estudiantes</a></li>
+            <li><a href="/abogado">Abogados</a></li>
         </ul>
     </nav>
     <div>
 <center>
 
-    <input type="text" id="busqueda" placeholder="Buscar estudiantes..." autocomplete="off">
+    <input type="text" id="busqueda" placeholder="Buscar abogado..." autocomplete="off">
     </center>
 <table  >
     <thead>
         <tr>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Correo</th>
+            <th>Código de Abogado</th>
+            <th>Nombre de Abogado</th>
+            <th>Correo Electronico</th>
             <th>Municipio</th>
             <th>Departamento</th>
             <th>Teléfono</th>

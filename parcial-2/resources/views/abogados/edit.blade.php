@@ -45,11 +45,12 @@
         input[type="submit"]:hover {
             background-color: #45a049;
         }
+
         nav {
-    background-color: #2c3e50; /* Cambia el color de fondo según tu preferencia */
+            background-color: #161947; 
     color: #fff;
     text-align: center;
-    padding: 20px 0; /* Incrementé el padding para un aspecto más espaciado */
+    padding: 20px 0; 
 }
 
 nav ul {
@@ -115,7 +116,7 @@ nav ul li a:hover {
     <nav>
         <ul>
             <li><a href="/">Inicio</a></li>
-            <li><a href="/abogados">Estudiantes</a></li>
+            <li><a href="/abogado">Abogados</a></li>
 
         </ul>
     </nav>
@@ -123,11 +124,11 @@ nav ul li a:hover {
 <form method="POST" action="{{ route('estudiantes.update', $estudiante->id) }}">
     @csrf
     @method('PUT')
-    <label>Código:</label>
+    <label>Código de Abogado:</label>
     <input type="text" name="codigo" value="{{ $estudiante->codigo }}" autocomplete="off" required><br>
-    <label>Nombre:</label>
+    <label>Nombre de Abogado:</label>
     <input type="text" name="nombre" value="{{ $estudiante->nombre }}" autocomplete="off" required><br>
-    <label>Dirección:</label>
+    <label>Correo Electronico:</label>
     <input type="text" name="direccion" value="{{ $estudiante->direccion }}" autocomplete="off" required><br>
     <label>Municipio:</label>
     <input type="text" name="municipio" value="{{ $estudiante->municipio }}" autocomplete="off" required><br>

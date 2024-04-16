@@ -14,7 +14,7 @@
 
         
         nav {
-    background-color: #2c3e50; /* Cambia el color de fondo según tu preferencia */
+            background-color: #161947; 
     color: #fff;
     text-align: center;
     padding: 20px 0; /* Incrementé el padding para un aspecto más espaciado */
@@ -53,12 +53,13 @@ nav ul li a:hover {
     <nav>
         <ul>
             <li><a href="/">Inicio</a></li>
-            <li><a href="/abogado">abogado</a></li>
+            <li><a href="/abogado">Abogados</a></li>
 
         </ul>
     </nav>
 
     
+    <img src="{{ asset('images/1.jpg') }}" alt="Descripción de la imagen">
 
 </body>
 </html>
