@@ -17,42 +17,21 @@ use App\Http\Controllers\InscripcionController;
 */
 
 Route::get('/', function () {
-    return view('/estudiantes/welcome');
+    return view('/abogados/welcome');
 });
 Route::get('/inicio', function () {
-    return view('/estudiantes/welcome');
+    return view('/abogados/welcome');
 });
 
-Route::get('/estudiante', function () {
-    return view('/estudiantes/create');
+Route::get('/abogado', function () {
+    return view('/abogados/create');
 });
 
-
-
-Route::get('/materias', function () {
-    return view('/materias/create');
-});
-
-Route::get('/materia', function () {
-    return view('/materias/create');
-});
-
-Route::get('/matricula', function () {
-    return view('/matriculas/create');
+Route::get('/tabla', function () {
+    return view('/abogados/intex');
 });
 
 
-Route::get('/mostrarN', function () {
-    return view('/materias');
-});
-
-Route::get('/inscricion', function () {
-    return view('/inscripciones/create');
-});
-
-Route::get('/inscriciones', function () {
-    return view('/inscripciones/index');
-});
 
 
 

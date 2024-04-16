@@ -53,10 +53,8 @@ nav ul li a:hover {
     <nav>
         <ul>
             <li><a href="/">Inicio</a></li>
-            <li><a href="estudiante">Estudiantes</a></li>
-            <li><a href="materia">Materia</a></li>
-            <li><a href="/matricula">Matrícula</a></li>
-            <li><a href="inscricion">Inscripción</a></li>
+            <li><a href="/abogado">abogado</a></li>
+
         </ul>
     </nav>
 

@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-    <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Editar Estudiante</title>
-    </head>
 
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>abogados</title>
     <style>
             body {
             font-family: Arial, sans-serif;
@@ -107,29 +107,89 @@ nav ul li a:hover {
     .boton-redireccionador:hover {
       background-color: #45a049;
     }
+    table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .acciones {
+            display: flex;
+            justify-content: space-between;
+        }
+        #busqueda {
+  padding: 10px;
+  width: 100%;
+  max-width: 700px; 
+  border: 2px solid #ccc; 
+  border-radius: 25px; 
+  font-size: 18px; 
+  outline: none;
+  transition: border-color 0.3s ease; 
+}
+
+/* Estilos para el placeholder */
+#busqueda::placeholder {
+  color: #999;
+}
+
+/* Estilos para cuando el campo de búsqueda está enfocado */
+#busqueda:focus {
+  border-color: #66afe9; 
+}
     </style>
-
-
-    <body>
+</head>
+<body>
 
     <nav>
         <ul>
-            <li><a href="/">Inicio</a></li>
-            <li><a href="/estudiante">Estudiantes</a></li>
-            <li><a href="/materia">Materia</a></li>
-            <li><a href="/matricula">Matrícula</a></li>
-            <li><a href="/inscricion">Inscripción</a></li>
+            <li><a href="inicio">Inicio</a></li>
+            <li><a href="">Abogado</a></li>
+         
         </ul>
     </nav>
+    <center>
+        <h1>Registrar abogado</h1>
+    </center>
 
-<form method="POST" action="{{ route('materias.update', $materia->id) }}">
+    <form method="POST" action="/estudiantes">
     @csrf
-    @method('PUT')
-    <label>Código:</label>
-    <input type="text" name="codigo" value="{{ $materia->codigo }}" autocomplete="off" required><br>
-    <label>Nombre:</label>
-    <input type="text" name="nombre" value="{{ $materia->nombre }}" autocomplete="off" required><br>
-    <label>Créditos:</label>
-    <input type="number" name="creditos" value="{{ $materia->creditos }}" autocomplete="off" required><br>
-    <button type="submit">Actualizar</button>
+    <label>Código de abogado:</label>
+    <input type="text" name="codigo" autocomplete="off" required><br>
+    <label>Nombre de abogado:</label>
+    <input type="text" name="nombre" autocomplete="off" required><br>
+    <label>Oficio:</label>
+    <input type="text" name="direccion" autocomplete="off" required><br>
+    <label>Correo Electronico:</label>
+    <input type="text" name="municipio" autocomplete="off" required><br>
+    <label>Departamento:</label>
+    <input type="text" name="departamento" autocomplete="off" required><br>
+    <label>Teléfono:</label>
+    <input type="text" name="telefono" autocomplete="off" required><br>
+    <label>Fecha de Nacimiento:</label>
+    <input type="date" name="fecha_nacimiento"><br>
+    <label>Sexo:</label>
+    <select name="sexo">
+        <option value="M">Masculino</option>
+        <option value="F">Femenino</option>
+    </select><br>
+    <button type="submit">Guardar</button>
 </form>
+<center>
+<button class="boton-redireccionador" onclick="window.location.href = 'estudiantes/create';">Tabla</button>
+
+</center>
+
+
+</body>
+</html>
+
+</html>
+
