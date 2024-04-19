@@ -7,6 +7,7 @@
     <style>
         body {
             background-color: #242975;
+            font-family: Bahnschrift;
         }
 
 .container {
@@ -18,6 +19,7 @@
 }
 
 .box {
+    font-family: Bahnschrift;
     padding: 20px;
     border: 2px solid #1E90FF; /* Cambiado a azul más claro */
     border-radius: 10px;
@@ -32,6 +34,7 @@
 }
 
 #boton-arriba {
+    font-family: Bahnschrift;
     padding: 10px 150px;
     font-size: 16px;
     border: 2px solid #E6F0FF; /* Cambiado a azul más claro */
@@ -43,7 +46,8 @@
 }
 
 #boton-abajo {
-    padding: 10px 145px;
+    font-family: Bahnschrift;
+       padding: 10px 145px;
     font-size: 16px;
     border: 2px solid #E6F0FF; /* Cambiado a azul más claro */
     background-color: #E6F0FF; /* Cambiado a azul más claro */
@@ -56,6 +60,7 @@
 #boton-arriba:hover{
     background-color: #242975;
     color: white; /* Cambiado a azul más claro */
+    
 }
 
 #boton-abajo:hover {
@@ -70,6 +75,10 @@
     margin: 10px 0;
 }
 
+.letras{
+    font-size: 12px;
+    color: white;
+}
     </style>
 </head>
 <body>
@@ -77,12 +86,13 @@
     <div class="container">
         <div class="box">
             <center>
-            <img src="recursos\inicio.png" alt="Descripción de la imagen" width="150" height="150">
+            <img src="recursos\inicio.png" alt="Descripción de la imagen" width="155" height="150">
             <div style="flex-grow: 1;"></div> <!-- Espacio para empujar los botones hacia abajo -->
-            <button id="boton-arriba">Registrarse</button>
+            <button id="boton-arriba" onclick="window.location.href = 'registros/registrar.php';">Registrarse</button>
             <div class="barra-negra"></div> <!-- Barra negra entre los botones -->
-            <button id="boton-abajo">Iniciar Sesion</button>
+            <button id="boton-abajo" onclick="window.location.href = 'registros/iniciarsecion.php';">Iniciar Sesion</button>
         </div>
+        <div class="letras">Legal Connect © 2024</div>
     </div>
 </body>
 </html>
