@@ -35,11 +35,11 @@
 
 #boton-arriba {
     font-family: Bahnschrift;
-    padding: 10px 150px;
+    padding: 10px 140px;
     font-size: 16px;
     border: 2px solid #E6F0FF; /* Cambiado a azul más claro */
     background-color: #1E90FF; /* Cambiado a azul más claro */
-    border-radius: 50px;
+    border-radius: 10px;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
@@ -47,11 +47,11 @@
 
 #boton-abajo {
     font-family: Bahnschrift;
-       padding: 10px 145px;
+       padding: 10px 135px;
     font-size: 16px;
     border: 2px solid #E6F0FF; /* Cambiado a azul más claro */
     background-color: #E6F0FF; /* Cambiado a azul más claro */
-    border-radius: 50px;
+    border-radius: 10px;
     color: #1E90FF;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
