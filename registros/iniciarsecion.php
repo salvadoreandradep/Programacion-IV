@@ -18,7 +18,7 @@
         }
 
         .container {
-       
+            font-family: Bahnschrift;
     border-radius: 10px;
     background-color: #E6F0FF;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -29,12 +29,14 @@
         }
 
         h2 {
+            font-family: Bahnschrift;
             text-align: center;
             margin-bottom: 20px;
             color: #000;
         }
 
         label {
+            font-family: Bahnschrift;
             display: block;
             margin-bottom: 5px;
              color: #000;
@@ -43,6 +45,7 @@
         input[type="email"],
         input[type="password"],
         button {
+            font-family: Bahnschrift;
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
@@ -53,8 +56,9 @@
         }
 
         button {
+            font-family: Bahnschrift;
             background-color: #42a5f5;
-            color: #000;
+            color: #fff;
             cursor: pointer;
         }
 
@@ -63,6 +67,7 @@
         }
 
         .error {
+            font-family: Bahnschrift;
             color: red;
             text-align: center;
             margin-top: 10px;
