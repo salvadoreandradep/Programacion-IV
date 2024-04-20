@@ -17,7 +17,9 @@
 
         .box {
             background-color: #fff;
-            border-radius: 10px;
+            border: 2px solid #1E90FF; /* Cambiado a azul más claro */
+    border-radius: 10px;
+    background-color: #E6F0FF;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             padding: 80px;
             max-width: 800px;
@@ -50,19 +52,47 @@
         }
 
         .box button {
-            padding: 10px 20px;
-            background-color: #1E90FF;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            outline: none;
+            font-family: Bahnschrift;
+    padding: 10px 140px;
+    font-size: 16px;
+    border: 2px solid #E6F0FF; /* Cambiado a azul más claro */
+    background-color: #1E90FF; /* Cambiado a azul más claro */
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
         }
 
         .box button:hover {
-            background-color: #007bff;
+            background-color: #242975;
+    color: white; /* Cambiado a azul más claro */
         }
+        
+        .boton-registro {
+    background-color: #007bff; /* Azul */
+    color: white;
+    padding: 10px 50px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* Estilo del botón al pasar el cursor por encima */
+  .boton-registro:hover {
+    background-color: #0056b3; /* Azul más oscuro */
+  }
+  .barra-negra {
+    width: 80%;
+    height: 2px;
+    background-color:  #1E90FF;
+    margin: 10px 0;
+}
+
+.letras{
+    font-size: 12px;
+    color: white;
+}
         
     </style>
 </head>
@@ -72,17 +102,23 @@
         <form action="procesar_registro.php" method="POST">
             <div style="display: flex; justify-content: space-between;">
                 <div style="width: 48%;">
+                <div style="width: 48%;">
                     <label for="nombre">Nombre:</label>
+                </div>
                     <input type="text" id="nombre" name="nombre" required>
                 </div>
                 <div style="width: 48%;">
+                <div style="width: 48%;">
                     <label for="apellido">Apellido:</label>
+                    </div>
                     <input type="text" id="apellido" name="apellido" required>
                 </div>
             </div>
             <div style="display: flex; justify-content: space-between;">
                 <div style="width: 48%;">
+                <div style="width: 48%;">
                     <label for="telefono">Teléfono:</label>
+                    </div>
                     <input type="tel" id="telefono" name="telefono" required>
                 </div>
                 <div style="width: 48%;">
@@ -97,20 +133,31 @@
                     </select>
                 </div>
             </div>
+            <div style="width: 48%;">
             <label for="correo">Correo Electrónico:</label>
+            </div>
             <input type="email" id="correo" name="correo" required>
             <div style="display: flex; justify-content: space-between;">
                 <div style="width: 48%;">
+                <div style="width: 48%;">
                     <label for="contrasena">Contraseña:</label>
+                    </div>
                     <input type="password" id="contrasena" name="contrasena" required>
                 </div>
                 <div style="width: 48%;">
+                <div style="width: 48%;">
                     <label for="confirmar_contrasena">Confirmar Contraseña:</label>
+                    </div>
                     <input type="password" id="confirmar_contrasena" name="confirmar_contrasena" required>
                 </div>
             </div>
-            <button type="submit">Registrarse</button>
+           
+            <div style="width: 48%;">
+            <button type="submit" class="boton-registro">Registrarse</button>
+        </div>
+        
         </form>
+      
     </div>
 </body>
 <script>
