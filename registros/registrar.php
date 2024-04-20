@@ -19,8 +19,9 @@
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-            max-width: 400px;
+            padding: 80px;
+            max-width: 800px;
+            max-height: 500px;
             width: 100%;
         }
 
@@ -62,31 +63,52 @@
         .box button:hover {
             background-color: #007bff;
         }
+        
     </style>
 </head>
 <body>
-    <div class="box">
+<div class="box">
         <h2>Registro de Usuario</h2>
         <form action="procesar_registro.php" method="POST">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required>
-            <label for="apellido">Apellido:</label>
-            <input type="text" id="apellido" name="apellido" required>
+            <div style="display: flex; justify-content: space-between;">
+                <div style="width: 48%;">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div style="width: 48%;">
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" id="apellido" name="apellido" required>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <div style="width: 48%;">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+                <div style="width: 48%;">
+                <div style="width: 48%;">
+                    <label for="tipo">Oficio:</label>
+                    </div>
+                    <select id="tipo" name="tipo" required>
+                        <option value="" disabled selected hidden></option>
+                        <option value="abogado">Abogado</option>
+                        <option value="juez">Juez</option>
+                        <option value="fiscal">Fiscal</option>
+                    </select>
+                </div>
+            </div>
             <label for="correo">Correo Electrónico:</label>
             <input type="email" id="correo" name="correo" required>
-
-            <label for="tipo">Oficio:</label>
-<select id="tipo" name="tipo" required>
-    <option value="" disabled selected hidden></option>
-    <option value="abogado">Abogado</option>
-    <option value="juez">Juez</option>
-    <option value="fiscal">Fiscal</option>
-</select>
-
-
-
-            <label for="contrasena">Contraseña:</label>
-            <input type="password" id="contrasena" name="contrasena" required>
+            <div style="display: flex; justify-content: space-between;">
+                <div style="width: 48%;">
+                    <label for="contrasena">Contraseña:</label>
+                    <input type="password" id="contrasena" name="contrasena" required>
+                </div>
+                <div style="width: 48%;">
+                    <label for="confirmar_contrasena">Confirmar Contraseña:</label>
+                    <input type="password" id="confirmar_contrasena" name="confirmar_contrasena" required>
+                </div>
+            </div>
             <button type="submit">Registrarse</button>
         </form>
     </div>
@@ -99,7 +121,26 @@
             this.setCustomValidity("");
         }
     });
-</script>
 
+    document.getElementById("contrasena").addEventListener("input", function() {
+        var confirmarContrasenaInput = document.getElementById("confirmar_contrasena");
+        if (this.value !== confirmarContrasenaInput.value) {
+            confirmarContrasenaInput.setCustomValidity("Las contraseñas no coinciden");
+        } else {
+            confirmarContrasenaInput.setCustomValidity("");
+        }
+    });
+
+    document.getElementById("confirmar_contrasena").addEventListener("input", function() {
+        var contrasenaInput = document.getElementById("contrasena");
+        if (this.value !== contrasenaInput.value) {
+            this.setCustomValidity("Las contraseñas no coinciden");
+        } else {
+            this.setCustomValidity("");
+        }
+    });
+</script>
 </html>
+
+
 
