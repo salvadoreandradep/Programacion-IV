@@ -43,13 +43,15 @@
         }
 
         .box input,
-        .box select {
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            outline: none;
-        }
+.box select {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    width: calc(50% - 15px); /* Ancho igual para todos los inputs y selects */
+}
+
 
         .box button {
             font-family: Bahnschrift;
