@@ -153,11 +153,15 @@
                     <input type="password" id="confirmar_contrasena" name="confirmar_contrasena" required>
                 </div>
             </div>
-           
-            <div style="width: 48%;">
+            
+            <div style="width: 80%;">
             <button type="submit" class="boton-registro">Registrarse</button>
+            
+            <p>¿Ya tienes una cuenta? <a href="#">Inicia sesión</a>
         </div>
+      
         
+       
         </form>
       
     </div>
