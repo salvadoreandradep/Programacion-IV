@@ -9,10 +9,6 @@
             background-color: #242975;
             font-family: Bahnschrift;
         }
-
-
-        
-
 .container {
     display: flex;
     flex-direction: column;
