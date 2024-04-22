@@ -26,7 +26,9 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     if (password_verify($contrasena, $row['contrasena'])) {
         // Contraseña correcta, inicio de sesión exitoso
-        header("Location: Pagina_Principal.php"); // Redirigir al usuario a la página de inicio exitoso
+        session_start(); // Iniciar sesión
+        $_SESSION['user_id'] = $row['id']; // Almacenar el ID de usuario en la sesión
+        header("Location: Pagina_Principal.php"); // Redirigir al usuario a la página principal
         exit();
     } else {
         // Contraseña incorrecta, redirigir de nuevo al formulario de inicio de sesión con un mensaje de error
@@ -42,4 +44,3 @@ if ($result->num_rows > 0) {
 // Cerrar conexión
 $conn->close();
 ?>
-
