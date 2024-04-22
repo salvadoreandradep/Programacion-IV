@@ -1,9 +1,9 @@
 <?php
 // Conexión a la base de datos (ajusta estos valores según tu configuración)
 $servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "legalcc";
+$username = "usuario";
+$password = "contraseña";
+$dbname = "nombre_base_de_datos";
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -42,3 +42,5 @@ if ($result->num_rows > 0) {
 // Cerrar conexión
 $conn->close();
 ?>
+
+

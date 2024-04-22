@@ -43,10 +43,21 @@
         }
 
         input[type="email"],
-        input[type="password"],
-        button {
+        input[type="password"]
+        {
             font-family: Bahnschrift;
             width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #000;
+        }
+        button {
+            font-family: Bahnschrift;
+            width: 420px;
+           
             padding: 10px;
             margin-bottom: 10px;
             border: none;
@@ -72,6 +83,21 @@
             text-align: center;
             margin-top: 10px;
         }
+        p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
     </style>
 </head>
 <body>
@@ -92,6 +118,9 @@
     ?>
         <button type="submit">Iniciar Sesión</button>
     </form>
+    <center>
+    <p>¿No tienes cuenta? <a href="registrar.php">Registrate Ya</a>
+    </center>
 </div>
 
 </body>
