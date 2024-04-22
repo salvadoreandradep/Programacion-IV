@@ -95,6 +95,23 @@
     font-size: 12px;
     color: white;
 }
+
+.imagen-preview {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; /* Esto hace que el contenedor sea circular */
+    overflow: hidden; /* Oculta cualquier parte de la imagen que se desborde del contenedor */
+    margin: auto; /* Centra el contenedor */
+}
+
+#imagen-preview {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%; /* Esto hace que la imagen sea circular */
+}
+
         
     </style>
 </head>
@@ -102,6 +119,14 @@
 <div class="box">
         <h2>Registro de Usuario</h2>
         <form action="procesar_registro.php" method="POST">
+
+       
+        <div class="imagen-preview">
+    <img id="imagen-preview" src="#" alt="Vista previa de la imagen">
+        </div>
+         <input type="file" id="imagen" name="imagen" accept="image/*" required>
+
+
             <div style="display: flex; justify-content: space-between;">
                 <div style="width: 48%;">
                 <div style="width: 48%;">
@@ -192,6 +217,23 @@
             this.setCustomValidity("");
         }
     });
+
+
+    // Obtén el elemento de entrada de la imagen
+var inputImagen = document.getElementById('imagen');
+
+// Escucha el evento change en el elemento de entrada de la imagen
+inputImagen.addEventListener('change', function(event) {
+    // Obtén la imagen seleccionada
+    var imagenSeleccionada = event.target.files[0];
+    
+    // Crea un objeto URL para la imagen seleccionada
+    var urlImagen = URL.createObjectURL(imagenSeleccionada);
+    
+    // Actualiza el atributo src de la imagen de vista previa
+    document.getElementById('imagen-preview').src = urlImagen;
+});
+
 </script>
 </html>
 
