@@ -8,6 +8,19 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+if (isset($_GET['logout'])) {
+  // Verificar si se ha confirmado la salida
+  if ($_GET['logout'] == 'confirm') {
+      session_destroy(); // Destruir todas las variables de sesión
+      header("Location: Iniciar_Sesion.php"); // Redirigir al usuario a la página de inicio de sesión
+      exit();
+  } else {
+      // Si no se ha confirmado, redirigir al usuario a esta misma página con un parámetro 'confirm'
+      header("Location: {$_SERVER['PHP_SELF']}?logout=confirm");
+      exit();
+  }
+}
+
 // Resto del código aquí (contenido de la página principal)
 //___________________________________________HTML Normal_____________________________________________________________________________________
 ?>
@@ -28,7 +41,7 @@ if (!isset($_SESSION['user_id'])) {
     <style>
 
 :root {
-  --main-color: #4FB391; /* Cambio de color principal */
+  --main-color: #242975; /* Cambio de color principal */
   --accent-color: #2D6653; /* Nuevo color de acento */
 }
 
@@ -62,25 +75,32 @@ nav {
   background: var(--accent-color); /* Usar el nuevo color de acento */
   transform: translateX(-100%);
   transition: .4s ease;
+  background-color: #E6F0FF;
 }
 
 .navigation li {
   list-style: none;
   width: 100%;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+
+  
 }
 
 .navigation a {
-  color: #fff; /* Cambiar el color del texto a blanco */
+  color: #242975; /* Cambiar el color del texto a blanco */
+  background-color: #E6F0FF;
   display: block;
   line-height: 3.5;
   padding: 15px 20px; /* Aumentar el espacio alrededor del texto */
   text-decoration: none;
   transition: .4s ease;
+  font-family: Bahnschrift;
 }
 
 .navigation a:hover {
-  background-color: rgba(255, 255, 255, 0.1); /* Agregar un color de fondo al pasar el cursor */
+  background-color: #242975; /* Agregar un color de fondo al pasar el cursor */
+  color: #E6F0FF;
+  font-family: Bahnschrift;
 }
 
 #btn-nav {
@@ -106,6 +126,26 @@ nav {
   background: rgba(255, 255, 255, 0.1); /* Cambiar el color de fondo al pasar el cursor */
 }
 
+.circle-container {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%; /* Esto hace que el borde sea redondeado, creando un círculo */
+        overflow: hidden; /* Oculta cualquier contenido fuera del círculo */
+        margin: 50px; /* Añade un margen de 10px alrededor del círculo */
+        border: 2px solid #ccc; /* Agrega un borde para mayor claridad */
+    }
+    
+    /* Estilo para la imagen */
+    .circle-image {
+        width: 100%; /* Ajusta el ancho de la imagen al 100% del contenedor */
+        height: auto; /* Mantiene la proporción de la imagen */
+    }
+    h1{
+      color: black;
+      font-size: 10px;
+      font-family: Bahnschrift;
+    }
+
 
     </style>
 </head>
@@ -116,12 +156,21 @@ nav {
     <input type="checkbox" id="btn-nav">
     <nav>
       <ul class="navigation">
-        <li><a href="#">Inicio</a></li>
-        <li><a href="#">Acerca</a></li>
-        <li><a href="#">Servicios</a></li>
-        <li><a href="#">Contacto</a></li>
+<center>
+<a href="/Formularios/Perfil.php">
+<div class="circle-container">
+
+    <img class="circle-image" src="recursos/profile.png" alt="Tu imagen">
+
+   </div>
+  </a>
+        <li><a href="#">Audiencias</a></li>
+        <li><a href="#">Casos</a></li>
+        <li><a href="?logout">Cerrar Sesion</a></li>
+        <h1>LegalConnect</h1>
       </ul>
     </nav>
+    </center>
   </header>
 
 
@@ -137,6 +186,12 @@ nav {
 
 
 <script>
+
+document.querySelector('a[href="?logout"]').addEventListener('click', function(event) {
+    if (!confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+        event.preventDefault(); // Cancelar el evento de clic si el usuario no confirma
+    }
+});
 
 document.addEventListener("DOMContentLoaded", function() {
   const btnNav = document.getElementById("btn-nav");
