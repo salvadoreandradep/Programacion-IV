@@ -164,6 +164,7 @@ nav {
 
    </div>
   </a>
+        <li><a href="#">Inicio</a></li>
         <li><a href="#">Audiencias</a></li>
         <li><a href="#">Casos</a></li>
         <li><a href="?logout">Cerrar Sesion</a></li>

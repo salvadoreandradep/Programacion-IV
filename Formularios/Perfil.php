@@ -42,54 +42,60 @@ $conn->close();
     
 
     <style>
-         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Bahnschrift, Arial, sans-serif; /* Agregamos Bahnschrift como primera opción */
+}
 
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #242975;
-        }
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #242975;
+    font-family: Bahnschrift, Arial, sans-serif; /* Agregamos Bahnschrift como primera opción */
+}
 
-        /* Estilos para la tarjeta de usuario */
-        .user-card {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-bottom: 20px;
-        }
+/* Estilos para la tarjeta de usuario */
+.user-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    font-family: Bahnschrift, Arial, sans-serif; /* Agregamos Bahnschrift como primera opción */
+}
 
-        .user-card p {
-            margin-bottom: 10px;
-        }
+.user-card p {
+    margin-bottom: 10px;
+    font-family: Bahnschrift, Arial, sans-serif; /* Agregamos Bahnschrift como primera opción */
+}
 
-        .user-card p strong {
-            font-weight: bold;
-            margin-right: 5px;
-        }
+.user-card p strong {
+    font-weight: bold;
+    margin-right: 5px;
+    font-family: Bahnschrift, Arial, sans-serif; /* Agregamos Bahnschrift como primera opción */
+}
 
-        .edit-profile-btn {
-            display: block;
-            width: 100%;
-            max-width: 200px;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: #242975;
-            color: #fff;
-            text-align: center;
-            text-decoration: none;
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
+.edit-profile-btn {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #242975;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-family: Bahnschrift, Arial, sans-serif; /* Agregamos Bahnschrift como primera opción */
+}
 
-        .edit-profile-btn:hover {
-            background-color: #2D6653;
-        }
+.edit-profile-btn:hover {
+    background-color: #2D6653;
+}
 
 :root {
   --main-color: #242975; /* Cambio de color principal */
@@ -215,7 +221,8 @@ nav {
 
    </div>
   </a>
-        <li><a href="#">Audiencias</a></li>
+        <li><a href="/Pagina_principal.php">Inicio</a></li>
+        <li><a href="">Audiencias</a></li>
         <li><a href="#">Casos</a></li>
         <li><a href="?logout">Cerrar Sesion</a></li>
         <h1>LegalConnect</h1>
