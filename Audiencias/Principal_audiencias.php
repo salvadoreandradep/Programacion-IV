@@ -51,10 +51,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Registro de Audiencias</title>
 
     <style>
- label {
+ body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 800px;
+        
+        margin: 50px auto;
+        padding: 80px;
+        
+      
+        
+    }
+    h2 {
+        text-align: center;
+    }
+    label {
         font-weight: bold;
     }
-
     input[type="text"],
     input[type="date"],
     input[type="time"],
@@ -62,28 +78,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     textarea {
         width: 100%;
         padding: 8px;
-        margin-top: 5px;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         border: 1px solid #ccc;
         border-radius: 4px;
         box-sizing: border-box;
     }
-
-    
-    /* Estilos para el botón */
     input[type="submit"] {
-        background-color: #4caf50;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-    }
+        width: 20%;
+background-color: #4CAF50;
+color: white;
+padding: 10px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+font-size: 16px;
+float: right;
 
+    }
     input[type="submit"]:hover {
         background-color: #45a049;
     }
+
 
 </style>
 
@@ -92,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-
+<div class="container">
 
 <h2>Registro de Audiencias</h2>
 
