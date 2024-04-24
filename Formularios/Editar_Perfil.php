@@ -57,27 +57,77 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Principal</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Perfil de Usuario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .user-card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .user-details {
+            margin-top: 20px;
+        }
+        .user-details p {
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            width: calc(100% - 10px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>Bienvenido</h1>
-        <?php if ($result->num_rows > 0): ?>
-            <?php $row = $result->fetch_assoc(); ?>
-            <div class="user-details">
-                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                    <p><strong>Nombre:</strong> <input type="text" name="nombre" value="<?php echo $row['nombre']; ?>"></p>
-                    <p><strong>Apellido:</strong> <input type="text" name="apellido" value="<?php echo $row['apellido']; ?>"></p>
-                    <p><strong>Correo Electrónico:</strong> <?php echo $row['correo']; ?></p>
-                    <p><strong>Teléfono:</strong> <input type="text" name="telefono" value="<?php echo $row['telefono']; ?>"></p>
-                    <input type="submit" value="Actualizar">
-                </form>
-            </div>
-        <?php else: ?>
-            <p>Error: No se encontraron detalles del usuario.</p>
-        <?php endif; ?>
-        <a href="Cerrar_Sesion.php" class="btn">Cerrar Sesión</a>
+        <div class="user-card">
+            <?php if ($result->num_rows > 0): ?>
+                <?php $row = $result->fetch_assoc(); ?>
+                <div class="user-details">
+                    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                        <p><strong>Nombre:</strong> <input type="text" name="nombre" value="<?php echo $row['nombre']; ?>"></p>
+                        <p><strong>Apellido:</strong> <input type="text" name="apellido" value="<?php echo $row['apellido']; ?>"></p>
+                        <p><strong>Correo Electrónico:</strong> <?php echo $row['correo']; ?></p>
+                        <p><strong>Teléfono:</strong> <input type="text" name="telefono" value="<?php echo $row['telefono']; ?>"></p>
+                        <input type="submit" value="Actualizar">
+                    </form>
+                </div>
+            <?php else: ?>
+                <p>Error: No se encontraron detalles del usuario.</p>
+            <?php endif; ?>
+        </div>
     </div>
 </body>
 </html>

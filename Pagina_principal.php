@@ -141,8 +141,13 @@ nav {
         height: auto; /* Mantiene la proporción de la imagen */
     }
     h1{
-      color: black;
+      color: W;
       font-size: 10px;
+      font-family: Bahnschrift;
+    }
+    h2{
+      color: white;
+      font-size: 20px;
       font-family: Bahnschrift;
     }
 
@@ -152,8 +157,10 @@ nav {
 <body>
 
 <header class="main-header">
+
     <label for="btn-nav" class="btn-nav">&#9776;</label>
     <input type="checkbox" id="btn-nav">
+    <h2>LegalConnect</h2>
     <nav>
       <ul class="navigation">
 <center>
@@ -165,14 +172,15 @@ nav {
    </div>
   </a>
         <li><a href="#">Inicio</a></li>
-        <li><a href="#">Audiencias</a></li>
+        <li><a href="/Audiencias/Principal_audiencias.php">Audiencias</a></li>
         <li><a href="#">Casos</a></li>
         <li><a href="?logout">Cerrar Sesion</a></li>
-        <h1>LegalConnect</h1>
+        <h1>LegalConnect v.1</h1>
       </ul>
     </nav>
     </center>
   </header>
+
 
 
 

@@ -81,6 +81,7 @@
             cursor: pointer;
             width: 100%; /* Ancho completo para el botón */
             max-width: 200px; /* Ajuste máximo de ancho */
+           
         }
 
         .boton-registro:hover {
@@ -149,7 +150,7 @@ $error_message = isset($_GET['mensaje']) ? $_GET['mensaje'] : null;
         <h2>Registro de Usuario</h2>
         <form action="Proceso_registro.php" method="POST" enctype="multipart/form-data">
             
-                     <div style="display: flex; justify-content: space-between; width: 100%;">
+            <div style="display: flex; justify-content: space-between; width: 100%;">
                 <div style="width: 48%;">
                     <label for="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" required>
@@ -159,6 +160,7 @@ $error_message = isset($_GET['mensaje']) ? $_GET['mensaje'] : null;
                     <input type="text" id="apellido" name="apellido" required>
                 </div>
             </div>
+
             <div style="display: flex; justify-content: space-between; width: 100%;">
                 <div style="width: 48%;">
                     <label for="telefono">Teléfono:</label>

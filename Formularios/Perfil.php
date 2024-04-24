@@ -8,6 +8,18 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: Iniciar_Sesion.php");
     exit();
 }
+if (isset($_GET['logout'])) {
+    // Verificar si se ha confirmado la salida
+    if ($_GET['logout'] == 'confirm') {
+        session_destroy(); // Destruir todas las variables de sesión
+        header("Location: /Iniciar_Sesion.php"); // Redirigir al usuario a la página de inicio de sesión
+        exit();
+    } else {
+        // Si no se ha confirmado, redirigir al usuario a esta misma página con un parámetro 'confirm'
+        header("Location: {$_SERVER['PHP_SELF']}?logout=confirm");
+        exit();
+    }
+  }
 
 // Obtener el ID de usuario de la sesión
 $user_id = $_SESSION['user_id'];
@@ -54,6 +66,7 @@ h1 {
     margin-bottom: 20px;
     color: #242975;
     font-family: Bahnschrift, Arial, sans-serif; /* Agregamos Bahnschrift como primera opción */
+    font-size: 30px;
 }
 
 /* Estilos para la tarjeta de usuario */
@@ -197,10 +210,11 @@ nav {
         width: 100%; /* Ajusta el ancho de la imagen al 100% del contenedor */
         height: auto; /* Mantiene la proporción de la imagen */
     }
-    h1{
+    h2{
       color: black;
       font-size: 10px;
       font-family: Bahnschrift;
+      font-size: 10px;
     }
 
 
@@ -225,7 +239,7 @@ nav {
         <li><a href="">Audiencias</a></li>
         <li><a href="#">Casos</a></li>
         <li><a href="?logout">Cerrar Sesion</a></li>
-        <h1>LegalConnect</h1>
+        <h2>LegalConnect</h2>
       </ul>
     </nav>
     </center>
@@ -249,6 +263,17 @@ nav {
 
     <a href="/Formularios/Editar_Perfil.php" class="edit-profile-btn">Editar Perfil</a>
 </div>
+
+
+
+<script>
+
+document.querySelector('a[href="?logout"]').addEventListener('click', function(event) {
+    if (!confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+        event.preventDefault(); // Cancelar el evento de clic si el usuario no confirma
+    }
+});
+</script>
 </body>
 </html>
 
