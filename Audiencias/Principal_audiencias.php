@@ -193,7 +193,7 @@ nav {
     }
     input[type="submit"] {
         width: 20%;
-background-color: #4CAF50;
+background-color: #1E90FF;
 color: white;
 padding: 10px;
 border: none;
@@ -204,7 +204,7 @@ float: right;
 
     }
     input[type="submit"]:hover {
-        background-color: #45a049;
+        background-color: #242975;
     }
 
 

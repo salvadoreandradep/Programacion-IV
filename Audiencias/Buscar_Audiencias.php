@@ -185,11 +185,33 @@ nav {
         color: #aaa;
     }
 
+    #botonArribaIzquierda {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+            margin-left: 1000px;
+            margin-top: 50px;
+        }
+
+        #botonArribaIzquierda:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
 
     </style>
 </head>
 <body>
 
+<a id="botonArribaIzquierda" href="/Audiencias/Principal_audiencias.php">Editar Audiencia</a>
 
 
 <header class="main-header">

@@ -193,6 +193,8 @@ a:hover {
 }
 
 
+
+
     </style>
 </head>
 <body>
@@ -223,7 +225,7 @@ a:hover {
   </header>
 
  
-
+  <a id="botonArribaIzquierda" href="editar_audiencia.php?id=<?php echo $id; ?>">Editar Audiencia</a>
   
 
   
