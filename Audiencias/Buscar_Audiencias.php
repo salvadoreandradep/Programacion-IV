@@ -211,7 +211,7 @@ nav {
 </head>
 <body>
 
-<a id="botonArribaIzquierda" href="/Audiencias/Principal_audiencias.php">Programar Audiencia</a>
+<a id="botonArribaIzquierda" href="/Audiencias/Principal_audiencias.php">Programar Audiencoa</a>
 
 
 <header class="main-header">
@@ -254,6 +254,7 @@ nav {
             <div class="table-cell">Imputado</div>
             <div class="table-cell">Víctima</div>
             <div class="table-cell">Delito</div>
+            <div class="table-cell">Acciones</div>
         </div>
         <?php
     // Conexión a la base de datos MySQL
@@ -268,6 +269,16 @@ nav {
     if ($conn->connect_error) {
         die("Error de conexión a la base de datos: " . $conn->connect_error);
     }
+// Eliminar registro si se ha enviado el ID
+if(isset($_GET['id'])) {
+  $id = $_GET['id'];
+  $sql = "DELETE FROM audiencias WHERE id=$id";
+  if ($conn->query($sql) === TRUE) {
+    header("Location: Buscar_Audiencia.php");
+  } else {
+      echo "Error al eliminar el registro: " . $conn->error;
+  }
+}
 
     // Consulta para obtener todas las audiencias
     $sql = "SELECT * FROM audiencias";
@@ -276,19 +287,23 @@ nav {
     // Mostrar datos de cada audiencia
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            echo "<div class='table-row'>";
-            echo "<div class='table-cell'><a href='ver_audiencia.php?id=" . $row["id"] . "'>" . $row["titulo"] . "</a></div>";
-            echo "<div class='table-cell'>" . $row["caso"] . "</div>";
-            echo "<div class='table-cell'>" . $row["modalidad"] . "</div>";
-            echo "<div class='table-cell'>" . $row["fecha"] . "</div>";
-            echo "<div class='table-cell'>" . $row["hora"] . "</div>";
-            echo "<div class='table-cell'>" . $row["imputado"] . "</div>";
-            echo "<div class='table-cell'>" . $row["victima"] . "</div>";
-            echo "<div class='table-cell'>" . $row["delito"] . "</div>";
-            echo "</div>";
+          echo "<div class='table-row'>";
+          echo "<div class='table-cell'><a href='ver_audiencia.php?id=" . $row["id"] . "'>" . $row["titulo"] . "</a></div>";
+          echo "<div class='table-cell'>" . $row["caso"] . "</div>";
+          echo "<div class='table-cell'>" . $row["modalidad"] . "</div>";
+          echo "<div class='table-cell'>" . $row["fecha"] . "</div>";
+          echo "<div class='table-cell'>" . $row["hora"] . "</div>";
+          echo "<div class='table-cell'>" . $row["imputado"] . "</div>";
+          echo "<div class='table-cell'>" . $row["victima"] . "</div>";
+          echo "<div class='table-cell'>" . $row["delito"] . "</div>";
+          echo "<div class='table-cell'>";
+          echo "<a href='ver_audiencia.php?id=" . $row["id"] . "'>Ver</a> | ";
+          echo "<a href='#' onclick='eliminar(".$row["id"].")'>Eliminar</a>";
+          echo "</div>";
+          echo "</div>";
         }
     } else {
-        echo "No hay audiencias registradas.";
+        echo "<center>No hay audiencias registradas.</center>";
     }
 
     // Cerrar la conexión
@@ -325,7 +340,22 @@ nav {
 
     // Evento de escucha para el cambio en el campo de búsqueda
     document.getElementById("searchInput").addEventListener("input", filterTable);
-</script>
+
+        function eliminar(id) {
+            if (confirm("¿Estás seguro de que quieres eliminar este registro?")) {
+                // Enviar una petición AJAX para eliminar el registro
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        // Recargar la página después de eliminar el registro
+                        window.location.reload();
+                    }
+                };
+                xhr.open("GET", "?id=" + id, true);
+                xhr.send();
+            }
+        }
+    </script>
 
 </body>
 </html>

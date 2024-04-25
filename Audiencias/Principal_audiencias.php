@@ -35,7 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     VALUES ('$titulo', '$caso', '$modalidad', '$fecha', '$hora', '$imputado', '$victima', '$delito', '$descripcion', '$juzgado', '$abogado', '$fiscal', '$sala', '$juez_suplente')";
     
     if ($conn->query($sql) === TRUE) {
-        echo "Audiencia registrada correctamente";
+        header("Location: Buscar_Audiencias.php");
+        exit;
     } else {
         echo "Error al registrar la audiencia: " . $conn->error;
     }
