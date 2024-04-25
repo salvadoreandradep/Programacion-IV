@@ -224,11 +224,7 @@ a:hover {
     </center>
   </header>
 
- 
-  <a id="botonArribaIzquierda" href="editar_audiencia.php?id=<?php echo $id; ?>">Editar Audiencia</a>
-  
-
-  
+   
 <?php
 // Conexión a la base de datos MySQL
 $servername = "localhost";
