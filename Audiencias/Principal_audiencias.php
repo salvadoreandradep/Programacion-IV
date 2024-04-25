@@ -228,8 +228,8 @@ float: right;
 
    </div>
   </a>
-        <li><a href="#">Inicio</a></li>
-        <li><a href="/Audiencias/Principal_audiencias.php">Audiencias</a></li>
+        <li><a href="/Pagina_principal.php">Inicio</a></li>
+        <li><a href="/Audiencias/Buscar_Audiencias.php">Audiencias</a></li>
         <li><a href="#">Casos</a></li>
         <li><a href="?logout">Cerrar Sesion</a></li>
         <h1>LegalConnect v.1</h1>
