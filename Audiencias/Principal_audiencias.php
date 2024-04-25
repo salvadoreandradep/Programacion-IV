@@ -1,4 +1,31 @@
 <?php
+session_start(); // Iniciar sesión
+
+// Verificar si el usuario está autenticado
+if (!isset($_SESSION['user_id'])) {
+    // Redirigir al usuario a la página de inicio de sesión si no ha iniciado sesión
+    header("Location: Iniciar_Sesion.php");
+    exit();
+}
+
+if (isset($_GET['logout'])) {
+  // Verificar si se ha confirmado la salida
+  if ($_GET['logout'] == 'confirm') {
+      session_destroy(); // Destruir todas las variables de sesión
+      header("Location: Iniciar_Sesion.php"); // Redirigir al usuario a la página de inicio de sesión
+      exit();
+  } else {
+      // Si no se ha confirmado, redirigir al usuario a esta misma página con un parámetro 'confirm'
+      header("Location: {$_SERVER['PHP_SELF']}?logout=confirm");
+      exit();
+  }
+}
+
+// Resto del código aquí (contenido de la página principal)
+//___________________________________________HTML Normal_____________________________________________________________________________________
+?>
+
+<?php
 // Conexión a la base de datos MySQL
 $servername = "localhost";
 $username = "root";
