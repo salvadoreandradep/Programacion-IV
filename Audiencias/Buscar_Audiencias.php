@@ -211,7 +211,7 @@ nav {
 </head>
 <body>
 
-<a id="botonArribaIzquierda" href="/Audiencias/Principal_audiencias.php">Programar Audiencoa</a>
+<a id="botonArribaIzquierda" href="/Audiencias/Principal_audiencias.php">Programar Audiencias</a>
 
 
 <header class="main-header">
