@@ -119,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "UPDATE audiencias SET titulo='$titulo', caso='$caso', modalidad='$modalidad', fecha='$fecha', hora='$hora', imputado='$imputado', victima='$victima', delito='$delito', descripcion='$descripcion', juzgado='$juzgado', abogado='$abogado', fiscal='$fiscal', sala='$sala', juez_suplente='$juez_suplente' WHERE id=$id";
     
     if ($conn->query($sql) === TRUE) {
-        header("Location: ver_audiencia.php?id = id" );
+        header("Location: ver_audiencia.php?id=$id");
         exit();
     } else {
         echo "Error al actualizar la audiencia: " . $conn->error;
