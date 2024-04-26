@@ -188,26 +188,7 @@ nav {
     }
 }
 /* Estilo para el botón */
-button {
-  background-color: #4CAF50; /* Color de fondo */
-  border: none; /* Sin borde */
-  color: white; /* Color del texto */
-  padding: 10px 20px; /* Espaciado interno */
-  text-align: center; /* Alineación del texto */
-  text-decoration: none; /* Sin decoración de texto */
-  display: inline-block; /* Mostrar como elemento en línea */
-  font-size: 16px; /* Tamaño de la fuente */
-  margin: 4px 2px; /* Margen externo */
-  cursor: pointer; /* Cursor de ratón */
-  border-radius: 8px; /* Radio de borde */
-  margin-left: 968px;
 
-}
-
-/* Cambio de estilo al pasar el ratón por encima */
-button:hover {
-  background-color: #45a049;
-}
 
 /* Estilo para el enlace */
 a {
@@ -219,9 +200,51 @@ a:hover {
   text-decoration: underline; /* Subrayado al pasar el ratón */
 }
 
+#botonArribaIzquierda {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+            margin-left: 889px;
+            margin-top: 500px;
+        }
+
+        #botonArribaIzquierda:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
 
 
 
+        #botonRegresar {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+            margin-left: 280px;
+            margin-top: 500px;
+        }
+
+        #botonRegresar:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -355,9 +378,20 @@ $conn->close();
             </div>
     </div> 
 </div>
+
+
     <?php
-    echo "<a href='editar_audiencia.php?id=" . $id . "'><button>Editar Audiencia</button></a>";
+
+
+echo '<a id="botonArribaIzquierda" href="editar_audiencia.php?id=' . $id . '">Reprogramar Audiencias</a>';
+
+echo '';
+
+  
     ?>
+
+    <a id="botonRegresar" href="/Audiencias/Buscar_Audiencias.php">Volver a la tabla</a>
+
 
 </body>
 </html>

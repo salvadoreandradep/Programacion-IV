@@ -232,6 +232,25 @@ nav {
             color: #fff;
         }
 
+        /* Estilos para el botón */
+.edit-button {
+  display: inline-block;
+  background-color: white; /* Color de fondo del botón */
+  color: black; /* Color del texto del botón */
+  padding: 10px 20px; /* Espaciado interno del botón */
+  text-decoration: none; /* Eliminar subrayado del enlace */
+  border: none; /* Quitar borde del botón */
+  border-radius: 5px; /* Borde redondeado */
+  cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+}
+
+/* Estilos para cuando el cursor pasa sobre el botón */
+.edit-button:hover {
+  background-color: #0056b3;
+  color: white; /* Cambiar color de fondo cuando el cursor pasa sobre el botón */
+}
+
+
     </style>
 </head>
 <body>
@@ -313,7 +332,7 @@ if(isset($_GET['id'])) {
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
           echo "<div class='table-row'>";
-          echo "<div class='table-cell'><a href='ver_audiencia.php?id=" . $row["id"] . "'>" . $row["titulo"] . "</a></div>";
+          echo "<div class='table-cell'>" . $row["titulo"] . "</a></div>";
           echo "<div class='table-cell'>" . $row["caso"] . "</div>";
           echo "<div class='table-cell'>" . $row["modalidad"] . "</div>";
           echo "<div class='table-cell'>" . $row["fecha"] . "</div>";
@@ -322,9 +341,9 @@ if(isset($_GET['id'])) {
           echo "<div class='table-cell'>" . $row["victima"] . "</div>";
           echo "<div class='table-cell'>" . $row["delito"] . "</div>";
           echo "<div class='table-cell'>";
-          echo "<a href='ver_audiencia.php?id=" . $row["id"] . "'>Ver</a> | ";
-          echo "<a href='#' onclick='eliminar(".$row["id"].")'>Eliminar</a>";
-          echo "</div>";
+          echo "<center><a class='edit-button' href='ver_audiencia.php?id=" . $row["id"] . "'><i class='fa fa-eye'></i> Ver </a></center>";
+          echo "<a class='edit-button' href='#' onclick='eliminar(".$row["id"].")'><i class='fa fa-trash'></i> Eliminar</a>";
+                    echo "</div>";
           echo "</div>";
         }
     } else {
@@ -382,7 +401,7 @@ if(isset($_GET['id'])) {
         }
 
 
-        ocument.querySelector('a[href="?logout"]').addEventListener('click', function(event) {
+        document.querySelector('a[href="?logout"]').addEventListener('click', function(event) {
     if (!confirm('¿Estás seguro de que deseas cerrar sesión?')) {
         event.preventDefault(); // Cancelar el evento de clic si el usuario no confirma
     }
