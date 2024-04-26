@@ -114,16 +114,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sala = $_POST["sala"];
     $juez_suplente = $_POST["juez_suplente"];
     
+    
     // Actualizar la audiencia en la base de datos
     $sql = "UPDATE audiencias SET titulo='$titulo', caso='$caso', modalidad='$modalidad', fecha='$fecha', hora='$hora', imputado='$imputado', victima='$victima', delito='$delito', descripcion='$descripcion', juzgado='$juzgado', abogado='$abogado', fiscal='$fiscal', sala='$sala', juez_suplente='$juez_suplente' WHERE id=$id";
     
     if ($conn->query($sql) === TRUE) {
-        header("Location: ver_audiencia.php?id=1");
+        header("Location: ver_audiencia.php?id = id" );
         exit();
     } else {
         echo "Error al actualizar la audiencia: " . $conn->error;
     }
 }
+
 
 // Obtener el ID de la audiencia de la URL
 $id = $_GET["id"];
