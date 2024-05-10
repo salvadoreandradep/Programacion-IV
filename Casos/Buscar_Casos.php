@@ -181,7 +181,81 @@ nav {
     </center>
   </header>
 
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualización de Casos</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Visualización de Casos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Referencia de Caso</th>
+                <th>Documento</th>
+                <th>Víctima</th>
+                <th>Inputado</th>
+                <th>Delito</th>
+                <th>Evidencia</th>
+                <th>Evidencia Validada</th>
+                <th>Fecha de Creación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Conexión a la base de datos
+            $conexion = new mysqli("localhost", "root", "", "legalcc");
 
+            // Verifica la conexión
+            if ($conexion->connect_error) {
+                die("Error de conexión: " . $conexion->connect_error);
+            }
+
+            // Consulta SQL para obtener los casos
+            $sql = "SELECT referencia, documento, victima, inputado, delito, evidencia, evidencia_validada, fecha_creacion FROM casos";
+            $result = $conexion->query($sql);
+
+            if ($result->num_rows > 0) {
+                // Mostrar los datos en la tabla
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . $row["referencia"] . "</td>";
+                    echo "<td><a href='" . $row["documento"] . "' target='_blank'>Ver Documento</a></td>";
+                    echo "<td>" . $row["victima"] . "</td>";
+                    echo "<td>" . $row["inputado"] . "</td>";
+                    echo "<td>" . $row["delito"] . "</td>";
+                    echo "<td>" . $row["evidencia"] . "</td>";
+                    echo "<td>" . ($row["evidencia_validada"] ? "Sí" : "No") . "</td>";
+                    echo "<td>" . $row["fecha_creacion"] . "</td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='8'>No hay casos registrados.</td></tr>";
+            }
+
+            // Cierra la conexión
+            $conexion->close();
+            ?>
+        </tbody>
+    </table>
+</body>
+</html>
 
 
 
