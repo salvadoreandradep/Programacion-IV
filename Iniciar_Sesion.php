@@ -110,18 +110,29 @@ a:hover {
         <input type="email" id="correo" name="correo" required>
         <label for="contrasena">Contraseña:</label>
         <input type="password" id="contrasena" name="contrasena" required>
-
-        <?php
-    if(isset($_GET['error'])){
-        echo "<p class='error'>Correo electrónico o contraseña incorrectos.</p>";
-    }
-    ?>
+        <p id="error-msg" class="error"></p>
+     
         <button type="submit">Iniciar Sesión</button>
     </form>
     <center>
     <p>¿No tienes cuenta? <a href="/Registro_usuario.php">Registrate Ya</a>
     </center>
 </div>
+
+
+<script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+
+        if(error) {
+            const errorMessage = document.getElementById('error-msg');
+            errorMessage.textContent = 'Correo electrónico o contraseña incorrectos.';
+
+            setTimeout(function() {
+                errorMessage.textContent = '';
+            }, 5000);
+        }
+    </script>
 
 </body>
 </html>
