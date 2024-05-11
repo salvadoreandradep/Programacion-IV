@@ -25,7 +25,7 @@
     </style>
 </head>
 <body>
-    <h1>Registro Completado</h1>
+    <h1>Iniciando sesión</h1>
     <img src="recursos/listo.gif" alt="GIF">
     <p id="loading-msg">Espera un momento...</p>
     <p id="redirect-msg">Redirigiendo...</p>
@@ -42,7 +42,7 @@
             document.getElementById('redirect-msg').style.display = 'block';
             // Redirigir después de 2 segundos
             setTimeout(function() {
-                window.location.href = '/Iniciar_Sesion.php';
+                window.location.href = '/Pagina_principal.php';
             }, 2000); // 2000 milisegundos = 2 segundos
         }, 2000); // 2000 milisegundos = 2 segundos
     </script>

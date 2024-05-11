@@ -29,7 +29,7 @@ if ($result->num_rows > 0) {
         // Contraseña correcta, inicio de sesión exitoso
         session_start(); // Iniciar sesión
         $_SESSION['user_id'] = $row['id']; // Almacenar el ID de usuario en la sesión
-        header("Location: Pagina_Principal.php"); // Redirigir al usuario a la página principal
+        header("Location: InicioGuardado.php"); // Redirigir al usuario a la página principal
         exit();
     } else {
         // Contraseña incorrecta, redirigir de nuevo al formulario de inicio de sesión con un mensaje de error
