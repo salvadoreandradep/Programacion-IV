@@ -30,8 +30,8 @@ $sql = "INSERT INTO usuarios (nombre, apellido, telefono, tipo, correo, contrase
         VALUES ('$nombre', '$apellido', '$telefono', '$tipo', '$correo', '$contrasena_encriptada')";
 
 if ($conn->query($sql) === TRUE) {
-    header("Location: Iniciar_Sesion.php"); 
-        exit();
+    header("Location: RegistroGuardado.php");
+    exit();
 } else {
     header("Location: Regsitro_Usuario.php"); 
         exit();;
