@@ -25,7 +25,28 @@ if (isset($_GET['logout'])) {
 //___________________________________________HTML Normal_____________________________________________________________________________________
 ?>
 
+<?php
+// Conexión a la base de datos
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "legalcc";
 
+$conn = new mysqli($servername, $username, $password, $database);
+
+// Verificar conexión
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
+
+// Consulta para obtener los casos con sus documentos
+$sql = "SELECT casos.*, GROUP_CONCAT(documentos.nombre_archivo) AS archivos_documento 
+        FROM casos 
+        LEFT JOIN documentos ON casos.referencia = documentos.caso_referencia 
+        GROUP BY casos.id";
+
+$result = $conn->query($sql);
+?>
 
 
 
@@ -151,6 +172,18 @@ nav {
       font-family: Bahnschrift;
     }
 
+    table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
 
     </style>
 </head>
@@ -181,7 +214,61 @@ nav {
     </center>
   </header>
 
+  <a id="botonArribaIzquierda" href="/Casos/Agregar_casos.php">Programar Audiencias</a>
+
+
+  <table>
+        <tr>
+            <th>Referencia</th>
+            <th>Víctima</th>
+            <th>Imputado</th>
+            <th>Tipo de Delito</th>
+            <th>Documentos</th>
+            <th>Acciones</th>
+        </tr>
+        <?php
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . $row["referencia"] . "</td>";
+                echo "<td>" . $row["victima"] . "</td>";
+                echo "<td>" . $row["imputado"] . "</td>";
+                echo "<td>" . $row["tipo_delito"] . "</td>";
+                echo "<td>";
+                if (!empty($row["archivos_documento"])) {
+                    $archivos_documento = explode(",", $row["archivos_documento"]);
+                    foreach ($archivos_documento as $archivo) {
+                        echo "<a href='documentos/" . $archivo . "' target='_blank'>" . $archivo . "</a><br>";
+                    }
+                } else {
+                    echo "Sin documentos";
+                }
+                echo "</td>";
+                echo "<td>";
+                echo "<button onclick=\"editarCaso('" . $row["referencia"] . "')\">Editar</button>";
+                echo "<button onclick=\"eliminarCaso('" . $row["referencia"] . "')\">Eliminar</button>";
+                echo "</td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='6'>No hay casos registrados.</td></tr>";
+        }
+        ?>
+    </table>
+
+
+
+
+
 <script>
+
+function eliminarCaso(referencia) {
+    if (confirm("¿Estás seguro de que deseas eliminar este caso?")) {
+        // Redireccionar a la página de eliminación con la referencia del caso
+        window.location.href = "eliminar_caso.php?referencia=" + referencia;
+    }
+}
+
 
 document.querySelector('a[href="?logout"]').addEventListener('click', function(event) {
     if (!confirm('¿Estás seguro de que deseas cerrar sesión?')) {
