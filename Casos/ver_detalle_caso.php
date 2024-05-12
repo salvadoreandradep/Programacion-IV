@@ -91,8 +91,10 @@
                             // Archivo de audio
                             echo "<audio controls>";
                             echo "<source src='" . $row_evidencia["ubicacion_archivo"] . "' type='audio/" . $extension . "'>";
+                            echo "<source src='" . $row_evidencia["ubicacion_archivo"] . "' type='audio/" . $extension . "'>";
                             echo "Your browser does not support the audio tag.";
                             echo "</audio>";
+                            
                         } else {
                             // Otros tipos de archivos
                             echo "<p>No se puede mostrar la evidencia.</p>";

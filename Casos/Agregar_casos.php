@@ -116,13 +116,30 @@ $conn->close();
         <input type="text" id="imputado" name="imputado"><br>
         <label for="tipo_delito">Tipo de Delito:</label><br>
         <input type="text" id="tipo_delito" name="tipo_delito"><br>
-        <input type="file" name="evidencia[]" multiple><br> <!-- Permitir múltiples archivos de evidencia -->
+        <div id="evidencia-container">
+            <label>Evidencia:</label><br>
+            <input type="file" name="evidencia[]"><br>
+        </div>
+        <button type="button" onclick="agregarCampoEvidencia()">Agregar otro archivo de evidencia</button>
         <br>
         <label for="documento">Documento (PDF o DOC):</label><br>
         <input type="file" name="documento"><br>
         <br>
         <input type="submit" value="Agregar Caso">
     </form>
+
+    <script>
+        function agregarCampoEvidencia() {
+            var container = document.getElementById("evidencia-container");
+            var input = document.createElement("input");
+            input.type = "file";
+            input.name = "evidencia[]";
+            container.appendChild(document.createElement("br"));
+            container.appendChild(input);
+        }
+    </script>
 </body>
 </html>
+
+
 
