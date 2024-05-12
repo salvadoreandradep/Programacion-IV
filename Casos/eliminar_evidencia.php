@@ -16,10 +16,6 @@ if (isset($_GET['id'])) {
 
     // Obtener el ID de la evidencia desde la URL
     $id_evidencia = $_GET['id'];
-    $referencia = $_GET['referencia'];
-
-    $sql = "SELECT * FROM casos WHERE referencia = '$referencia'";
-    $result = $conn->query($sql);
 
     // Consulta para obtener la ubicación del archivo de evidencia
     $sql = "SELECT ubicacion_archivo FROM evidencias WHERE id = '$id_evidencia'";
@@ -34,8 +30,9 @@ if (isset($_GET['id'])) {
         if ($conn->query($sql_delete) === TRUE) {
             // Eliminar el archivo de evidencia del servidor
             if (unlink($ubicacion_archivo)) {
-                header("Location: editar_caso.php?referencia=$referencia");
-        exit();
+                // Redirigir al usuario a editar_caso.php
+                header("Location: editar_caso.php?referencia=" . $_GET['referencia']);
+                exit();
             } else {
                 echo "Error al eliminar el archivo de evidencia del servidor.";
             }
