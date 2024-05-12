@@ -83,6 +83,10 @@ if (isset($_GET['logout'])) {
             // Obtener la referencia del caso desde la URL
             $referencia = $_GET['referencia'];
 
+
+            echo "<a href='editar_caso.php?referencia=$referencia' class='edit-btn'>Editar Caso</a>";
+
+
             // Consulta para obtener los detalles del caso
             $sql = "SELECT * FROM casos WHERE referencia = '$referencia'";
             $result = $conn->query($sql);
@@ -156,6 +160,8 @@ if (isset($_GET['logout'])) {
         } else {
             echo "<p>No se proporcionó una referencia de caso válida.</p>";
         }
+
+        
         ?>
     </div>
 </body>
