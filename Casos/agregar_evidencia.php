@@ -31,6 +31,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['evidencia']['name']))
             $sql = "INSERT INTO evidencias (caso_referencia, nombre_archivo, ubicacion_archivo) VALUES ('$referencia', '$fileName', '$targetFilePath')";
             if ($conn->query($sql) !== TRUE) {
                 echo "Error al insertar evidencia: " . $conn->error;
+            } else {
+                header("Location: editar_caso.php?referencia=$referencia");
+                exit();
             }
         } else {
             echo "Error al cargar el archivo de evidencia.";
