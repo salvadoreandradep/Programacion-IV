@@ -175,6 +175,9 @@ nav {
     table {
             border-collapse: collapse;
             width: 100%;
+            margin-left: 100px;
+            margin-right: 100px;
+            margin-top: 50px;
         }
         th, td {
             border: 1px solid #ddd;
@@ -245,8 +248,9 @@ nav {
                 }
                 echo "</td>";
                 echo "<td>";
-                echo "<button onclick=\"editarCaso('" . $row["referencia"] . "')\">Editar</button>";
                 echo "<button onclick=\"eliminarCaso('" . $row["referencia"] . "')\">Eliminar</button>";
+
+                echo "<a href='ver_detalle_caso.php?referencia=" . $row["referencia"] . "'>Ver Detalles</a>";
                 echo "</td>";
                 echo "</tr>";
             }
@@ -254,7 +258,6 @@ nav {
             echo "<tr><td colspan='6'>No hay casos registrados.</td></tr>";
         }
         ?>
-    </table>
 
 
 

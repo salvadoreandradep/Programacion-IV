@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $file_size =$_FILES['evidencia']['size'][$key];
                 $file_tmp =$_FILES['evidencia']['tmp_name'][$key];
                 $file_type=$_FILES['evidencia']['type'][$key];
-                if($file_size > 2097152){
+                if($file_size > 10000000000000){
                     $errors[]='El tamaño del archivo debe ser menor a 2 MB';
                 }      
                 $desired_dir="uploads"; // Directorio donde se guardarán los archivos
@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $desired_dir = "documentos"; // Directorio donde se guardarán los documentos
 
             // Verificar el tipo de archivo (PDF o DOC)
-            if ($file_type == 'application/pdf' || $file_type == 'application/msword') {
+            if ($file_type == 'application/pdf' || $file_type == 'application/docx') {
                 if (move_uploaded_file($file_tmp, "$desired_dir/" . $file_name)) {
                     // Insertar información del documento en la base de datos
                     $sql_documento = "INSERT INTO documentos (caso_referencia, nombre_archivo, tipo_archivo, ubicacion_archivo) VALUES ('$referencia', '$file_name', '$file_type', '$desired_dir/$file_name')";
