@@ -120,7 +120,12 @@ if (isset($_GET['referencia'])) {
                 </div>
                 <div class="card">
                     <h3>Documento</h3>
-                    <!-- Puedes agregar un formulario para actualizar el documento aquí -->
+                <form action="actualizar_documento.php" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="referencia" value="<?php echo $row['referencia']; ?>">
+                    <input type="file" name="documento">
+                    <input type="submit" value="Actualizar Documento" class="btn">
+                </form>
+
                 </div>
             </div>
         </body>
