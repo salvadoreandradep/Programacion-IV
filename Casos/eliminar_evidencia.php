@@ -14,6 +14,12 @@ if (isset($_GET['id'])) {
         die("Conexión fallida: " . $conn->connect_error);
     }
 
+    $referencia = $_GET['referencia'];
+
+    $sql = "SELECT * FROM casos WHERE referencia = '$referencia'";
+    $result = $conn->query($sql);
+
+
     // Obtener el ID de la evidencia desde la URL
     $id_evidencia = $_GET['id'];
 
@@ -31,7 +37,7 @@ if (isset($_GET['id'])) {
             // Eliminar el archivo de evidencia del servidor
             if (unlink($ubicacion_archivo)) {
                 // Redirigir al usuario a editar_caso.php
-                header("Location: editar_caso.php?referencia=" . $_GET['referencia']);
+                header("Location: Buscar_casos.php");
                 exit();
             } else {
                 echo "Error al eliminar el archivo de evidencia del servidor.";
