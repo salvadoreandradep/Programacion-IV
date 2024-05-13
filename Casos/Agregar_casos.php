@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $file_size =$_FILES['evidencia']['size'][$key];
                 $file_tmp =$_FILES['evidencia']['tmp_name'][$key];
                 $file_type=$_FILES['evidencia']['type'][$key];
-                if($file_size > 10000000000000){
+                if($file_size > 1000){
                     $errors[]='El tamaño del archivo debe ser menor a 2 MB';
                 }      
                 $desired_dir="uploads"; // Directorio donde se guardarán los archivos
