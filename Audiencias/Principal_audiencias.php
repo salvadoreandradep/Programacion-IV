@@ -39,6 +39,9 @@ if ($conn->connect_error) {
     die("Error de conexión a la base de datos");
 }
 
+$sql = "SELECT referencia FROM casos";
+$result = $conn->query($sql);
+
 // Procesar el formulario cuando se envíe
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recopilar datos del formulario
@@ -279,16 +282,28 @@ float: right;
             <label>Tipo de Audiencia:</label><br>
             <input type="text" name="titulo" required><br><br>
         </div>
-    <div style="width: 48%;">
-            <label>Seleccionar Caso:</label><br>
-            <select name="caso">
-                <option value="Caso 1">Caso 1</option>
-                <option value="Caso 2">Caso 2</option>
-                <option value="Caso 3">Caso 3</option>
-            </select><br><br>
-        </div>
-     </div>    
-
+      
+<div style="width: 48%;">
+    <label>Seleccionar Caso:</label><br>
+    <select name="caso">
+        <?php
+        // Verificar si hay resultados de la consulta
+        if ($result->num_rows > 0) {
+            // Imprimir cada opción del menú desplegable
+            while($row = $result->fetch_assoc()) {
+                echo "<option value='" . $row["referencia"] . "'>" . $row["referencia"] . "</option>";
+            }
+        } else {
+            echo "<option value=''>No hay casos disponibles</option>";
+        }
+        ?>
+    </select><br><br>
+</div>
+<?php
+// Cerrar la conexión a la base de datos
+$conn->close();
+?> 
+</div>
 <div style="display: flex; justify-content: space-between; width: 100%;">
     <div style="width: 48%;">
             <label>Modalidad de Audiencias:</label><br>
@@ -309,23 +324,22 @@ float: right;
 
 <div style="display: flex; justify-content: space-between; width: 100%;">
     <div style="width: 48%;">
-
-            <label>Nombre del Imputado:</label><br>
-            <input type="text" name="imputado" required><br><br>
-            </div>
+        <label>Nombre del Imputado:</label><br>
+        <input type="text" name="imputado" required><br><br>
+    </div>
     <div style="width: 48%;">       
-            <label>Nombre de la Víctima:</label><br>
-            <input type="text" name="victima" required><br><br>
-            </div>
+        <label>Nombre de la Víctima:</label><br>
+        <input type="text" name="victima" required><br><br>
+    </div>
     <div style="width: 48%;">       
-            <label>Seleccionar Tipo de Delito:</label><br>
-            <select name="delito">
-                <option value="Homicidio">Homicidio</option>
-                <option value="Violación">Violación</option>
-                <option value="Hurto">Hurto</option>
-            </select><br><br>
-            </div>
-</div>        
+        <label>Seleccionar Tipo de Delito:</label><br>
+        <select name="delito">
+            <option value="Homicidio">Homicidio</option>
+            <option value="Violación">Violación</option>
+            <option value="Hurto">Hurto</option>
+        </select><br><br>
+    </div>
+</div>       
 <div style="display: flex; justify-content: space-between; width: 100%;">
     <div style="width: 48%;">   
             <label>Descripción de la Audiencia:</label><br>
@@ -381,7 +395,32 @@ float: right;
         </form>
 
 
-        
+        <script>
+    // Función para cargar los datos del caso seleccionado
+    function cargarDatosCaso() {
+        // Obtener el valor seleccionado del menú desplegable
+        var casoSeleccionado = document.getElementsByName("caso")[0].value;
+
+        // Realizar una solicitud AJAX para obtener los datos del caso seleccionado
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                // Convertir la respuesta JSON en un objeto JavaScript
+                var datosCaso = JSON.parse(this.responseText);
+
+                // Llenar los campos de texto con los datos del caso
+                document.getElementsByName("imputado")[0].value = datosCaso.imputado;
+                document.getElementsByName("victima")[0].value = datosCaso.victima;
+                document.getElementsByName("delito")[0].value = datosCaso.tipo_delito;
+            }
+        };
+        xhr.open("GET", "obtener_datos_caso.php?caso=" + casoSeleccionado, true);
+        xhr.send();
+    }
+
+    // Adjuntar la función cargarDatosCaso al evento de cambio del menú desplegable
+    document.getElementsByName("caso")[0].addEventListener("change", cargarDatosCaso);
+</script>
 </body>
 </html>
 
