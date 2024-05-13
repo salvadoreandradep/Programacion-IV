@@ -246,15 +246,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $id = $_GET["id"];
 
 // Consulta para obtener la información de la audiencia específica
-$sql = "SELECT * FROM audiencias WHERE id = $id";
-$result = $conn->query($sql);
+$sql_audiencia = "SELECT * FROM audiencias WHERE id = $id";
+$result_audiencia = $conn->query($sql_audiencia);
 
 // Mostrar el formulario de edición de la audiencia
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
+if ($result_audiencia->num_rows > 0) {
+    $row = $result_audiencia->fetch_assoc();
+
+    // Consulta para obtener los casos
+    $sql_cases = "SELECT referencia FROM casos";
+    $result_cases = $conn->query($sql_cases);
+
+    // Variable para almacenar la referencia del caso seleccionado (si es que hay uno seleccionado)
+    $selected_case = ""; // Esto debe ser establecido previamente según el caso seleccionado
     ?>
     <div class="container">
-  
+
+
+    
     </div>
    <center><h1>Reprogramacion</h1></center>
 <div class="container">
@@ -270,28 +279,43 @@ if ($result->num_rows > 0) {
     <div style="width: 48%;">       
         <label for="caso">Seleccionar Caso:</label><br>
         <select id="caso" name="caso">
-            <option value="Caso 1" <?php if ($row['caso'] == 'Caso 1') echo 'selected'; ?>>Caso 1</option>
-            <option value="Caso 2" <?php if ($row['caso'] == 'Caso 2') echo 'selected'; ?>>Caso 2</option>
-            <option value="Caso 3" <?php if ($row['caso'] == 'Caso 3') echo 'selected'; ?>>Caso 3</option>
-        </select><br>
+        <?php
+// Obtener la referencia del caso seleccionado (si existe)
+$selected_case = $row['caso'];
+
+// Verificar si hay resultados de la consulta
+if ($result_cases->num_rows > 0) {
+    // Imprimir cada opción del menú desplegable
+    while($row_case = $result_cases->fetch_assoc()) {
+        $referencia = $row_case["referencia"];
+        // Verificar si la referencia coincide con el caso seleccionado
+        $selected = ($referencia == $selected_case) ? "selected" : "";
+        echo "<option value='$referencia' $selected>$referencia</option>";
+    }
+} else {
+    echo "<option value=''>No hay casos disponibles</option>";
+}
+?>
+
     </div>
 </div>
 
+</div>
 <div style="display: flex; justify-content: space-between; width: 100%;">
-    <div style="width: 48%;">
-        <label for="modalidad">Modalidad de Audiencia:</label><br>
-        <select id="modalidad" name="modalidad">
-            <option value="Presencial" <?php if ($row['modalidad'] == 'Presencial') echo 'selected'; ?>>Presencial</option>
-            <option value="Virtual" <?php if ($row['modalidad'] == 'Virtual') echo 'selected'; ?>>Virtual</option>
-        </select><br>
-        </div>
-    <div style="width: 48%;">         
+    <div style="width: 48%;">    
         <label for="fecha">Fecha:</label><br>
         <input type="date" id="fecha" name="fecha" value="<?php echo $row['fecha']; ?>"><br>
-        </div>
-    <div style="width: 48%;">        
+        </div> 
+    <div style="width: 48%;">  
         <label for="hora">Hora:</label><br>
         <input type="time" id="hora" name="hora" value="<?php echo $row['hora']; ?>"><br>
+     </div>
+     <div style="width: 48%;">
+    <label for="modalidad">Modalidad de Audiencia:</label><br>
+    <select id="modalidad" name="modalidad">
+        <option value="Presencial" <?php if ($row['modalidad'] == 'Presencial') echo 'selected'; ?>>Presencial</option>
+        <option value="Virtual" <?php if ($row['modalidad'] == 'Virtual') echo 'selected'; ?>>Virtual</option>
+    </select><br>
     </div>
 </div>    
 
@@ -321,7 +345,7 @@ if ($result->num_rows > 0) {
 </div>       
 
 <div style="display: flex; justify-content: space-between; width: 100%;">
-    <div style="width: 48%;">
+    <div style="width: 48%;">     
         <label for="juzgado">Seleccionar Juzgado:</label><br>
         <select id="juzgado" name="juzgado">
             <option value="Juzgado 1" <?php if ($row['juzgado'] == 'Juzgado 1') echo 'selected'; ?>>Juzgado 1</option>
@@ -379,3 +403,4 @@ $conn->close();
 
 </body>
 </html>
+

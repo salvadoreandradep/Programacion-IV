@@ -157,6 +157,7 @@ nav {
     height: 400px; /* Altura fija del contenedor */
         overflow-y: auto; /* Desplazamiento vertical */
     
+    
 }
 .table-container2 {
     margin: 0 auto;
@@ -306,7 +307,7 @@ nav {
     <div class="custom-table">
         <div class="table-header">
             <div class="table-cell">Título</div>
-            <div class="table-cell">Caso</div>
+            <div class="table-cell">Referencia</div>
             <div class="table-cell">Modalidad</div>
             <div class="table-cell">Fecha</div>
             <div class="table-cell">Hora</div>
