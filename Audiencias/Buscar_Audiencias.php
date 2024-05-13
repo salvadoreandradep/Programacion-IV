@@ -154,6 +154,15 @@ nav {
 .table-container {
     margin: 0 auto;
     max-width: 800px; /* Ajusta el ancho máximo según sea necesario */
+    height: 400px; /* Altura fija del contenedor */
+        overflow-y: auto; /* Desplazamiento vertical */
+    
+}
+.table-container2 {
+    margin: 0 auto;
+    max-width: 800px; /* Ajusta el ancho máximo según sea necesario */
+    
+    
 }
 
 .custom-table {
@@ -168,12 +177,15 @@ nav {
 .table-header,
 .table-row {
     display: flex;
+    
+    
 }
 
 .table-cell {
     flex: 1;
     padding: 12px; /* Incrementamos el espacio de relleno */
     border-bottom: 1px solid #ddd;
+    
 }
 
 .table-header {
@@ -284,9 +296,12 @@ nav {
   </header>
 <h2>Audiencias Registradas</h2>
 
+<div class="table-container2">
+<input type="text" id="searchInput" placeholder="Buscar...">
+</div>
 <div class="table-container">
     <center>
-    <input type="text" id="searchInput" placeholder="Buscar...">
+    
     </center>
     <div class="custom-table">
         <div class="table-header">
@@ -325,7 +340,9 @@ if(isset($_GET['id'])) {
 }
 
     // Consulta para obtener todas las audiencias
-    $sql = "SELECT * FROM audiencias";
+    // Consulta para obtener todas las audiencias ordenadas por fecha de forma descendente
+$sql = "SELECT * FROM audiencias ORDER BY fecha DESC";
+
     $result = $conn->query($sql);
 
     // Mostrar datos de cada audiencia
@@ -406,6 +423,11 @@ if(isset($_GET['id'])) {
         event.preventDefault(); // Cancelar el evento de clic si el usuario no confirma
     }
 });
+
+function verMas() {
+        // Hacer scroll hacia abajo para mostrar más elementos
+        window.scrollBy(0, window.innerHeight);
+    }
     </script>
 
 </body>
