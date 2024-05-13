@@ -223,23 +223,25 @@ nav {
 <body>
 
 <header class="main-header">
+
     <label for="btn-nav" class="btn-nav">&#9776;</label>
     <input type="checkbox" id="btn-nav">
+    <h2>LegalConnect</h2>
     <nav>
       <ul class="navigation">
 <center>
 <a href="/Formularios/Perfil.php">
 <div class="circle-container">
 
-    <img class="circle-image" src="/recursos/profile.png" alt="Tu imagen">
+    <img class="circle-image" src="recursos/profile.png" alt="Tu imagen">
 
    </div>
   </a>
         <li><a href="/Pagina_principal.php">Inicio</a></li>
-        <li><a href="">Audiencias</a></li>
-        <li><a href="#">Casos</a></li>
+        <li><a href="/Audiencias/Buscar_Audiencias.php">Audiencias</a></li>
+        <li><a href="/Casos/Buscar_Casos.php">Casos</a></li>
         <li><a href="?logout">Cerrar Sesion</a></li>
-        <h2>LegalConnect</h2>
+        <h1>LegalConnect v.1</h1>
       </ul>
     </nav>
     </center>

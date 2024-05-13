@@ -272,10 +272,10 @@ nav {
     <img class="circle-image" src="recursos/profile.png" alt="Tu imagen">
 
    </div>
-  </a>
+   </a>
         <li><a href="/Pagina_principal.php">Inicio</a></li>
         <li><a href="/Audiencias/Buscar_Audiencias.php">Audiencias</a></li>
-        <li><a href="#">Casos</a></li>
+        <li><a href="/Casos/Buscar_Casos.php">Casos</a></li>
         <li><a href="?logout">Cerrar Sesion</a></li>
         <h1>LegalConnect v.1</h1>
       </ul>
