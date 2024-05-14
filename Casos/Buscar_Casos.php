@@ -60,6 +60,27 @@ $result = $conn->query($sql);
     <title>Document</title>
 
     <style>
+     #botonArribaIzquierda {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+            margin-left: 1000px;
+            margin-top: 50px;
+        }
+
+        #botonArribaIzquierda:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
 
 :root {
   --main-color: #242975; /* Cambio de color principal */
@@ -173,19 +194,42 @@ nav {
     }
 
     table {
+            width: calc(100% - 200px); /* Restar el espacio del margen izquierdo y derecho */
+            margin: 200px auto; /* Margen superior e inferior automático para centrar la tabla */
             border-collapse: collapse;
-            width: 100%;
-            margin-left: 100px;
-            margin-right: 100px;
-            margin-top: 50px;
+            border-radius: 8px;
         }
+
         th, td {
-            border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
+            border-bottom: 1px solid #ddd;
         }
+
         th {
             background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #c82333;
         }
 
     </style>
@@ -218,49 +262,48 @@ nav {
     </center>
   </header>
 
-  <a id="botonArribaIzquierda" href="/Casos/Agregar_casos.php">Programar Audiencias</a>
+  <a id="botonArribaIzquierda" href="/Casos/Agregar_casos.php">Añadir Caso</a>
 
 
   <table>
-        <tr>
-            <th>Referencia</th>
-            <th>Víctima</th>
-            <th>Imputado</th>
-            <th>Tipo de Delito</th>
-            <th>Documentos</th>
-            <th>Acciones</th>
-        </tr>
-        <?php
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>" . $row["referencia"] . "</td>";
-                echo "<td>" . $row["victima"] . "</td>";
-                echo "<td>" . $row["imputado"] . "</td>";
-                echo "<td>" . $row["tipo_delito"] . "</td>";
-                echo "<td>";
-                if (!empty($row["archivos_documento"])) {
-                    $archivos_documento = explode(",", $row["archivos_documento"]);
-                    foreach ($archivos_documento as $archivo) {
-                        echo "<a href='documentos/" . $archivo . "' target='_blank'>" . $archivo . "</a><br>";
-                    }
-                } else {
-                    echo "Sin documentos";
+    <tr>
+        <th>Referencia</th>
+        <th>Víctima</th>
+        <th>Imputado</th>
+        <th>Tipo de Delito</th>
+        <th>Documentos</th>
+        <th>Acciones</th>
+    </tr>
+    <?php
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            echo "<td>" . $row["referencia"] . "</td>";
+            echo "<td>" . $row["victima"] . "</td>";
+            echo "<td>" . $row["imputado"] . "</td>";
+            echo "<td>" . $row["tipo_delito"] . "</td>";
+            echo "<td>";
+            if (!empty($row["archivos_documento"])) {
+                $archivos_documento = explode(",", $row["archivos_documento"]);
+                foreach ($archivos_documento as $archivo) {
+                    echo "<a href='documentos/" . $archivo . "' target='_blank'>" . $archivo . "</a><br>";
                 }
-                echo "</td>";
-                echo "<td>";
-                echo "<button onclick=\"eliminarCaso('" . $row["referencia"] . "')\">Eliminar</button>";
-
-                echo "<a href='ver_detalle_caso.php?referencia=" . $row["referencia"] . "'>Ver Detalles</a>";
-                echo "</td>";
-                echo "</tr>";
+            } else {
+                echo "Sin documentos";
             }
-        } else {
-            echo "<tr><td colspan='6'>No hay casos registrados.</td></tr>";
+            echo "</td>";
+            echo "<td>";
+            echo "<button onclick=\"eliminarCaso('" . $row["referencia"] . "')\">Eliminar</button>";
+
+            echo "<a href='ver_detalle_caso.php?referencia=" . $row["referencia"] . "'>Ver Detalles</a>";
+            echo "</td>";
+            echo "</tr>";
         }
-        ?>
-
-
+    } else {
+        echo "<tr><td colspan='6'>No hay casos registrados.</td></tr>";
+    }
+    ?>
+</table>
 
 
 
