@@ -79,7 +79,7 @@ eliminarEvidencias($referencia, $conn);
 // Eliminar el caso en sí
 $sql = "DELETE FROM casos WHERE referencia='$referencia'";
 if ($conn->query($sql) === TRUE) {
-    echo "Caso eliminado correctamente.";
+    header("Location: /Casos/buscar_casos.php");
 } else {
     echo "Error al eliminar el caso: " . $conn->error;
 }

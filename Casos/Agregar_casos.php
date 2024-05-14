@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO casos (referencia, victima, imputado, tipo_delito) VALUES ('$referencia', '$victima', '$imputado', '$tipoDelito')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Caso agregado correctamente.";
+        header("Location: /Casos/buscar_casos.php");
 
         // Procesar y guardar archivos de evidencia
         if(isset($_FILES['evidencia'])){
@@ -133,27 +133,262 @@ $conn->close();
 <html>
 <head>
     <title>Agregar Caso</title>
+    <style>
+
+:root {
+  --main-color: #242975; /* Cambio de color principal */
+  --accent-color: #2D6653; /* Nuevo color de acento */
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  overflow: hidden;
+}
+
+.main-header {
+  background: var(--main-color); /* Usar el color principal */
+  width: 100%;
+  height: 50px;
+  display: flex; /* Alinear el contenido del encabezado */
+  align-items: center; /* Alinear verticalmente */
+  justify-content: space-between; /* Espacio entre los elementos */
+  padding: 0 20px; /* Agregar un poco de espacio alrededor del contenido */
+}
+
+nav {
+  position: absolute;
+  left: 0;
+  top: 50px;
+  width: 200px;
+  height: calc(100vh - 50px);
+  background: var(--accent-color); /* Usar el nuevo color de acento */
+  transform: translateX(-100%);
+  transition: .4s ease;
+  background-color: #E6F0FF;
+}
+
+.navigation li {
+  list-style: none;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+
+  
+}
+
+.navigation a {
+  color: #242975; /* Cambiar el color del texto a blanco */
+  background-color: #E6F0FF;
+  display: block;
+  line-height: 3.5;
+  padding: 15px 20px; /* Aumentar el espacio alrededor del texto */
+  text-decoration: none;
+  transition: .4s ease;
+  font-family: Bahnschrift;
+}
+
+.navigation a:hover {
+  background-color: #242975; /* Agregar un color de fondo al pasar el cursor */
+  color: #E6F0FF;
+  font-family: Bahnschrift;
+}
+
+#btn-nav {
+  display: none;
+}
+
+#btn-nav:checked ~ nav {
+  transform: translateX(0);
+}
+
+.btn-nav {
+  color: #fff; /* Cambiar el color del botón a blanco */
+  font-size: 20px; /* Reducir un poco el tamaño del botón */
+  cursor: pointer;
+  padding: 10px 15px; /* Ajustar el espacio alrededor del botón */
+  transition: .2s ease;
+  background: transparent; /* Hacer el botón transparente */
+  border: none; /* Eliminar el borde del botón */
+  outline: none; /* Eliminar el contorno del botón al hacer clic */
+}
+
+.btn-nav:hover {
+  background: rgba(255, 255, 255, 0.1); /* Cambiar el color de fondo al pasar el cursor */
+}
+
+.circle-container {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%; /* Esto hace que el borde sea redondeado, creando un círculo */
+        overflow: hidden; /* Oculta cualquier contenido fuera del círculo */
+        margin: 50px; /* Añade un margen de 10px alrededor del círculo */
+        border: 2px solid #ccc; /* Agrega un borde para mayor claridad */
+    }
+    
+    /* Estilo para la imagen */
+    .circle-image {
+        width: 100%; /* Ajusta el ancho de la imagen al 100% del contenedor */
+        height: auto; /* Mantiene la proporción de la imagen */
+    }
+    h1{
+      color: W;
+      font-size: 10px;
+      font-family: Bahnschrift;
+    }
+    h2{
+      color: white;
+      font-size: 20px;
+      font-family: Bahnschrift;
+    }
+
+
+    body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+    .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto; /* Agregamos scroll vertical */
+            max-height: 500px; /* Establecemos una altura máxima */
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            margin-top: 30px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="file"], button {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .add-evidence {
+            display: flex;
+            align-items: center;
+        }
+
+        .add-evidence button {
+            margin-left: 10px;
+            flex-shrink: 0;
+        }
+
+
+        .submit-btn {
+            background-color: #007bff; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3; /* Darker Green on Hover */
+        }
+        
+
+    </style>
+
 </head>
 <body>
-    <h2>Agregar Caso</h2>
-    <form method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-        <label for="victima">Victima:</label><br>
-        <input type="text" id="victima" name="victima"><br>
-        <label for="imputado">Imputado:</label><br>
-        <input type="text" id="imputado" name="imputado"><br>
-        <label for="tipo_delito">Tipo de Delito:</label><br>
-        <input type="text" id="tipo_delito" name="tipo_delito"><br>
-        <div id="evidencia-container">
-            <label>Evidencia:</label><br>
-            <input type="file" name="evidencia[]"><br>
-        </div>
-        <button type="button" onclick="agregarCampoEvidencia()">Agregar otro archivo de evidencia</button>
-        <br>
-        <label for="documento">Documento (PDF o DOC):</label><br>
-        <input type="file" name="documento"><br>
-        <br>
-        <input type="submit" value="Agregar Caso">
-    </form>
+
+<header class="main-header">
+
+    <label for="btn-nav" class="btn-nav">&#9776;</label>
+    <input type="checkbox" id="btn-nav">
+    <h2>LegalConnect</h2>
+    <nav>
+      <ul class="navigation">
+<center>
+<a href="/Formularios/Perfil.php">
+<div class="circle-container">
+
+    <img class="circle-image" src="recursos/profile.png" alt="Tu imagen">
+
+   </div>
+  </a>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="/Audiencias/Buscar_Audiencias.php">Audiencias</a></li>
+        <li><a href="/Casos/Buscar_Casos.php">Casos</a></li>
+        <li><a href="?logout">Cerrar Sesion</a></li>
+        <h1>LegalConnect v.1</h1>
+      </ul>
+    </nav>
+    </center>
+  </header>
+
+
+
+
+  <div class="container">
+        <h2>Agregar Caso</h2>
+        <form method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+            <label for="victima">Víctima:</label>
+            <input type="text" id="victima" name="victima" required>
+
+            <label for="imputado">Imputado:</label>
+            <input type="text" id="imputado" name="imputado">
+
+            <label for="tipo_delito">Tipo de Delito:</label>
+            <input type="text" id="tipo_delito" name="tipo_delito">
+
+            <div id="evidencia-container">
+                <label>Evidencia:</label>
+                <input type="file" name="evidencia[]">
+            </div>
+
+            <div class="add-evidence">
+                <button type="button" onclick="agregarCampoEvidencia()">Agregar otro archivo de evidencia</button>
+            </div>
+
+            <label for="documento">Documento (PDF o DOC):</label>
+            <input type="file" name="documento">
+
+            <input type="submit" value="Agregar Caso" class="submit-btn">
+        </form>
+    </div>
 
     <script>
         function agregarCampoEvidencia() {
