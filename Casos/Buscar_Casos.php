@@ -194,10 +194,8 @@ nav {
     }
 
     table {
-            width: calc(100% - 200px); /* Restar el espacio del margen izquierdo y derecho */
-            margin: 200px auto; /* Margen superior e inferior automático para centrar la tabla */
+            margin-left: 400px  ;
             border-collapse: collapse;
-            border-radius: 8px;
         }
 
         th, td {
@@ -232,6 +230,35 @@ nav {
             background-color: #c82333;
         }
 
+
+ /* Estilo para el campo de entrada de texto */
+#inputBusqueda {
+  padding: 10px;
+        width: 700px; /* Ancho aumentado a 400px */
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+        margin-top: 200px; /* Añadir margen superior */
+}
+
+/* Estilo cuando el campo de entrada está enfocado */
+#inputBusqueda:focus {
+  outline: none;
+        border-color: #66afe9;
+}
+
+/* Placeholder */
+#inputBusqueda::placeholder {
+  color: #999;
+}
+
+/* Estilo para el contenedor del campo de entrada */
+.container {
+  margin: 0 auto;
+    
+}
+
     </style>
 </head>
 <body>
@@ -264,8 +291,11 @@ nav {
 
   <a id="botonArribaIzquierda" href="/Casos/Agregar_casos.php">Añadir Caso</a>
 
-
-  <table>
+  <div class="container">
+<center>
+  <input type="text" id="inputBusqueda" onkeyup="buscarCasos()" placeholder="Buscar casos...">
+  </center>
+<table>
     <tr>
         <th>Referencia</th>
         <th>Víctima</th>
@@ -277,7 +307,7 @@ nav {
     <?php
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            echo "<tr>";
+            echo "<tr id='tablaCasos'>";
             echo "<td>" . $row["referencia"] . "</td>";
             echo "<td>" . $row["victima"] . "</td>";
             echo "<td>" . $row["imputado"] . "</td>";
@@ -308,6 +338,38 @@ nav {
 
 
 <script>
+
+function buscarCasos() {
+    // Obtenemos el valor ingresado en la barra de búsqueda
+    var input = document.getElementById("inputBusqueda");
+    var filtro = input.value.toUpperCase();
+
+    // Obtenemos las filas de la tabla de casos
+    var filas = document.querySelectorAll("#tablaCasos");
+
+    // Iteramos sobre cada fila de la tabla y ocultamos las que no coincidan con la búsqueda
+    filas.forEach(function(fila) {
+        var celdas = fila.getElementsByTagName("td");
+        var mostrarFila = false;
+
+        // Iteramos sobre cada celda de la fila y verificamos si alguna contiene el texto buscado
+        for (var j = 0; j < celdas.length; j++) {
+            var textoCelda = celdas[j].textContent || celdas[j].innerText;
+            if (textoCelda.toUpperCase().indexOf(filtro) > -1) {
+                mostrarFila = true;
+                break;
+            }
+        }
+
+        // Mostramos u ocultamos la fila según corresponda
+        if (mostrarFila) {
+            fila.style.display = "";
+        } else {
+            fila.style.display = "none";
+        }
+    });
+}
+
 
 function eliminarCaso(referencia) {
     if (confirm("¿Estás seguro de que deseas eliminar este caso?")) {
