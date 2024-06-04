@@ -12,8 +12,23 @@
 
         <label for="password">Contraseña:</label>
         <input type="password" name="password" id="password" required><br><br>
+        <p id="error-msg" class="error"></p>
 
         <button type="submit">Iniciar Sesión</button>
     </form>
 </body>
+
+<script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+
+        if(error) {
+            const errorMessage = document.getElementById('error-msg');
+            errorMessage.textContent = 'Correo electrónico o contraseña incorrectos.';
+
+            setTimeout(function() {
+                errorMessage.textContent = '';
+            }, 5000);
+        }
+    </script>
 </html>

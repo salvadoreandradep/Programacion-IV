@@ -31,8 +31,9 @@ if ($result->num_rows > 0) {
         $_SESSION['user_id'] = $user['id'];
         header("Location: Pagina_principal.php");
     } else {
-        // Contraseña incorrecta
-        echo "Contraseña incorrecta.";
+        
+        header("Location: Iniciar_Sesion.php?error=1");
+        exit();
     }
 } else {
     // Usuario no encontrado

@@ -47,7 +47,7 @@ $sql = "INSERT INTO users (fotografia, nombre, apellido, telefono, profesion, em
         VALUES ('$target_file', '$nombre', '$apellido', '$telefono', '$profesion', '$email', '$hashed_password')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "Registro exitoso.";
+    header("Location: iniciar_sesion.php");
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
