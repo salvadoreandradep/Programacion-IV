@@ -159,22 +159,22 @@ $error_message = isset($_GET['mensaje']) ? $_GET['mensaje'] : null;
             <div style="display: flex; justify-content: space-between; width: 100%;">
                 <div style="width: 48%;">
                     <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required>
+                    <input type="text" id="nombre" name="nombre" required autocomplete="off">
                 </div>
                 <div style="width: 48%;">
                     <label for="apellido">Apellido:</label>
-                    <input type="text" id="apellido" name="apellido" required>
+                    <input type="text" id="apellido" name="apellido" required autocomplete="off">
                 </div>
             </div>
 
             <div style="display: flex; justify-content: space-between; width: 100%;">
                 <div style="width: 48%;">
                     <label for="telefono">Teléfono:</label>
-                    <input type="tel" id="telefono" name="telefono" required>
+                    <input type="tel" id="telefono" name="telefono" required autocomplete="off">
                 </div>
                 <div style="width: 48%;">
                     <label for="profesion">Profesión:</label>
-                    <select class="form-control" name="profesion" id="profesion" required>
+                    <select class="form-control" name="profesion" id="profesion" required autocomplete="off">
                         <option value="" disabled selected hidden></option>
                         <option value="Juez">Juez</option>
                         <option value="Abogado">Abogado</option>
@@ -183,15 +183,15 @@ $error_message = isset($_GET['mensaje']) ? $_GET['mensaje'] : null;
                 </div>
             </div>
             <label for="correo" style="width: 100%;">Correo Electrónico:</label>
-            <input type="email" id="correo" name="correo" required>
+            <input type="email" id="correo" name="correo" required autocomplete="off">
             <div style="display: flex; justify-content: space-between; width: 100%;">
                 <div style="width: 48%;">
                     <label for="contrasena">Contraseña:</label>
-                    <input type="password" id="contrasena" name="contrasena" required>
+                    <input type="password" id="contrasena" name="contrasena" required autocomplete="off">
                 </div>
                 <div style="width: 48%;">
                     <label for="confirmar_contrasena">Confirmar Contraseña:</label>
-                    <input type="password" id="confirmar_contrasena" name="confirmar_contrasena" required>
+                    <input type="password" id="confirmar_contrasena" name="confirmar_contrasena" required autocomplete="off">
                 </div>
             </div>
             

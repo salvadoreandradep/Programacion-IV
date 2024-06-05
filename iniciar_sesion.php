@@ -99,10 +99,10 @@
         <h2>Iniciar Sesión</h2>
         <form action="login.php" method="post">
             <label for="email">Correo Electrónico:</label>
-            <input type="email" name="email" id="email" required>
+            <input type="email" name="email" id="email" required autocomplete="off">
 
             <label for="password">Contraseña:</label>
-            <input type="password" name="password" id="password" required>
+            <input type="password" name="password" id="password" required autocomplete="off">
 
             <p id="error-msg" class="error"></p>
       

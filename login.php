@@ -29,7 +29,7 @@ if ($result->num_rows > 0) {
     if (password_verify($password, $user['password'])) {
         // Contraseña válida
         $_SESSION['user_id'] = $user['id'];
-        header("Location: Pagina_principal.php");
+        header("Location: iniciandosesion.php");
     } else {
         
         header("Location: Iniciar_Sesion.php?error=1");
