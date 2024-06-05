@@ -174,7 +174,7 @@ nav {
       <ul class="navigation">
 <center>
 
-        <li><a href="#">Inicio</a></li>
+        <li><a href="/pagina_principal.php">Inicio</a></li>
         <li><a href="/Audiencias/AgregarAudiencias.php">Audiencias</a></li>
         <li><a href="/Casos/AgregarCasos.php">Casos</a></li>
         <li><a href="?logout">Cerrar Sesion</a></li>
