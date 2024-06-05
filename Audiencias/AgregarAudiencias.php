@@ -127,8 +127,8 @@ nav {
 }
 
 .circle-container {
-        width: 70px;
-        height: 70px;
+        width: 30px;
+        height: 30px;
         border-radius: 50%; /* Esto hace que el borde sea redondeado, creando un círculo */
         overflow: hidden; /* Oculta cualquier contenido fuera del círculo */
         margin: 50px; /* Añade un margen de 10px alrededor del círculo */
@@ -160,18 +160,21 @@ nav {
 
     <label for="btn-nav" class="btn-nav">&#9776;</label>
     <input type="checkbox" id="btn-nav">
-    <h2>LegalConnect</h2>
+    <a href="/Formularios/Perfil.php">
+    <div class="circle-container">
+
+<img class="circle-image" src="recursos/profile.png" alt="Tu imagen">
+
+</div>
+
+
+</a>
+   
     <nav>
       <ul class="navigation">
 <center>
-<a href="/Formularios/Perfil.php">
-<div class="circle-container">
 
-    <img class="circle-image" src="recursos/profile.png" alt="Tu imagen">
-
-   </div>
-  </a>
-  <li><a href="/pagina_principal.php">Inicio</a></li>
+        <li><a href="#">Inicio</a></li>
         <li><a href="/Audiencias/AgregarAudiencias.php">Audiencias</a></li>
         <li><a href="/Casos/AgregarCasos.php">Casos</a></li>
         <li><a href="?logout">Cerrar Sesion</a></li>
