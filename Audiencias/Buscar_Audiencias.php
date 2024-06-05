@@ -246,7 +246,7 @@ nav {
         }
 
         /* Estilos para el botón */
-.edit-button {
+        .edit-button {
   display: inline-block;
   background-color: white; /* Color de fondo del botón */
   color: black; /* Color del texto del botón */

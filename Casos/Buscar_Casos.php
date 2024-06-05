@@ -193,42 +193,48 @@ nav {
       font-family: Bahnschrift;
     }
 
-    table {
-            margin-left: 400px  ;
-            border-collapse: collapse;
-        }
+    .table-container {
+    margin: 0 auto;
+    max-width: 800px;
+    height: 400px;
+    overflow-y: auto;
+}
 
-        th, td {
-            padding: 8px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
+.table-container2 {
+    margin: 0 auto;
+    max-width: 800px;
+}
 
-        th {
-            background-color: #f2f2f2;
-        }
+.custom-table {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-        tr:hover {
-            background-color: #f5f5f5;
-        }
+.table-header,
+.table-row {
+    display: flex;
+}
 
-        a {
-            text-decoration: none;
-            color: #007bff;
-        }
+.table-cell {
+    flex: 1;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
 
-        button {
-            padding: 5px 10px;
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
+.table-header {
+    font-weight: bold;
+    background-color: #f2f2f2;
+}
 
-        button:hover {
-            background-color: #c82333;
-        }
+.no-data {
+    padding: 12px;
+    text-align: center;
+}
+
 
 
  /* Estilo para el campo de entrada de texto */
@@ -258,6 +264,38 @@ nav {
   margin: 0 auto;
     
 }
+
+.edit-button {
+  display: inline-block;
+  background-color: white;
+  color: black;
+  padding: 10px 20px;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+.delete-button {
+  display: inline-block;
+  background-color: #ff3333; /* Color de fondo del botón de eliminar */
+  color: white; /* Color del texto del botón de eliminar */
+  padding: 10px 20px;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #cc0000; /* Cambiar color de fondo cuando el cursor pasa sobre el botón de eliminar */
+}
+
 
     </style>
 </head>
@@ -295,45 +333,48 @@ nav {
 <center>
   <input type="text" id="inputBusqueda" onkeyup="buscarCasos()" placeholder="Buscar casos...">
   </center>
-<table>
-    <tr>
-        <th>Referencia</th>
-        <th>Víctima</th>
-        <th>Imputado</th>
-        <th>Tipo de Delito</th>
-        <th>Documentos</th>
-        <th>Acciones</th>
-    </tr>
-    <?php
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            echo "<tr id='tablaCasos'>";
-            echo "<td>" . $row["referencia"] . "</td>";
-            echo "<td>" . $row["victima"] . "</td>";
-            echo "<td>" . $row["imputado"] . "</td>";
-            echo "<td>" . $row["tipo_delito"] . "</td>";
-            echo "<td>";
-            if (!empty($row["archivos_documento"])) {
-                $archivos_documento = explode(",", $row["archivos_documento"]);
-                foreach ($archivos_documento as $archivo) {
-                    echo "<a href='documentos/" . $archivo . "' target='_blank'>" . $archivo . "</a><br>";
+  <div class="table-container">
+    <div class="custom-table">
+        <div class="table-header">
+            <div class="table-cell">Referencia</div>
+            <div class="table-cell">Víctima</div>
+            <div class="table-cell">Imputado</div>
+            <div class="table-cell">Tipo de Delito</div>
+            <div class="table-cell">Documentos</div>
+            <div class="table-cell">Acciones</div>
+        </div>
+        <?php
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "<div class='table-row'>";
+                echo "<div class='table-cell'>" . $row["referencia"] . "</div>";
+                echo "<div class='table-cell'>" . $row["victima"] . "</div>";
+                echo "<div class='table-cell'>" . $row["imputado"] . "</div>";
+                echo "<div class='table-cell'>" . $row["tipo_delito"] . "</div>";
+                echo "<div class='table-cell'>";
+                if (!empty($row["archivos_documento"])) {
+                    $archivos_documento = explode(",", $row["archivos_documento"]);
+                    foreach ($archivos_documento as $archivo) {
+                        echo "<a href='documentos/" . $archivo . "' target='_blank'>" . $archivo . "</a><br>";
+                    }
+                } else {
+                    echo "Sin documentos";
                 }
-            } else {
-                echo "Sin documentos";
+                echo "</div>";
+                echo "<div class='table-cell'>";
+                echo "<button class='delete-button' onclick=\"eliminarCaso('" . $row["referencia"] . "')\">Eliminar</button>";
+                echo "<a class='edit-button' href='ver_detalle_caso.php?referencia=" . $row["referencia"] . "'>Ver Detalles</a>";
+                
+                
+                echo "</div>";
+                echo "</div>";
             }
-            echo "</td>";
-            echo "<td>";
-            echo "<button onclick=\"eliminarCaso('" . $row["referencia"] . "')\">Eliminar</button>";
-
-            echo "<a href='ver_detalle_caso.php?referencia=" . $row["referencia"] . "'>Ver Detalles</a>";
-            echo "</td>";
-            echo "</tr>";
+        } else {
+            echo "<div class='no-data' colspan='6'>No hay casos registrados.</div>";
         }
-    } else {
-        echo "<tr><td colspan='6'>No hay casos registrados.</td></tr>";
-    }
-    ?>
-</table>
+        ?>
+    </div>
+</div>
 
 
 
