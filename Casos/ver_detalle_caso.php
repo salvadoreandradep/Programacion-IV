@@ -170,6 +170,49 @@ nav {
       font-size: 20px;
       font-family: Bahnschrift;
     }
+    #botonArribaIzquierda {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+            margin-left: 100px;
+            margin-top: 500px;
+        }
+
+        #botonArribaIzquierda:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+
+        .edit-btn {
+          position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+            margin-left: 110px;
+            margin-top: 80px;
+}
+
+.edit-btn:hover {
+    background-color: #0056b3;
+}
+
     </style>
 </head>
 <body>
@@ -199,7 +242,7 @@ nav {
     </center>
   </header>
 
-
+  <a id="botonArribaIzquierda" href="/Casos/Buscar_Casos.php">Tabla de casos</a>
 
     <div class="container">
         <?php

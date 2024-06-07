@@ -155,6 +155,7 @@ nav {
 }
 
 .btn-nav {
+  
   color: #fff; /* Cambiar el color del botón a blanco */
   font-size: 20px; /* Reducir un poco el tamaño del botón */
   cursor: pointer;
@@ -193,7 +194,52 @@ nav {
       font-size: 20px;
       font-family: Bahnschrift;
     }
-            </style>
+
+    .select-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .select-container select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%204%205%22%3E%3Cpath%20fill%3D%22%23007bff%22%20d%3D%22M2%200L0%202h4L2%200zM2%205L0%203h4L2%205z%22/%3E%3C/svg%3E') no-repeat right 10px center;
+            background-size: 12px;
+        }
+        .select-container select:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        #botonArribaIzquierda {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+            margin-left: 100px;
+            margin-top: 80px;
+        }
+
+        #botonArribaIzquierda:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+        </style>
         </head>
         <body>
 
@@ -225,7 +271,7 @@ nav {
 </header>
 
 
-
+<a id="botonArribaIzquierda" href="/Casos/Buscar_Casos.php">Tabla de casos</a>
 
         
             <div class="container">
@@ -236,8 +282,12 @@ nav {
                     <input type="text" id="victima" name="victima" value="<?php echo $row['victima']; ?>"><br>
                     <label for="imputado">Imputado:</label><br>
                     <input type="text" id="imputado" name="imputado" value="<?php echo $row['imputado']; ?>"><br>
+                    
+                    
                     <label for="tipo_delito">Tipo de Delito:</label><br>
                     <input type="text" id="tipo_delito" name="tipo_delito" value="<?php echo $row['tipo_delito']; ?>"><br>
+
+                    
                     <input type="submit" value="Guardar Cambios">
                 </form>
                 <div class="card">

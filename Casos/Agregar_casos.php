@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO casos (referencia, victima, imputado, tipo_delito) VALUES ('$referencia', '$victima', '$imputado', '$tipoDelito')";
 
     if ($conn->query($sql) === TRUE) {
-        header("Location: /Casos/buscar_casos.php");
+        header("Location: /Casos/casoguardado.php"); 
 
         // Procesar y guardar archivos de evidencia
         if(isset($_FILES['evidencia'])){
@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Insertar información de la evidencia en la base de datos
                     $sql_evidencia = "INSERT INTO evidencias (caso_referencia, nombre_archivo, tipo_archivo, ubicacion_archivo) VALUES ('$referencia', '$file_name', '$file_type', '$desired_dir/$file_name')";
                     if ($conn->query($sql_evidencia) === TRUE) {
-                        echo "Evidencia subida correctamente.";
+                        header("Location: /Casos/casoguardado.php"); 
                     } else {
                         echo "Error al subir la evidencia: " . $conn->error;
                     }
@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Insertar información del documento en la base de datos
                     $sql_documento = "INSERT INTO documentos (caso_referencia, nombre_archivo, tipo_archivo, ubicacion_archivo) VALUES ('$referencia', '$file_name', '$file_type', '$desired_dir/$file_name')";
                     if ($conn->query($sql_documento) === TRUE) {
-                        header("Location: /casos/buscar_casos.php"); 
+                        header("Location: /Casos/casoguardado.php"); 
                         exit();
                     } else {
                         echo "Error al subir el documento: " . $conn->error;
@@ -351,6 +351,30 @@ nav {
             color: #fff;
         }
 
+
+        
+        .select-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .select-container select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%204%205%22%3E%3Cpath%20fill%3D%22%23007bff%22%20d%3D%22M2%200L0%202h4L2%200zM2%205L0%203h4L2%205z%22/%3E%3C/svg%3E') no-repeat right 10px center;
+            background-size: 12px;
+        }
+        .select-container select:focus {
+            outline: none;
+            border-color: #007bff;
+        }
     </style>
 
 </head>
@@ -393,8 +417,16 @@ nav {
             <label for="imputado">Imputado:</label>
             <input type="text" id="imputado" name="imputado">
 
+            <div class="select-container">
             <label for="tipo_delito">Tipo de Delito:</label>
-            <input type="text" id="tipo_delito" name="tipo_delito">
+            <select id="tipo_delito" name="tipo_delito">
+                <option value="robo">Robo</option>
+                <option value="asalto">Asalto</option>
+                <option value="fraude">Fraude</option>
+                <option value="vandalismo">Vandalismo</option>
+                <option value="homicidio">Homicidio</option>
+            </select>
+            </div>
 
            
             <label>Evidencia:</label>
