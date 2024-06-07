@@ -319,7 +319,7 @@ nav {
    </a>
         <li><a href="/Pagina_principal.php">Inicio</a></li>
         <li><a href="/Audiencias/Buscar_Audiencias.php">Audiencias</a></li>
-        <li><a href="/Casos/Buscar_Casos.php">Casos</a></li>
+        <li><a href="/Casos/Agregar_Casos.php">Casos</a></li>
         <li><a href="?logout">Cerrar Sesion</a></li>
         <h1>LegalConnect v.1</h1>
       </ul>
@@ -334,7 +334,7 @@ nav {
   <input type="text" id="inputBusqueda" onkeyup="buscarCasos()" placeholder="Buscar casos...">
   </center>
   <div class="table-container">
-    <div class="custom-table">
+    <div class="custom-table" id="casosTabla">
         <div class="table-header">
             <div class="table-cell">Referencia</div>
             <div class="table-cell">Víctima</div>
@@ -347,7 +347,7 @@ nav {
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 echo "<div class='table-row'>";
-                echo "<div class='table-cell'>" . $row["referencia"] . "</div>";
+                echo "<div class='table-cell referencia'>" . $row["referencia"] . "</div>";
                 echo "<div class='table-cell'>" . $row["victima"] . "</div>";
                 echo "<div class='table-cell'>" . $row["imputado"] . "</div>";
                 echo "<div class='table-cell'>" . $row["tipo_delito"] . "</div>";
@@ -364,8 +364,6 @@ nav {
                 echo "<div class='table-cell'>";
                 echo "<button class='delete-button' onclick=\"eliminarCaso('" . $row["referencia"] . "')\">Eliminar</button>";
                 echo "<a class='edit-button' href='ver_detalle_caso.php?referencia=" . $row["referencia"] . "'>Ver Detalles</a>";
-                
-                
                 echo "</div>";
                 echo "</div>";
             }
@@ -378,37 +376,85 @@ nav {
 
 
 
+
+
+
 <script>
 
-function buscarCasos() {
-    // Obtenemos el valor ingresado en la barra de búsqueda
-    var input = document.getElementById("inputBusqueda");
-    var filtro = input.value.toUpperCase();
+function ordenarPorReferencia() {
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("casosTabla");
+    switching = true;
 
-    // Obtenemos las filas de la tabla de casos
-    var filas = document.querySelectorAll("#tablaCasos");
+    // Hacer un bucle hasta que no haya más cambios
+    while (switching) {
+        switching = false;
+        rows = table.getElementsByClassName("table-row");
 
-    // Iteramos sobre cada fila de la tabla y ocultamos las que no coincidan con la búsqueda
-    filas.forEach(function(fila) {
-        var celdas = fila.getElementsByTagName("td");
-        var mostrarFila = false;
+        // Bucle a través de todas las filas de la tabla (excepto el encabezado)
+        for (i = 0; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
 
-        // Iteramos sobre cada celda de la fila y verificamos si alguna contiene el texto buscado
-        for (var j = 0; j < celdas.length; j++) {
-            var textoCelda = celdas[j].textContent || celdas[j].innerText;
-            if (textoCelda.toUpperCase().indexOf(filtro) > -1) {
-                mostrarFila = true;
+            // Obtener los dos elementos que se compararán
+            x = rows[i].getElementsByClassName("referencia")[0];
+            y = rows[i + 1].getElementsByClassName("referencia")[0];
+
+            // Verificar si las dos filas deben cambiar de lugar
+            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                shouldSwitch = true;
                 break;
             }
         }
 
-        // Mostramos u ocultamos la fila según corresponda
-        if (mostrarFila) {
-            fila.style.display = "";
-        } else {
-            fila.style.display = "none";
+        if (shouldSwitch) {
+            // Hacer el cambio y marcar que se ha hecho un cambio
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
         }
-    });
+    }
+}
+
+// Ejecutar la función de ordenación al cargar la página
+window.onload = function() {
+    ordenarPorReferencia();
+};
+
+
+
+
+
+
+
+
+
+
+function buscarCasos() {
+    var input, filter, table, rows, cells, i, j, cellValue, shouldDisplay;
+    input = document.getElementById("inputBusqueda");
+    filter = input.value.toLowerCase();
+    table = document.getElementById("casosTabla");
+    rows = table.getElementsByClassName("table-row");
+
+    for (i = 0; i < rows.length; i++) {
+        cells = rows[i].getElementsByClassName("table-cell");
+        shouldDisplay = false;
+
+        for (j = 0; j < cells.length; j++) {
+            if (cells[j]) {
+                cellValue = cells[j].textContent || cells[j].innerText;
+                if (cellValue.toLowerCase().indexOf(filter) > -1) {
+                    shouldDisplay = true;
+                    break;
+                }
+            }
+        }
+
+        if (shouldDisplay) {
+            rows[i].style.display = "";
+        } else {
+            rows[i].style.display = "none";
+        }
+    }
 }
 
 

@@ -188,7 +188,7 @@ h1{
          <li><a href="/Formularios/Perfil.php">Perfil</a></li>
         <li><a href="/Pagina_principal.php">Inicio</a></li>
         <li><a href="/Audiencias/Buscar_Audiencias.php">Audiencias</a></li>
-        <li><a href="#">Casos</a></li>
+        <li><a href="/Casos/Agregar_Casos.php">Casos</a></li>
         <li><a href="?logout">Cerrar Sesion</a></li>
       
       </ul>
