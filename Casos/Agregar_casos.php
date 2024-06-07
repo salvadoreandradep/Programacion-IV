@@ -327,7 +327,29 @@ nav {
         .submit-btn:hover {
             background-color: #0056b3; /* Darker Green on Hover */
         }
-        
+
+
+        #botonArribaIzquierda {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+            margin-left: 200px;
+            margin-top: 80px;
+        }
+
+        #botonArribaIzquierda:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
 
     </style>
 
@@ -349,9 +371,9 @@ nav {
 
    </div>
   </a>
-        <li><a href="#">Inicio</a></li>
+        <li><a href="/Pagina_principal.php">Inicio</a></li>
         <li><a href="/Audiencias/Buscar_Audiencias.php">Audiencias</a></li>
-        <li><a href="/Casos/Buscar_Casos.php">Casos</a></li>
+        <li><a href="/Casos/Agregar_Casos.php">Casos</a></li>
         <li><a href="?logout">Cerrar Sesion</a></li>
         <h1>LegalConnect v.1</h1>
       </ul>
@@ -361,7 +383,7 @@ nav {
 
 
 
-
+  <a id="botonArribaIzquierda" href="/Casos/Buscar_Casos.php">Tabla de casos</a>
   <div class="container">
         <h2>Agregar Caso</h2>
         <form method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -374,14 +396,10 @@ nav {
             <label for="tipo_delito">Tipo de Delito:</label>
             <input type="text" id="tipo_delito" name="tipo_delito">
 
-            <div id="evidencia-container">
-                <label>Evidencia:</label>
-                <input type="file" name="evidencia[]">
-            </div>
-
-            <div class="add-evidence">
-                <button type="button" onclick="agregarCampoEvidencia()">Agregar otro archivo de evidencia</button>
-            </div>
+           
+            <label>Evidencia:</label>
+            <input type="file" name="evidencia[]">
+                 
 
             <label for="documento">Documento (PDF o DOC):</label>
             <input type="file" name="documento">
