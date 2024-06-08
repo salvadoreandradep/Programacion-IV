@@ -283,9 +283,17 @@ nav {
                     <label for="imputado">Imputado:</label><br>
                     <input type="text" id="imputado" name="imputado" value="<?php echo $row['imputado']; ?>"><br>
                     
-                    
+                    <div class="select-container">
                     <label for="tipo_delito">Tipo de Delito:</label><br>
-                    <input type="text" id="tipo_delito" name="tipo_delito" value="<?php echo $row['tipo_delito']; ?>"><br>
+                    <select id="tipo_delito" name="tipo_delito">
+                        <option value="robo" <?php if($row['tipo_delito'] == 'robo') echo 'selected'; ?>>Robo</option>
+                        <option value="asalto" <?php if($row['tipo_delito'] == 'asalto') echo 'selected'; ?>>Asalto</option>
+                        <option value="fraude" <?php if($row['tipo_delito'] == 'fraude') echo 'selected'; ?>>Fraude</option>
+                        <option value="vandalismo" <?php if($row['tipo_delito'] == 'vandalismo') echo 'selected'; ?>>Vandalismo</option>
+                        <option value="homicidio" <?php if($row['tipo_delito'] == 'homicidio') echo 'selected'; ?>>Homicidio</option>
+                    </select><br>
+                    </div>
+
 
                     
                     <input type="submit" value="Guardar Cambios">
