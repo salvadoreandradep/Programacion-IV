@@ -231,7 +231,7 @@ nav {
             font-family: Arial, sans-serif;
             font-size: 16px;
             transition: background-color 0.3s, color 0.3s;
-            margin-left: 100px;
+            margin-left: 1200px;
             margin-top: 80px;
         }
 
@@ -239,6 +239,28 @@ nav {
             background-color: #0056b3;
             color: #fff;
         }
+
+        .btn {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
         </style>
         </head>
         <body>
@@ -271,7 +293,7 @@ nav {
 </header>
 
 
-<a id="botonArribaIzquierda" href="/Casos/Buscar_Casos.php">Tabla de casos</a>
+<a id="botonArribaIzquierda" href="/Casos/ver_detalle_caso.php?referencia=<?php echo $row['referencia']; ?>">Cancelar Edicion</a>
 
         
             <div class="container">
@@ -294,41 +316,60 @@ nav {
                     </select><br>
                     </div>
 
-
-                    
-                    <input type="submit" value="Guardar Cambios">
-                </form>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </form>
                 <div class="card">
                     <h3>Evidencias</h3>
                     <form action="agregar_evidencia.php" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="referencia" value="<?php echo $row['referencia']; ?>">
                         <input type="file" name="evidencia[]" multiple>
-                        <input type="submit" value="Agregar Evidencia" class="btn">
+                        <button type="submit" class="btn btn-primary">Agregar Evidencia</button>
                     </form>
                     <?php
-                    // Consulta para obtener las evidencias asociadas al caso
                     $sql_evidencia = "SELECT * FROM evidencias WHERE caso_referencia = '$referencia'";
-                    $result_evidencia = $conn->query($sql_evidencia);
-                    if ($result_evidencia->num_rows > 0) {
-                        echo "<div class='evidencia'>";
-                        while($row_evidencia = $result_evidencia->fetch_assoc()) {
-                            echo "<div>";
+                $result_evidencia = $conn->query($sql_evidencia);
+                if ($result_evidencia->num_rows > 0) {
+                    echo "<div class='evidencia'>";
+                    echo "<h3>Evidencia</h3>";
+                    while($row_evidencia = $result_evidencia->fetch_assoc()) {
+                        // Obtener la extensión del archivo
+                        $extension = pathinfo($row_evidencia["nombre_archivo"], PATHINFO_EXTENSION);
+                        // Mostrar cada archivo de evidencia según su tipo
+                        if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png' || $extension == 'gif') {
+                            // Archivo de imagen
                             echo "<img src='" . $row_evidencia["ubicacion_archivo"] . "' alt='Evidencia'>";
-                            echo "<a href='eliminar_evidencia.php?id=" . $row_evidencia["id"] . "'>Eliminar</a>";
-                            echo "</div>";
+                        } elseif ($extension == 'mp4' || $extension == 'webm' || $extension == 'ogg') {
+                            // Archivo de video
+                            echo "<video controls>";
+                            echo "<source src='" . $row_evidencia["ubicacion_archivo"] . "' type='video/" . $extension . "'>";
+                            echo "Your browser does not support the video tag.";
+                            echo "</video>";
+                        } elseif ($extension == 'mp3' || $extension == 'ogg' || $extension == 'wav') {
+                            // Archivo de audio
+                            echo "<audio controls>";
+                            echo "<source src='" . $row_evidencia["ubicacion_archivo"] . "' type='audio/" . $extension . "'>";
+                            echo "<source src='" . $row_evidencia["ubicacion_archivo"] . "' type='audio/" . $extension . "'>";
+                            echo "Your browser does not support the audio tag.";
+                            echo "</audio>";
+                            //echo "<a href='eliminar_evidencia.php?id=" . $row_evidencia["id"] . "'>Eliminar</a>";
+                            
+                        } else {
+                            // Otros tipos de archivos
+                            echo "<p>No se puede mostrar la evidencia.</p>";
                         }
-                        echo "</div>";
-                    } else {
-                        echo "<p>No hay evidencia asociada a este caso.</p>";
                     }
-                    ?>
+                    echo "</div>";
+                } else {
+                    echo "<p>No hay evidencia asociada a este caso.</p>";
+                }
+                ?>
                 </div>
                 <div class="card">
                     <h3>Documento</h3>
                 <form action="actualizar_documento.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="referencia" value="<?php echo $row['referencia']; ?>">
                     <input type="file" name="documento">
-                    <input type="submit" value="Actualizar Documento" class="btn">
+                    <button type="submit" class="btn btn-primary">Agregar Documento</button>
                 </form>
 
                 </div>
@@ -345,3 +386,6 @@ nav {
     echo "No se proporcionó una referencia de caso válida.";
 }
 ?>
+
+
+ 
