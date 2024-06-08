@@ -36,12 +36,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['evidencia']['name']))
                 exit();
             }
         } else {
+            header("Location: editar_caso.php?referencia=$referencia");
             echo "Error al cargar el archivo de evidencia.";
         }
     }
 
     $conn->close();
 } else {
+    
     echo "No se recibieron datos del formulario o no se seleccionaron archivos.";
 }
 ?>
