@@ -103,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $desired_dir = "documentos"; // Directorio donde se guardarán los documentos
 
             // Verificar el tipo de archivo (PDF o DOC)
-            if ($file_type == 'application/pdf' || $file_type == 'application/docx') {
+            if ($file_type == 'application/pdf' || $file_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
                 if (move_uploaded_file($file_tmp, "$desired_dir/" . $file_name)) {
                     // Insertar información del documento en la base de datos
                     $sql_documento = "INSERT INTO documentos (caso_referencia, nombre_archivo, tipo_archivo, ubicacion_archivo) VALUES ('$referencia', '$file_name', '$file_type', '$desired_dir/$file_name')";
