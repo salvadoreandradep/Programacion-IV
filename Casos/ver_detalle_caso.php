@@ -41,15 +41,7 @@ if (isset($_GET['logout'])) {
             margin: 0 auto;
             padding: 20px;
         }
-        .card {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        .card h3 {
-            margin-top: 0;
-        }
+
         .evidencia img {
             max-width: 100%;
             height: auto;
@@ -213,6 +205,77 @@ nav {
     background-color: #0056b3;
 }
 
+
+
+
+
+
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Aumenté el radio del borde para hacerlo más suave */
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 500px; /* Ajusté el ancho máximo para adaptarlo a pantallas más grandes */
+    background-color: #ffffff; /* Cambié el color de fondo para que sea más nítido */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Hice la sombra más pronunciada */
+}
+
+/* Estilos para el título */
+.card h3 {
+    color: #333;
+    font-size: 1.5em; /* Aumenté el tamaño del título para hacerlo más prominente */
+    text-align: center;
+    margin-bottom: 15px; /* Agregué un margen inferior para separarlo del contenido */
+}
+
+/* Estilos para los párrafos */
+.card p {
+    color: #666;
+    font-size: 1.1em; /* Aumenté ligeramente el tamaño de la fuente */
+    line-height: 1.4; /* Ajusté el espaciado entre líneas para mejorar la legibilidad */
+    margin-bottom: 15px;
+}
+
+/* Estilos específicos para los elementos fuertes dentro de los párrafos */
+.card p strong {
+    color: #000;
+    font-weight: bold; /* Agregué negrita para resaltar los elementos fuertes */
+}
+
+
+.card2 {
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Aumenté el radio del borde para hacerlo más suave */
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px; /* Ajusté el ancho máximo para adaptarlo a pantallas más grandes */
+    background-color: #ffffff; /* Cambié el color de fondo para que sea más nítido */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Hice la sombra más pronunciada */
+}
+
+/* Estilos para el título */
+.card2 h3 {
+    color: #333;
+    font-size: 1.5em; /* Aumenté el tamaño del título para hacerlo más prominente */
+    text-align: center;
+    margin-bottom: 15px; /* Agregué un margen inferior para separarlo del contenido */
+}
+
+/* Estilos para los párrafos */
+.card2 p {
+    color: #666;
+    font-size: 1.1em; /* Aumenté ligeramente el tamaño de la fuente */
+    line-height: 1.4; /* Ajusté el espaciado entre líneas para mejorar la legibilidad */
+    margin-bottom: 15px;
+}
+
+/* Estilos específicos para los elementos fuertes dentro de los párrafos */
+.card2 p strong {
+    color: #000;
+    font-weight: bold; /* Agregué negrita para resaltar los elementos fuertes */
+}
+
     </style>
 </head>
 <body>
@@ -275,16 +338,19 @@ nav {
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 // Mostrar los detalles del caso
+                echo "<center>";
                 echo "<div class='card'>";
                 echo "<h3>Detalles del Caso</h3>";
                 echo "<p><strong>Referencia:</strong> " . $row["referencia"] . "</p>";
                 echo "<p><strong>Víctima:</strong> " . $row["victima"] . "</p>";
                 echo "<p><strong>Imputado:</strong> " . $row["imputado"] . "</p>";
                 echo "<p><strong>Tipo de Delito:</strong> " . $row["tipo_delito"] . "</p>";
+                echo "</center>";
                 // Consulta para obtener la evidencia asociada al caso
                 $sql_evidencia = "SELECT * FROM evidencias WHERE caso_referencia = '$referencia'";
                 $result_evidencia = $conn->query($sql_evidencia);
                 if ($result_evidencia->num_rows > 0) {
+                  echo "<div class='card2'>";
                     echo "<div class='evidencia'>";
                     echo "<h3>Evidencia</h3>";
                     while($row_evidencia = $result_evidencia->fetch_assoc()) {
@@ -317,7 +383,8 @@ nav {
                 } else {
                     echo "<p>No hay evidencia asociada a este caso.</p>";
                 }
-                
+                echo "</div class='card2'>";
+                echo "<div class='card2'>";
                 // Consulta para obtener el documento asociado al caso
                 $sql_documento = "SELECT * FROM documentos WHERE caso_referencia = '$referencia'";
                 $result_documento = $conn->query($sql_documento);
@@ -332,7 +399,7 @@ nav {
                 } else {
                     echo "<p>No hay documento asociado a este caso.</p>";
                 }
-                echo "</div>"; // Cierre de la tarjeta de detalles del caso
+                echo "</>"; // Cierre de la tarjeta de detalles del caso
             } else {
                 echo "<p>No se encontraron detalles para la referencia de caso proporcionada.</p>";
             }
