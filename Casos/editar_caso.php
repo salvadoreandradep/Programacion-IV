@@ -226,7 +226,7 @@ nav {
             background-color: #007bff;
             color: white;
             text-decoration: none;
-            border: 2px solid #007bff;
+         
             border-radius: 5px;
             font-family: Arial, sans-serif;
             font-size: 16px;
@@ -260,6 +260,101 @@ nav {
 .btn-primary:hover {
   background-color: #0056b3;
 }
+
+
+
+
+/* Estilos para el modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+    animation: slide-down 0.3s ease-in-out;
+}
+
+@keyframes slide-down {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close {
+    color: #555;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+
+
+/* Estilos para el botón de enviar */
+button[type="submit"] {
+    background-color: #007bff; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    padding: 10px 20px; /* Relleno interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Esquinas redondeadas */
+    font-size: 16px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+    cursor: pointer; /* Cursor de puntero */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones */
+}
+
+/* Estilos para el hover y focus */
+button[type="submit"]:hover,
+button[type="submit"]:focus {
+    background-color: #0056b3; /* Color de fondo al pasar el cursor */
+    outline: none; /* Sin contorno */
+    transform: translateY(-2px); /* Efecto de elevación */
+}
+
+/* Estilos para el active */
+button[type="submit"]:active {
+    background-color: #004085; /* Color de fondo al hacer clic */
+    transform: translateY(0); /* Restablecer elevación */
+}
+
+
+
+
+
+
 
         </style>
         </head>
@@ -352,6 +447,8 @@ nav {
                             echo "Your browser does not support the audio tag.";
                             echo "</audio>";
                             //echo "<a href='eliminar_evidencia.php?id=" . $row_evidencia["id"] . "'>Eliminar</a>";
+                            echo "<a href='' id='deleteRequestLink' >Solicitud de eliminación</a>";
+                            
                             
                         } else {
                             // Otros tipos de archivos
@@ -363,6 +460,24 @@ nav {
                     echo "<p>No hay evidencia asociada a este caso.</p>";
                 }
                 ?>
+
+
+
+<div id="deleteRequestModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Solicitud de Eliminación</h2>
+            <form id="deleteRequestForm">
+                <label for="reason">Razón de la solicitud:</label><br>
+                <textarea id="reason" name="reason" rows="4" cols="50" required></textarea><br><br>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+
+
+
                 </div>
                 <div class="card">
                     <h3>Documento</h3>
@@ -374,6 +489,53 @@ nav {
 
                 </div>
             </div>
+<script>
+// Obtener el modal
+var modal = document.getElementById("deleteRequestModal");
+
+// Obtener el enlace que abre el modal
+var link = document.getElementById("deleteRequestLink");
+
+// Obtener el elemento <span> que cierra el modal
+var span = document.getElementsByClassName("close")[0];
+
+// Cuando el usuario hace clic en el enlace, abre el modal
+link.onclick = function(event) {
+    event.preventDefault();
+    modal.style.display = "block";
+}
+
+// Cuando el usuario hace clic en <span> (x), cierra el modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// Cuando el usuario hace clic en cualquier lugar fuera del modal, lo cierra
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+// Manejar el envío del formulario
+var form = document.getElementById("deleteRequestForm");
+form.onsubmit = function(event) {
+    event.preventDefault();
+    // Aquí puedes agregar el código para enviar la solicitud
+    alert("Solicitud enviada: " + document.getElementById("reason").value);
+    
+    // Limpiar el formulario
+    form.reset();
+    
+    // Cerrar el modal
+    modal.style.display = "none";
+}
+
+
+
+</script>
+
+
         </body>
         </html>
         <?php
