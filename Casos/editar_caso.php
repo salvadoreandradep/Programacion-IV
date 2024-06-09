@@ -352,6 +352,19 @@ button[type="submit"]:active {
 
 
 
+#deleteRequestLink {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#deleteRequestLink:hover {
+    background-color: #c82333;
+}
 
 
 
