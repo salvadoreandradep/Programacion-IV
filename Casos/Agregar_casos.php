@@ -102,8 +102,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $file_type = $_FILES['documento']['type'];
             $desired_dir = "documentos"; // Directorio donde se guardarán los documentos
 
-            // Verificar el tipo de archivo (PDF o DOC)
-            if ($file_type == 'application/pdf' || $file_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+            // || $file_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+            if ($file_type == 'application/pdf' ) {
                 if (move_uploaded_file($file_tmp, "$desired_dir/" . $file_name)) {
                     // Insertar información del documento en la base de datos
                     $sql_documento = "INSERT INTO documentos (caso_referencia, nombre_archivo, tipo_archivo, ubicacion_archivo) VALUES ('$referencia', '$file_name', '$file_type', '$desired_dir/$file_name')";
@@ -117,7 +117,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo "Error al subir el documento.";
                 }
             } else {
-                echo "Tipo de archivo no admitido. Se permiten solo archivos PDF o DOC.";
+                $error_message = "Tipo de archivo no admitido.";
+                header("Location: /Casos/casoguardado.php?error=" . urlencode($error_message));
+                exit();
+               
             }
         }
         
@@ -160,6 +163,10 @@ body {
   justify-content: space-between; /* Espacio entre los elementos */
   padding: 0 20px; /* Agregar un poco de espacio alrededor del contenido */
 }
+
+
+
+
 
 nav {
   position: absolute;
@@ -433,8 +440,10 @@ nav {
             <input type="file" name="evidencia[]">
                  
 
-            <label for="documento">Documento (PDF o DOC):</label>
+            <label for="documento">Documento:</label>
+
             <input type="file" name="documento">
+            
 
             <input type="submit" value="Agregar Caso" class="submit-btn">
         </form>
@@ -449,6 +458,11 @@ nav {
             container.appendChild(document.createElement("br"));
             container.appendChild(input);
         }
+
+
+
+
+
     </script>
 </body>
 </html>

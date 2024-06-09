@@ -70,45 +70,7 @@ h1 {
 }
 
 /* Estilos para la tarjeta de usuario */
-.user-card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-    font-family: Bahnschrift, Arial, sans-serif; /* Agregamos Bahnschrift como primera opción */
-}
 
-.user-card p {
-    margin-bottom: 10px;
-    font-family: Bahnschrift, Arial, sans-serif; /* Agregamos Bahnschrift como primera opción */
-}
-
-.user-card p strong {
-    font-weight: bold;
-    margin-right: 5px;
-    font-family: Bahnschrift, Arial, sans-serif; /* Agregamos Bahnschrift como primera opción */
-}
-
-.edit-profile-btn {
-    display: block;
-    width: 100%;
-    max-width: 200px;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: #242975;
-    color: #fff;
-    text-align: center;
-    text-decoration: none;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    font-family: Bahnschrift, Arial, sans-serif; /* Agregamos Bahnschrift como primera opción */
-}
-
-.edit-profile-btn:hover {
-    background-color: #2D6653;
-}
 
 :root {
   --main-color: #242975; /* Cambio de color principal */
@@ -196,20 +158,7 @@ nav {
   background: rgba(255, 255, 255, 0.1); /* Cambiar el color de fondo al pasar el cursor */
 }
 
-.circle-container {
-        width: 70px;
-        height: 70px;
-        border-radius: 50%; /* Esto hace que el borde sea redondeado, creando un círculo */
-        overflow: hidden; /* Oculta cualquier contenido fuera del círculo */
-        margin: 50px; /* Añade un margen de 10px alrededor del círculo */
-        border: 2px solid #ccc; /* Agrega un borde para mayor claridad */
-    }
-    
-    /* Estilo para la imagen */
-    .circle-image {
-        width: 100%; /* Ajusta el ancho de la imagen al 100% del contenedor */
-        height: auto; /* Mantiene la proporción de la imagen */
-    }
+
     h2{
       color: black;
       font-size: 10px;
@@ -217,6 +166,78 @@ nav {
       font-size: 10px;
     }
 
+    .user-profile {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+/* Header */
+.user-profile h2 {
+    color: #333;
+    font-size: 20px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* User Info */
+.user-info p {
+    color: #666;
+    margin: 10px 0;
+}
+
+.user-info p strong {
+    color: #333;
+}
+
+/* Highlighted Info */
+.highlight {
+    color: #1877f2;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* Error Message */
+.error-message {
+    color: red;
+    font-weight: bold;
+}
+
+/* Edit Profile Button */
+.edit-profile-btn {
+    display: inline-block;
+    background-color: #1877f2;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.edit-profile-btn:hover {
+    background-color: #145dbf;
+}
+
+
+.circle-container {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%; /* Esto hace que el borde sea redondeado, creando un círculo */
+        overflow: hidden; /* Oculta cualquier contenido fuera del círculo */
+        margin: 50px; /* Añade un margen de 10px alrededor del círculo */
+        border: 2px solid #ccc; /* Agrega un borde para mayor claridad */
+       
+    }
+    
+    /* Estilo para la imagen */
+    .circle-image {
+        width: 100%; /* Ajusta el ancho de la imagen al 100% del contenedor */
+        height: auto; /* Mantiene la proporción de la imagen */
+    }
 
     </style>
 </head>
@@ -226,45 +247,53 @@ nav {
 
     <label for="btn-nav" class="btn-nav">&#9776;</label>
     <input type="checkbox" id="btn-nav">
-    <h2>LegalConnect</h2>
+  
     <nav>
       <ul class="navigation">
 <center>
-<a href="/Formularios/Perfil.php">
-<div class="circle-container">
 
-    <img class="circle-image" src="recursos/profile.png" alt="Tu imagen">
-
-   </div>
-  </a>
         <li><a href="/Pagina_principal.php">Inicio</a></li>
         <li><a href="/Audiencias/Buscar_Audiencias.php">Audiencias</a></li>
         <li><a href="/Casos/Buscar_Casos.php">Casos</a></li>
         <li><a href="?logout">Cerrar Sesion</a></li>
-        <h1>LegalConnect v.1</h1>
+     
       </ul>
     </nav>
     </center>
   </header>
   <div class="container">
-    <h1>Bienvenido a LegalConnect</h1>
+    
+<center>
+    <div class="user-profile">
+    <h2>Datos de Usuario</h2>
+    <?php if ($result->num_rows > 0): ?>
+        <?php $row = $result->fetch_assoc(); ?>
+        <div class="user-info">
 
-    <div class="user-card">
-        <h2>Datos de Usuario</h2>
-        <?php if ($result->num_rows > 0): ?>
-            <?php $row = $result->fetch_assoc(); ?>
-            <p><strong>Nombre:</strong> <?php echo $row['nombre']; ?></p>
-            <p><strong>Apellido:</strong> <?php echo $row['apellido']; ?></p>
-            <p><strong>Correo Electrónico:</strong> <?php echo $row['correo']; ?></p>
-            <p><strong>Teléfono:</strong> <?php echo $row['telefono']; ?></p>
-            <p><strong>Tipo de Usuario:</strong> <?php echo $row['tipo']; ?></p>
-        <?php else: ?>
-            <p>Error: No se encontraron detalles del usuario.</p>
-        <?php endif; ?>
-    </div>
+       
+        <div class="circle-container">
 
+    <img class="circle-image" src="/recursos/profile.png" alt="Tu imagen">
+
+   </div>
+            <p class="highlight"><strong></strong> <?php echo $row['nombre']; ?></strong> <?php echo $row['apellido']; ?></p></p>
+
+            <p class="highlight"><strong>Profesión:</strong> <?php echo $row['tipo']; ?></p>
+            <p><strong></strong> <?php echo $row['correo']; ?></p>
+            <p><strong></strong> <?php echo $row['telefono']; ?></p>
+          
+
+    <?php else: ?>
+        <p class="error-message">Error: No se encontraron detalles del usuario.</p>
+    <?php endif; ?>
     <a href="/Formularios/Editar_Perfil.php" class="edit-profile-btn">Editar Perfil</a>
 </div>
+
+</center>
+
+
+
+
 
 
 

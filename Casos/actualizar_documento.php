@@ -27,7 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['documento']['name']))
     // Guardar el documento en el directorio
     if(move_uploaded_file($_FILES["documento"]["tmp_name"], $targetFilePath)){
         // Consulta para actualizar el documento en la base de datos
-        $sql = "UPDATE casos SET documento='$fileName', /documento='$targetFilePath' WHERE referencia='$referencia'";
+        $sql = "UPDATE casos SET documento='$fileName', documentos/='$targetFilePath' WHERE referencia='$referencia'";
+
         if ($conn->query($sql) === TRUE) {
             echo "El documento se actualizó correctamente.";
         } else {

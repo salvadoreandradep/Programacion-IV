@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $update_sql = "UPDATE usuarios SET nombre = '$nuevo_nombre', apellido = '$nuevo_apellido', telefono = '$nuevo_telefono' WHERE id = $user_id";
     if ($conn->query($update_sql) === TRUE) {
         // Actualización exitosa, redirigir para evitar envíos repetidos del formulario
-        header("Location: /Formularios/Perfil.php");
+        header("Location: /Formularios/Perfilguardado.php");
         exit();
     } else {
         echo "Error al actualizar los datos: " . $conn->error;
