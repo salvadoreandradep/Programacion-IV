@@ -229,11 +229,11 @@ nav {
 }
 
 .circle-container {
-        width: 70px;
-        height: 70px;
+        width: 25px;
+        height: 25px;
         border-radius: 50%; /* Esto hace que el borde sea redondeado, creando un círculo */
         overflow: hidden; /* Oculta cualquier contenido fuera del círculo */
-        margin: 50px; /* Añade un margen de 10px alrededor del círculo */
+        margin: 20px; /* Añade un margen de 10px alrededor del círculo */
         border: 2px solid #ccc; /* Agrega un borde para mayor claridad */
     }
     
@@ -349,7 +349,7 @@ nav {
             font-family: Arial, sans-serif;
             font-size: 16px;
             transition: background-color 0.3s, color 0.3s;
-            margin-left: 200px;
+            margin-left: 1000px;
             margin-top: 80px;
         }
 
@@ -391,17 +391,17 @@ nav {
 
     <label for="btn-nav" class="btn-nav">&#9776;</label>
     <input type="checkbox" id="btn-nav">
-    <h2>LegalConnect</h2>
-    <nav>
-      <ul class="navigation">
-<center>
-<a href="/Formularios/Perfil.php">
+    <a href="/Formularios/Perfil.php">
 <div class="circle-container">
 
-    <img class="circle-image" src="recursos/profile.png" alt="Tu imagen">
+    <img class="circle-image" src="/recursos/profile.png" alt="Tu imagen">
 
    </div>
   </a>
+    <nav>
+      <ul class="navigation">
+<center>
+
         <li><a href="/Pagina_principal.php">Inicio</a></li>
         <li><a href="/Audiencias/Buscar_Audiencias.php">Audiencias</a></li>
         <li><a href="/Casos/Agregar_Casos.php">Casos</a></li>
@@ -414,7 +414,7 @@ nav {
 
 
 
-  <a id="botonArribaIzquierda" href="/Casos/Buscar_Casos.php">Tabla de casos</a>
+  <a id="botonArribaIzquierda" href="/Casos/Buscar_Casos.php">Buscar Casos</a>
   <div class="container">
         <h2>Agregar Caso</h2>
         <form method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -461,7 +461,11 @@ nav {
 
 
 
-
+        document.querySelector('a[href="?logout"]').addEventListener('click', function(event) {
+    if (!confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+        event.preventDefault(); // Cancelar el evento de clic si el usuario no confirma
+    }
+});
 
     </script>
 </body>
