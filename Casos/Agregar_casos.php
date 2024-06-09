@@ -85,6 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $sql_evidencia = "INSERT INTO evidencias (caso_referencia, nombre_archivo, tipo_archivo, ubicacion_archivo) VALUES ('$referencia', '$file_name', '$file_type', '$desired_dir/$file_name')";
                     if ($conn->query($sql_evidencia) === TRUE) {
                         header("Location: /Casos/casoguardado.php"); 
+                        exit; // Terminar el script después de redirigir
                     } else {
                         echo "Error al subir la evidencia: " . $conn->error;
                     }
@@ -94,6 +95,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
         
+        
+        
         // Guardar documento PDF o DOC
         if(isset($_FILES['documento'])){
             $file_name = $_FILES['documento']['name'];
@@ -102,8 +105,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $file_type = $_FILES['documento']['type'];
             $desired_dir = "documentos"; // Directorio donde se guardarán los documentos
 
-            // || $file_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-            if ($file_type == 'application/pdf' ) {
+            // 
+            if ($file_type == 'application/pdf' || $file_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ) {
                 if (move_uploaded_file($file_tmp, "$desired_dir/" . $file_name)) {
                     // Insertar información del documento en la base de datos
                     $sql_documento = "INSERT INTO documentos (caso_referencia, nombre_archivo, tipo_archivo, ubicacion_archivo) VALUES ('$referencia', '$file_name', '$file_type', '$desired_dir/$file_name')";
@@ -437,12 +440,13 @@ nav {
 
            
             <label>Evidencia:</label>
-            <input type="file" name="evidencia[]">
+            <input type="file" name="evidencia[]" multiple>
                  
 
             <label for="documento">Documento:</label>
 
-            <input type="file" name="documento">
+            <input type="file" name="documento" accept=".pdf">
+
             
 
             <input type="submit" value="Agregar Caso" class="submit-btn">

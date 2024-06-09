@@ -497,25 +497,6 @@ button[type="submit"]:active {
                 <form action="actualizar_documento.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="referencia" value="<?php echo $row['referencia']; ?>">
                     <input type="file" name="documento">
-<?php
-  $sql_documento = "SELECT * FROM documentos WHERE caso_referencia = '$referencia'";
-  $result_documento = $conn->query($sql_documento);
-  if ($result_documento->num_rows > 0) {
-      echo "<div class='documento'>";
-      echo "<h3>Documento</h3>";
-      while($row_documento = $result_documento->fetch_assoc()) {
-          // Mostrar el documento en un iframe
-          echo "<iframe src='" . $row_documento["ubicacion_archivo"] . "'></iframe>";
-      }
-      echo "</div>";
-  } else {
-      echo "<p>No hay documento asociado a este caso.</p>";
-  }
-  
-
-
-
-?>
 
 
 
