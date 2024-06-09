@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $file_size =$_FILES['evidencia']['size'][$key];
                 $file_tmp =$_FILES['evidencia']['tmp_name'][$key];
                 $file_type=$_FILES['evidencia']['type'][$key];
-                if($file_size > 1000){
+                if($file_size > 10000000000000){
                     $errors[]='El tamaño del archivo debe ser menor a 2 MB';
                 }      
                 $desired_dir="uploads"; // Directorio donde se guardarán los archivos
@@ -84,8 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Insertar información de la evidencia en la base de datos
                     $sql_evidencia = "INSERT INTO evidencias (caso_referencia, nombre_archivo, tipo_archivo, ubicacion_archivo) VALUES ('$referencia', '$file_name', '$file_type', '$desired_dir/$file_name')";
                     if ($conn->query($sql_evidencia) === TRUE) {
-                        header("Location: /Casos/casoguardado.php"); 
-                        exit; // Terminar el script después de redirigir
+                        echo "Evidencia subida correctamente.";
                     } else {
                         echo "Error al subir la evidencia: " . $conn->error;
                     }
@@ -94,7 +93,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             }
         }
-        
         
         
         // Guardar documento PDF o DOC
