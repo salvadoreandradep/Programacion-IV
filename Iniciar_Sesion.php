@@ -121,10 +121,12 @@ a:hover {
 
 
 <script>
-        const urlParams = new URLSearchParams(window.location.search);
+       const urlParams = new URLSearchParams(window.location.search);
         const error = urlParams.get('error');
 
-        if(error) {
+        console.log('Error parameter:', error); // Agrega esto
+
+        if (error) {
             const errorMessage = document.getElementById('error-msg');
             errorMessage.textContent = 'Correo electrónico o contraseña incorrectos.';
 
