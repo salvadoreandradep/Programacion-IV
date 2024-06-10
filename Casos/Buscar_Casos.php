@@ -341,6 +341,7 @@ nav {
             <div class="table-cell">Imputado</div>
             <div class="table-cell">Tipo de Delito</div>
             <div class="table-cell">Documentos</div>
+            <div class="table-cell">Fecha</div>
             <div class="table-cell">Acciones</div>
         </div>
         <?php
@@ -351,6 +352,7 @@ nav {
                 echo "<div class='table-cell'>" . $row["victima"] . "</div>";
                 echo "<div class='table-cell'>" . $row["imputado"] . "</div>";
                 echo "<div class='table-cell'>" . $row["tipo_delito"] . "</div>";
+                
                 echo "<div class='table-cell'>";
                 if (!empty($row["archivos_documento"])) {
                     $archivos_documento = explode(",", $row["archivos_documento"]);
@@ -360,8 +362,11 @@ nav {
                 } else {
                     echo "Sin documentos";
                 }
+                
                 echo "</div>";
+                echo "<div class='table-cell'>" . $row["fecha_creacion"] . "</div>";
                 echo "<div class='table-cell'>";
+                
                 echo "<button class='delete-button' onclick=\"eliminarCaso('" . $row["referencia"] . "')\">Eliminar</button>";
                 echo "<a class='edit-button' href='ver_detalle_caso.php?referencia=" . $row["referencia"] . "'>Ver Detalles</a>";
                 echo "</div>";

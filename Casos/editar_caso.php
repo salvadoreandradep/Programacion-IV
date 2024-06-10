@@ -367,6 +367,70 @@ button[type="submit"]:active {
 }
 
 
+.card {
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Aumenté el radio del borde para hacerlo más suave */
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 500px; /* Ajusté el ancho máximo para adaptarlo a pantallas más grandes */
+    background-color: #ffffff; /* Cambié el color de fondo para que sea más nítido */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Hice la sombra más pronunciada */
+}
+
+/* Estilos para el título */
+.card h3 {
+    color: #333;
+    font-size: 1.5em; /* Aumenté el tamaño del título para hacerlo más prominente */
+    text-align: center;
+    margin-bottom: 15px; /* Agregué un margen inferior para separarlo del contenido */
+}
+
+/* Estilos para los párrafos */
+.card p {
+    color: #666;
+    font-size: 1.1em; /* Aumenté ligeramente el tamaño de la fuente */
+    line-height: 1.4; /* Ajusté el espaciado entre líneas para mejorar la legibilidad */
+    margin-bottom: 15px;
+}
+
+/* Estilos específicos para los elementos fuertes dentro de los párrafos */
+.card p strong {
+    color: #000;
+    font-weight: bold; /* Agregué negrita para resaltar los elementos fuertes */
+}
+
+
+.card2 {
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Aumenté el radio del borde para hacerlo más suave */
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px; /* Ajusté el ancho máximo para adaptarlo a pantallas más grandes */
+    background-color: #ffffff; /* Cambié el color de fondo para que sea más nítido */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Hice la sombra más pronunciada */
+}
+
+/* Estilos para el título */
+.card2 h3 {
+    color: #333;
+    font-size: 1.5em; /* Aumenté el tamaño del título para hacerlo más prominente */
+    text-align: center;
+    margin-bottom: 15px; /* Agregué un margen inferior para separarlo del contenido */
+}
+
+/* Estilos para los párrafos */
+.card2 p {
+    color: #666;
+    font-size: 1.1em; /* Aumenté ligeramente el tamaño de la fuente */
+    line-height: 1.4; /* Ajusté el espaciado entre líneas para mejorar la legibilidad */
+    margin-bottom: 15px;
+}
+
+/* Estilos específicos para los elementos fuertes dentro de los párrafos */
+.card2 p strong {
+    color: #000;
+    font-weight: bold; /* Agregué negrita para resaltar los elementos fuertes */
+}
 
 
         </style>
@@ -404,7 +468,7 @@ button[type="submit"]:active {
 <a id="botonArribaIzquierda" href="/Casos/ver_detalle_caso.php?referencia=<?php echo $row['referencia']; ?>">Cancelar Edicion</a>
 
         
-            <div class="container">
+            <div class="card2">
                 <h2>Editar Caso</h2>
                 <form action="actualizar_caso.php" method="post">
                     <input type="hidden" name="referencia" value="<?php echo $row['referencia']; ?>">
@@ -425,35 +489,47 @@ button[type="submit"]:active {
                     </div>
 
                     <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+          
                     </form>
-                <div class="card">
-                    <h3>Evidencias</h3>
+                <div class="card2">
+                    <h3>Agregar Evidencia</h3>
                     <form action="agregar_evidencia.php" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="referencia" value="<?php echo $row['referencia']; ?>">
                         <input type="file" name="evidencia[]" multiple>
                         <button type="submit" class="btn btn-primary">Agregar Evidencia</button>
                     </form>
+                </div>
                     <?php
                     $sql_evidencia = "SELECT * FROM evidencias WHERE caso_referencia = '$referencia'";
                 $result_evidencia = $conn->query($sql_evidencia);
                 if ($result_evidencia->num_rows > 0) {
                     echo "<div class='evidencia'>";
-                    echo "<h3>Evidencia</h3>";
+                    echo "<h3>Evidencia Registradas</h3>";
                     while($row_evidencia = $result_evidencia->fetch_assoc()) {
                         // Obtener la extensión del archivo
                         $extension = pathinfo($row_evidencia["nombre_archivo"], PATHINFO_EXTENSION);
                         // Mostrar cada archivo de evidencia según su tipo
                         if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png' || $extension == 'gif') {
                             // Archivo de imagen
-                            echo "<img src='" . $row_evidencia["ubicacion_archivo"] . "' alt='Evidencia'>";
+                            echo "<div class='card2'>";
+                            echo "<h3> Imagenes</h3>";
+                            echo "<img src='" . $row_evidencia["ubicacion_archivo"] . "' alt='Evidencia' width='200' height='200'>";
+                            echo "<a href='' id='deleteRequestLink' >Solicitud de eliminación</a>";
+                            echo "</div class='card2'>";
                         } elseif ($extension == 'mp4' || $extension == 'webm' || $extension == 'ogg') {
                             // Archivo de video
+                            echo "<div class='card2'>";
+                            echo "<h3> Videos</h3>";
                             echo "<video controls>";
-                            echo "<source src='" . $row_evidencia["ubicacion_archivo"] . "' type='video/" . $extension . "'>";
+                            echo "<source src='" . $row_evidencia["ubicacion_archivo"] . "' type='video/" . $extension . "width='200' height='200''>";
                             echo "Your browser does not support the video tag.";
                             echo "</video>";
+                            echo "<a href='' id='deleteRequestLink' >Solicitud de eliminación</a>";
+                            echo "</div class='card2'>";
                         } elseif ($extension == 'mp3' || $extension == 'ogg' || $extension == 'wav') {
                             // Archivo de audio
+                            echo "<div class='card2'>";
+                            echo "<h3> Audios</h3>";
                             echo "<audio controls>";
                             echo "<source src='" . $row_evidencia["ubicacion_archivo"] . "' type='audio/" . $extension . "'>";
                             echo "<source src='" . $row_evidencia["ubicacion_archivo"] . "' type='audio/" . $extension . "'>";
@@ -461,14 +537,14 @@ button[type="submit"]:active {
                             echo "</audio>";
                             //echo "<a href='eliminar_evidencia.php?id=" . $row_evidencia["id"] . "'>Eliminar</a>";
                             echo "<a href='' id='deleteRequestLink' >Solicitud de eliminación</a>";
-                            
+                            echo "</div class='card2'>";
                             
                         } else {
                             // Otros tipos de archivos
                             echo "<p>No se puede mostrar la evidencia.</p>";
                         }
                     }
-                    echo "</div>";
+                    echo "</>";
                 } else {
                     echo "<p>No hay evidencia asociada a este caso.</p>";
                 }
@@ -492,16 +568,42 @@ button[type="submit"]:active {
 
 
                 </div>
-                <div class="card">
+                <div class="card2">
                     <h3>Documento</h3>
                 <form action="actualizar_documento.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="referencia" value="<?php echo $row['referencia']; ?>">
                     <input type="file" name="documento">
-
-
-
-
                     <button type="submit" class="btn btn-primary">Agregar Documento</button>
+                    </div>
+                    <?php
+
+if (isset($referencia)) {
+    $sql_documento = "SELECT * FROM documentos WHERE caso_referencia = '$referencia'";
+    $result_documento = $conn->query($sql_documento);
+
+    if ($result_documento->num_rows > 0) {
+        echo "<div class='documento'>";
+      
+        while ($row_documento = $result_documento->fetch_assoc()) {
+            // Mostrar el documento en un iframe
+            echo "<iframe src='" . $row_documento["ubicacion_archivo"] . "'></iframe>";
+        }
+        echo "</div>"; // Cierre del div
+    } else {
+        echo "<p>No hay documento asociado a este caso.</p>";
+    }
+
+  
+ 
+} else {
+    echo "<p>No se proporcionó una referencia de caso válida.</p>";
+}
+
+?>
+
+
+
+                    
                 </form>
 
                 </div>

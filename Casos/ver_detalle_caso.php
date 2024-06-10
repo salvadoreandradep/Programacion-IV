@@ -275,6 +275,60 @@ nav {
     color: #000;
     font-weight: bold; /* Agregué negrita para resaltar los elementos fuertes */
 }
+button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+
+
+.modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            padding-top: 100px; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.9); 
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
     </style>
 </head>
@@ -304,6 +358,15 @@ nav {
     </nav>
     </center>
   </header>
+
+
+  <div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <video class="modal-content" id="video01" controls>
+        <source src='ruta_del_video.mp4' type='video/mp4'>
+        Your browser does not support the video tag.
+    </video>
+</div>
 
   <a id="botonArribaIzquierda" href="/Casos/Buscar_Casos.php">Tabla de casos</a>
 
@@ -346,6 +409,7 @@ nav {
                 echo "<p><strong>Imputado:</strong> " . $row["imputado"] . "</p>";
                 echo "<p><strong>Tipo de Delito:</strong> " . $row["tipo_delito"] . "</p>";
                 echo "</center>";
+
                 // Consulta para obtener la evidencia asociada al caso
                 $sql_evidencia = "SELECT * FROM evidencias WHERE caso_referencia = '$referencia'";
                 $result_evidencia = $conn->query($sql_evidencia);
@@ -353,36 +417,53 @@ nav {
                   echo "<div class='card2'>";
                     echo "<div class='evidencia'>";
                     echo "<h3>Evidencia</h3>";
+                    
                     while($row_evidencia = $result_evidencia->fetch_assoc()) {
                         // Obtener la extensión del archivo
                         $extension = pathinfo($row_evidencia["nombre_archivo"], PATHINFO_EXTENSION);
                         // Mostrar cada archivo de evidencia según su tipo
                         if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png' || $extension == 'gif') {
                             // Archivo de imagen
-                            echo "<img src='" . $row_evidencia["ubicacion_archivo"] . "' alt='Evidencia'>";
+                            echo "<div class='card2'>";
+                            echo "<h3>Imagenes</h3>";
+                            echo "<img src='" . $row_evidencia["ubicacion_archivo"] . "' alt='Evidencia' width='200' height='200'>";
+                            echo "</div class='card2'>";
                         } elseif ($extension == 'mp4' || $extension == 'webm' || $extension == 'ogg') {
                             // Archivo de video
+                            echo "<div class='card2'>";
+                            echo "<h3>Video</h3>";
                             echo "<video controls>";
-                            echo "<source src='" . $row_evidencia["ubicacion_archivo"] . "' type='video/" . $extension . "'>";
+                            echo "<source src='" . $row_evidencia["ubicacion_archivo"] . "' type='video/" . $extension . " '>";
                             echo "Your browser does not support the video tag.";
                             echo "</video>";
+                            echo '<button id="myBtn">Abrir en grande</button>';
+
+                            echo "</div class='card2'>";
+                           
                         } elseif ($extension == 'mp3' || $extension == 'ogg' || $extension == 'wav') {
                             // Archivo de audio
+                            echo "<div class='card2'>";
+                            echo "<h3>Audio</h3>";
+                            echo "<center>";
                             echo "<audio controls>";
                             echo "<source src='" . $row_evidencia["ubicacion_archivo"] . "' type='audio/" . $extension . "'>";
-                            echo "<source src='" . $row_evidencia["ubicacion_archivo"] . "' type='audio/" . $extension . "'>";
+
                             echo "Your browser does not support the audio tag.";
                             echo "</audio>";
+                            echo "</center>";
+                            echo "</div class='card2'>";
+                          
                             
                         } else {
                             // Otros tipos de archivos
                             echo "<p>No se puede mostrar la evidencia.</p>";
                         }
                     }
-                    echo "</div>";
+                    echo "</>";
                 } else {
                     echo "<p>No hay evidencia asociada a este caso.</p>";
                 }
+                echo "</div class='card2'>";
                 echo "</div class='card2'>";
                 echo "<div class='card2'>";
                 // Consulta para obtener el documento asociado al caso
@@ -413,5 +494,34 @@ nav {
         
         ?>
     </div>
+
+    <script>
+
+
+var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    </script>
 </body>
 </html>
