@@ -12,14 +12,16 @@ export default (io) => {
         socket.on("client:nuevoMensaje", async (data) => {
             const newMensaje = new Mensaje(data);
             const savedMensaje = await newMensaje.save();
-            io.emit("server:nuevoMensaje", savedMensaje);
-            // Enviar notificación de escritorio
+            io.emit("server:nuevoMensaje", savedMensaje); 
+
             notifier.notify({
-                title: 'Nuevo Mensaje',
-                message: `Nuevo mensaje de ${savedMensaje.sender}`,
-                // Otras opciones de configuración
+                title: 'Nuevo mensaje recibido',
+                message: `De: ${savedMensaje.sender}`,
+                icon: './chat/inicio.png', 
+                sound: true, 
+                timeout: 5000, 
+                wait: true 
             });
         });
     });
 };
-
