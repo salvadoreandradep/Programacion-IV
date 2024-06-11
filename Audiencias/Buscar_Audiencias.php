@@ -472,9 +472,10 @@ button[type="submit"]:active {
             <form id="deleteRequestForm">
                 <label>Nombre de Usuario:</label>
                 <p class="highlight"><strong></strong> <?php echo $row['nombre']; ?></strong> <?php echo $row['apellido']; ?></p></p>
-                <h1>______________________________________</h1>
+                <label for="reason"></label><br>
                 <label for="reason">Razón de la solicitud:</label><br>
                 <textarea id="reason" name="reason" rows="4" cols="50" required></textarea><br><br>
+                <label for="reason">Propone una fecha:</label><br>
                 <input type="datetime-local" id="fecha_hora"><br>
                 <button type="submit">Enviar</button>
             </form>
