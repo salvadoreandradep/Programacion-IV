@@ -368,7 +368,7 @@ button:hover {
     </video>
 </div>
 
-  <a id="botonArribaIzquierda" href="/Casos/Buscar_Casos.php">Tabla de casos</a>
+  <a id="botonArribaIzquierda" href="/Casos/Buscar_Casos.php">Historial de Casos</a>
 
     <div class="container">
         <?php

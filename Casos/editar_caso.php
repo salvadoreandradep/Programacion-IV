@@ -231,7 +231,7 @@ nav {
             font-family: Arial, sans-serif;
             font-size: 16px;
             transition: background-color 0.3s, color 0.3s;
-            margin-left: 1200px;
+            margin-left: 1050px;
             margin-top: 80px;
         }
 
@@ -469,7 +469,14 @@ button[type="submit"]:active {
 
         
             <div class="card2">
-                <h2>Editar Caso</h2>
+            <div class="card2">
+                <center>
+                <label >Generalidades</label><br>
+</div class="card2">
+           
+            <label ></label><br>
+            <label ></label><br>
+            </center>
                 <form action="actualizar_caso.php" method="post">
                     <input type="hidden" name="referencia" value="<?php echo $row['referencia']; ?>">
                     <label for="victima">Víctima:</label><br>
