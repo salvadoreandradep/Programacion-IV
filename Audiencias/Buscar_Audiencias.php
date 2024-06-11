@@ -23,7 +23,31 @@ if (isset($_GET['logout'])) {
 
 // Resto del código aquí (contenido de la página principal)
 //___________________________________________HTML Normal_____________________________________________________________________________________
+$user_id = $_SESSION['user_id'];
+
+// Conexión a la base de datos (ajusta estos valores según tu configuración)
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "legalcc";
+
+// Crear conexión
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verificar conexión
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
+
+// Obtener los detalles del usuario de la base de datos
+$sql = "SELECT nombre, apellido, telefono, tipo, correo FROM usuarios WHERE id = $user_id";
+$result = $conn->query($sql);
+
+// Cerrar conexión
+$conn->close();
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -120,11 +144,11 @@ nav {
 }
 
 .circle-container {
-        width: 70px;
-        height: 70px;
+        width: 25px;
+        height: 25px;
         border-radius: 50%; /* Esto hace que el borde sea redondeado, creando un círculo */
         overflow: hidden; /* Oculta cualquier contenido fuera del círculo */
-        margin: 50px; /* Añade un margen de 10px alrededor del círculo */
+        margin: 20px; /* Añade un margen de 10px alrededor del círculo */
         border: 2px solid #ccc; /* Agrega un borde para mayor claridad */
     }
     
@@ -149,55 +173,58 @@ nav {
 
     .content {
     margin-top: 50px; /* Espacio superior para separar del contenido anterior */
+    font-family: Bahnschrift;
 }
 
 .table-container {
     margin: 0 auto;
-    max-width: 800px; /* Ajusta el ancho máximo según sea necesario */
-    height: 400px; /* Altura fija del contenedor */
-        overflow-y: auto; /* Desplazamiento vertical */
-    
-    
+    max-width: 800px;
+    height: 400px;
+    overflow-y: auto;
+    font-family: Bahnschrift;
 }
+
 .table-container2 {
     margin: 0 auto;
-    max-width: 800px; /* Ajusta el ancho máximo según sea necesario */
-    
-    
+    max-width: 800px;
+    font-family: Bahnschrift;
 }
 
 .custom-table {
     display: flex;
     flex-direction: column;
     border: 1px solid #ddd;
-    border-radius: 8px; /* Agregamos bordes redondeados */
-    overflow: hidden; /* Para ocultar los bordes redondeados en las esquinas */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agregamos sombra */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: Bahnschrift;
 }
 
 .table-header,
 .table-row {
     display: flex;
-    
-    
+    font-family: Bahnschrift;
 }
 
 .table-cell {
     flex: 1;
-    padding: 12px; /* Incrementamos el espacio de relleno */
+    padding: 12px;
     border-bottom: 1px solid #ddd;
-    
+    font-family: Bahnschrift;
 }
 
 .table-header {
     font-weight: bold;
     background-color: #f2f2f2;
+    font-family: Bahnschrift;
 }
 
 .no-data {
-    padding: 12px; /* Incrementamos el espacio de relleno */
-    text-align: center; /* Centramos el texto */
+    padding: 12px;
+    text-align: center;
+    font-family: Bahnschrift;
 }
+/* Estilo para el campo de entrada de texto */
 
 
 
@@ -211,16 +238,19 @@ nav {
         transition: border-color 0.3s ease;
         margin-top: 100px; /* Añadir margen superior */
         margin-block-end: 50px;
+        font-family: Bahnschrift;
     }
 
     #searchInput:focus {
         outline: none;
         border-color: #66afe9;
+        font-family: Bahnschrift;
     }
 
     /* Estilos para el placeholder del campo de búsqueda */
     ::placeholder {
         color: #aaa;
+        font-family: Bahnschrift;
     }
 
     #botonArribaIzquierda {
@@ -238,11 +268,13 @@ nav {
             transition: background-color 0.3s, color 0.3s;
             margin-left: 1000px;
             margin-top: 50px;
+            font-family: Bahnschrift;
         }
 
         #botonArribaIzquierda:hover {
             background-color: #0056b3;
             color: #fff;
+            font-family: Bahnschrift;
         }
 
         /* Estilos para el botón */
@@ -255,14 +287,146 @@ nav {
   border: none; /* Quitar borde del botón */
   border-radius: 5px; /* Borde redondeado */
   cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+  font-family: Bahnschrift;
 }
 
 /* Estilos para cuando el cursor pasa sobre el botón */
 .edit-button:hover {
   background-color: #0056b3;
   color: white; /* Cambiar color de fondo cuando el cursor pasa sobre el botón */
+  font-family: Bahnschrift;
 }
 
+.solicitar-button {
+  display: inline-block;
+  background-color: white; /* Color de fondo del botón */
+  color: black; /* Color del texto del botón */
+  padding: 10px 20px; /* Espaciado interno del botón */
+  text-decoration: none; /* Eliminar subrayado del enlace */
+  border: none; /* Quitar borde del botón */
+  border-radius: 5px; /* Borde redondeado */
+  cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+  font-family: Bahnschrift;
+}
+
+/* Estilos para cuando el cursor pasa sobre el botón */
+.solicitar-button:hover {
+  background-color: #0056b3;
+  color: white; /* Cambiar color de fondo cuando el cursor pasa sobre el botón */
+  font-family: Bahnschrift;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+    font-family: Bahnschrift;
+}
+
+.modal.show {
+    display: flex;
+    opacity: 1;
+    font-family: Bahnschrift;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+    animation: slide-down 0.3s ease-in-out;
+    font-family: Bahnschrift;
+}
+
+@keyframes slide-down {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close {
+    color: #555;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    font-family: Bahnschrift;
+}
+
+
+
+/* Estilos para el botón de enviar */
+button[type="submit"] {
+    background-color: #007bff; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    padding: 10px 20px; /* Relleno interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Esquinas redondeadas */
+    font-size: 16px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+    cursor: pointer; /* Cursor de puntero */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones */
+    font-family: Bahnschrift;
+}
+
+/* Estilos para el hover y focus */
+button[type="submit"]:hover,
+button[type="submit"]:focus {
+    background-color: #0056b3; /* Color de fondo al pasar el cursor */
+    outline: none; /* Sin contorno */
+    transform: translateY(-2px); /* Efecto de elevación */
+    font-family: Bahnschrift;
+}
+
+/* Estilos para el active */
+button[type="submit"]:active {
+    background-color: #004085; /* Color de fondo al hacer clic */
+    transform: translateY(0); /* Restablecer elevación */
+    font-family: Bahnschrift;
+}
+
+
+
+#deleteRequestLink {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-family: Bahnschrift;
+}
+
+#deleteRequestLink:hover {
+    background-color: #0056b3;
+    color: white;
+    font-family: Bahnschrift;
+}
 
     </style>
 </head>
@@ -275,17 +439,17 @@ nav {
 
     <label for="btn-nav" class="btn-nav">&#9776;</label>
     <input type="checkbox" id="btn-nav">
-    <h2>LegalConnect</h2>
-    <nav>
-      <ul class="navigation">
-<center>
-<a href="/Formularios/Perfil.php">
+    <a href="/Formularios/Perfil.php">
 <div class="circle-container">
 
-    <img class="circle-image" src="recursos/profile.png" alt="Tu imagen">
+    <img class="circle-image" src="/recursos/profile.png" alt="Tu imagen">
 
    </div>
    </a>
+    <nav>
+      <ul class="navigation">
+<center>
+
         <li><a href="/Pagina_principal.php">Inicio</a></li>
         <li><a href="/Audiencias/Buscar_Audiencias.php">Audiencias</a></li>
         <li><a href="/Casos/Agregar_Casos.php">Casos</a></li>
@@ -295,16 +459,40 @@ nav {
     </nav>
     </center>
   </header>
+
+
+
+  <?php if ($result->num_rows > 0): ?>
+    <?php $row = $result->fetch_assoc(); ?>
+
+  <div id="deleteRequestModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Solicitud de Eliminación</h2>
+            <form id="deleteRequestForm">
+                <label>Nombre de Usuario:</label>
+                <p class="highlight"><strong></strong> <?php echo $row['nombre']; ?></strong> <?php echo $row['apellido']; ?></p></p>
+                <h1>______________________________________</h1>
+                <label for="reason">Razón de la solicitud:</label><br>
+                <textarea id="reason" name="reason" rows="4" cols="50" required></textarea><br><br>
+                <input type="datetime-local" id="fecha_hora"><br>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <?php else: ?>
+        <p class="error-message">Error: No se encontraron detalles del usuario.</p>
+    <?php endif; ?>
+ 
 <h2>Audiencias Registradas</h2>
 
 <div class="table-container2">
 <input type="text" id="searchInput" placeholder="Buscar...">
 </div>
 <div class="table-container">
-    <center>
-    
-    </center>
-    <div class="custom-table">
+
+  <div class="custom-table">
         <div class="table-header">
             <div class="table-cell">Título</div>
             <div class="table-cell">Referencia</div>
@@ -349,6 +537,7 @@ $sql = "SELECT * FROM audiencias ORDER BY fecha DESC";
     // Mostrar datos de cada audiencia
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
+          echo "<center>";
           echo "<div class='table-row'>";
           echo "<div class='table-cell'>" . $row["titulo"] . "</a></div>";
           echo "<div class='table-cell'>" . $row["caso"] . "</div>";
@@ -359,9 +548,9 @@ $sql = "SELECT * FROM audiencias ORDER BY fecha DESC";
           echo "<div class='table-cell'>" . $row["victima"] . "</div>";
           echo "<div class='table-cell'>" . $row["delito"] . "</div>";
           echo "<div class='table-cell'>";
-          echo "<center><a class='edit-button' href='ver_audiencia.php?id=" . $row["id"] . "'><i class='fa fa-eye'></i> Ver </a></center>";
+                    echo "<center><a class='edit-button' href='ver_audiencia.php?id=" . $row["id"] . "'><i class='fa fa-eye'></i> Ver </a></center>";
           echo "<a class='edit-button' href='#' onclick='eliminar(".$row["id"].")'><i class='fa fa-trash'></i> Eliminar</a>";
-                    echo "</div>";
+          echo "<a href='' id='deleteRequestLink' >Solicitud</a>";
           echo "</div>";
         }
     } else {
@@ -377,6 +566,70 @@ $sql = "SELECT * FROM audiencias ORDER BY fecha DESC";
 
 
 <script>
+
+
+
+
+
+
+
+var modal = document.getElementById("deleteRequestModal");
+
+// Obtener el enlace que abre el modal
+var link = document.getElementById("deleteRequestLink");
+
+// Obtener el elemento <span> que cierra el modal
+var span = document.getElementsByClassName("close")[0];
+
+// Cuando el usuario hace clic en el enlace, abre el modal
+link.onclick = function(event) {
+    event.preventDefault();
+    modal.style.display = "block";
+}
+
+// Cuando el usuario hace clic en <span> (x), cierra el modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// Cuando el usuario hace clic en cualquier lugar fuera del modal, lo cierra
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+// Manejar el envío del formulario
+var form = document.getElementById("deleteRequestForm");
+form.onsubmit = function(event) {
+    event.preventDefault();
+    // Aquí puedes agregar el código para enviar la solicitud
+    alert("Solicitud enviada: " + document.getElementById("reason").value);
+    
+    // Limpiar el formulario
+    form.reset();
+    
+    // Cerrar el modal
+    modal.style.display = "none";
+}
+
+function solicitar(id) {
+    document.getElementById('popup').style.display = 'block';
+  }
+
+  function enviarSolicitud() {
+    var descripcion = document.getElementById('descripcion').value;
+    var fecha_hora = document.getElementById('fecha_hora').value;
+    
+    // Aquí puedes enviar los datos al servidor para su procesamiento
+    // Por ejemplo, podrías usar AJAX para enviar una solicitud al servidor
+
+    // Luego de enviar la solicitud, puedes ocultar el popup
+    document.getElementById('popup').style.display = 'none';
+
+    // También podrías realizar alguna otra acción, como mostrar un mensaje de éxito al usuario
+    alert("Solicitud enviada correctamente");
+  }
     // Función para filtrar las filas de la tabla
     function filterTable() {
         var input, filter, table, tr, td, i, j, txtValue;
