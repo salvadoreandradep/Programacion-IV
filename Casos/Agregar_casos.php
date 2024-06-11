@@ -256,7 +256,7 @@ nav {
 
 
     body {
-            font-family: Arial, sans-serif;
+            font-family: Bahnschrift;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
@@ -266,11 +266,13 @@ nav {
             max-width: 600px;
             margin: 50px auto;
             background-color: #fff;
+            font-family: Bahnschrift;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             overflow-y: auto; /* Agregamos scroll vertical */
             max-height: 500px; /* Establecemos una altura máxima */
+            margin-top: 20px;
         }
 
         h2 {
@@ -321,6 +323,7 @@ nav {
             background-color: #007bff; /* Green */
             border: none;
             color: white;
+            font-family: Bahnschrift;
             padding: 15px 32px;
             text-align: center;
             text-decoration: none;
@@ -334,8 +337,29 @@ nav {
 
         .submit-btn:hover {
             background-color: #0056b3; /* Darker Green on Hover */
+            font-family: Bahnschrift;
+        }
+        .cancel-btn {
+            background-color: #fff; /* Green */
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            font-family: Bahnschrift;
         }
 
+        .cancel-btn:hover {
+            background-color: #0056b3; /* Darker Green on Hover */
+            color: #fff;
+            font-family: Bahnschrift;
+        }
 
         #botonArribaIzquierda {
             position: fixed;
@@ -347,7 +371,7 @@ nav {
             text-decoration: none;
             border: 2px solid #007bff;
             border-radius: 5px;
-            font-family: Arial, sans-serif;
+            font-family: Bahnschrift;
             font-size: 16px;
             transition: background-color 0.3s, color 0.3s;
             margin-left: 1000px;
@@ -357,6 +381,7 @@ nav {
         #botonArribaIzquierda:hover {
             background-color: #0056b3;
             color: #fff;
+            font-family: Bahnschrift;
         }
 
 
@@ -416,16 +441,16 @@ nav {
 
 
   <a id="botonArribaIzquierda" href="/Casos/Buscar_Casos.php">Buscar Casos</a>
-  <div class="container">
-        <h2>Agregar Caso</h2>
-        <form method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-            <label for="victima">Víctima:</label>
-            <input type="text" id="victima" name="victima" required>
+<div class="container">
+    <h2>Agregar Caso</h2>
+    <form method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+        <label for="victima">Víctima:</label>
+        <input type="text" id="victima" name="victima" required>
 
-            <label for="imputado">Imputado:</label>
-            <input type="text" id="imputado" name="imputado">
+        <label for="imputado">Imputado:</label>
+        <input type="text" id="imputado" name="imputado">
 
-            <div class="select-container">
+        <div class="select-container">
             <label for="tipo_delito">Tipo de Delito:</label>
             <select id="tipo_delito" name="tipo_delito">
                 <option value="robo">Robo</option>
@@ -434,22 +459,21 @@ nav {
                 <option value="vandalismo">Vandalismo</option>
                 <option value="homicidio">Homicidio</option>
             </select>
-            </div>
+        </div>
 
-           
-            <label>Evidencia:</label>
-            <input type="file" name="evidencia[]" multiple>
-                 
+        <label>Evidencia:</label>
+        <input type="file" name="evidencia[]" multiple>
 
-            <label for="documento">Documento:</label>
+        <label for="documento">Documento:</label>
+        <input type="file" name="documento" accept=".pdf">
 
-            <input type="file" name="documento" accept=".pdf">
-
-            
-
+        <div class="button-container">
             <input type="submit" value="Agregar Caso" class="submit-btn">
-        </form>
-    </div>
+            <input type="reset" value="Cancelar" class="cancel-btn">
+        </div>
+    </form>
+</div>
+
 
     <script>
         function agregarCampoEvidencia() {
