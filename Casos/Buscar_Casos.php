@@ -281,7 +281,7 @@ nav {
   color: white;
 }
 
-.archivar-button {
+.delete-button {
   display: inline-block;
   background-color: #ff3333; /* Color de fondo del botón de eliminar */
   color: white; /* Color del texto del botón de eliminar */
@@ -292,7 +292,7 @@ nav {
   cursor: pointer;
 }
 
-.archivar-button:hover {
+.delete-button:hover {
   background-color: #cc0000; /* Cambiar color de fondo cuando el cursor pasa sobre el botón de eliminar */
 }
 
@@ -366,7 +366,7 @@ nav {
                 echo "</div>";
                 echo "<div class='table-cell'>" . $row["fecha_creacion"] . "</div>";
                 echo "<div class='table-cell'>";
-                echo "<button class='archivar-button' onclick=\"ArchivarCaso('" . $row["referencia"] . "')\">Archivar</button>";
+                echo "<button class='delete-button' onclick=\"eliminarCaso('" . $row["referencia"] . "')\">Eliminar</button>";
                 echo "<a class='edit-button' href='ver_detalle_caso.php?referencia=" . $row["referencia"] . "'>Detalles</a>";
                 echo "</div>";
                 echo "</div>";

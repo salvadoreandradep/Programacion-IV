@@ -175,8 +175,8 @@ nav {
             font-family: Arial, sans-serif;
             font-size: 16px;
             transition: background-color 0.3s, color 0.3s;
-            margin-left: 100px;
-            margin-top: 500px;
+            margin-left: 1000px;
+            margin-top: 400px;
         }
 
         #botonArribaIzquierda:hover {
@@ -197,7 +197,7 @@ nav {
             font-family: Arial, sans-serif;
             font-size: 16px;
             transition: background-color 0.3s, color 0.3s;
-            margin-left: 110px;
+            margin-left: 1000px;
             margin-top: 80px;
 }
 
@@ -404,6 +404,7 @@ button:hover {
                 echo "<center>";
                 echo "<div class='card'>";
                 echo "<h3>Detalles del Caso</h3>";
+                echo "<p><strong>Generalidades</strong>";
                 echo "<p><strong>Referencia:</strong> " . $row["referencia"] . "</p>";
                 echo "<p><strong>Víctima:</strong> " . $row["victima"] . "</p>";
                 echo "<p><strong>Imputado:</strong> " . $row["imputado"] . "</p>";
