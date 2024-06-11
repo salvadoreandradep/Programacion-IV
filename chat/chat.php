@@ -69,7 +69,7 @@
         </div>
         <div class="chat-messages" id="chatMessages"></div>
         <div class="chat-footer">
-            <input type="text" id="messageInput" placeholder="Escribe un mensaje...">
+            <input type="text" id="messageInput" placeholder="Escribe un mensaje..." autocomplete="off">
             <button onclick="sendMessage()">Enviar</button>
         </div>
     </div>

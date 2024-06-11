@@ -85,7 +85,7 @@ h1 {
 
 body {
   font-family: 'Roboto', sans-serif;
-  overflow: hidden;
+  
 }
 
 .main-header {
@@ -239,6 +239,22 @@ nav {
         height: auto; /* Mantiene la proporción de la imagen */
     }
 
+
+    .chat {
+  display: none;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  width: 350px;
+  height: 490px;
+  overflow: hidden;
+  position: fixed;
+  top: 30px; /* Ajusta este valor según la distancia desde la parte superior que desees */
+  right: 10px; /* Ajusta este valor según la distancia desde la derecha que desees */
+  cursor: move;
+}
+
+
+
     </style>
 </head>
 <body>
@@ -247,7 +263,9 @@ nav {
 
     <label for="btn-nav" class="btn-nav">&#9776;</label>
     <input type="checkbox" id="btn-nav">
+
   
+  <button id="mostrarChat">Mostrar Chat</button>
     <nav>
       <ul class="navigation">
 <center>
@@ -291,19 +309,43 @@ nav {
 
 </center>
 
+<div id="draggable" class="chat">
+    <iframe src="/chat/chat.php" width="350" height="490" frameborder="10"></iframe>
+</div>
 
 
 
 
 
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
 
 document.querySelector('a[href="?logout"]').addEventListener('click', function(event) {
     if (!confirm('¿Estás seguro de que deseas cerrar sesión?')) {
         event.preventDefault(); // Cancelar el evento de clic si el usuario no confirma
     }
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Obtener referencia al elemento de chat y al botón
+  var chat = document.getElementById("draggable");
+  var botonMostrar = document.getElementById("mostrarChat");
+
+  // Agregar evento de clic al botón
+  botonMostrar.addEventListener("click", function() {
+    // Si el chat está oculto, mostrarlo; si no, ocultarlo
+    if (chat.style.display === "none") {
+      chat.style.display = "block";
+    } else {
+      chat.style.display = "none";
+    }
+  });
+});
+
+   
+</script>
+
 </script>
 </body>
 </html>
