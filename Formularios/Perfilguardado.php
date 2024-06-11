@@ -45,7 +45,7 @@
     </style>
 </head>
 <body>
-    <h1>Caso Guardado</h1>
+    <h1>Datos Guardados</h1>
     <img src="/recursos/284-avatar-man-approved.gif" alt="GIF">
     <p id="loading-msg">Espera un momento...</p>
     <p id="redirect-msg">Redirigiendo...</p>
