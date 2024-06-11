@@ -45,8 +45,8 @@
     </style>
 </head>
 <body>
-    <h1>Caso Guardado</h1>
-    <img src="/recursos/preview.gif" alt="GIF">
+    <h1>Caso almacenado exitosamente</h1>
+    <img src="/recursos/preview.gif" alt="GIF" height="200px" width="200px" >
     <p id="loading-msg">Espera un momento...</p>
     <p id="redirect-msg">Redirigiendo...</p>
 
