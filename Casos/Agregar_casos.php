@@ -440,7 +440,7 @@ nav {
 
 
 
-  <a id="botonArribaIzquierda" href="/Casos/Buscar_Casos.php">Buscar Casos</a>
+  <a id="botonArribaIzquierda" href="/Casos/Buscar_Casos.php">Historia de Casos</a>
 <div class="container">
     <h2>Agregar Caso</h2>
     <form method="post" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -462,7 +462,7 @@ nav {
         </div>
 
         <label>Evidencia:</label>
-        <input type="file" name="evidencia[]" multiple>
+        <input type="file" name="evidencia[]" multiple accept=".png ,.jpg,.jpeg">
 
         <label for="documento">Documento:</label>
         <input type="file" name="documento" accept=".pdf">

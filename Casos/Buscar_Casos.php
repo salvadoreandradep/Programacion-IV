@@ -274,26 +274,37 @@ nav {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-family: Bahnschrift;
+  
+  
+  
 }
 
 .edit-button:hover {
   background-color: #0056b3;
   color: white;
+  font-family: Bahnschrift;
 }
 
 .delete-button {
   display: inline-block;
-  background-color: #ff3333; /* Color de fondo del botón de eliminar */
-  color: white; /* Color del texto del botón de eliminar */
+  background-color: white; /* Color de fondo del botón de eliminar */
+  color: black; /* Color del texto del botón de eliminar */
   padding: 10px 20px;
   text-decoration: none;
   border: none;
+  font-size: 15px;
   border-radius: 5px;
   cursor: pointer;
+  font-family: Bahnschrift;
+  border-color: black;
 }
 
 .delete-button:hover {
-  background-color: #cc0000; /* Cambiar color de fondo cuando el cursor pasa sobre el botón de eliminar */
+  background-color: red; 
+  font-family: Bahnschrift;
+  color: white;
+  
 }
 
 
