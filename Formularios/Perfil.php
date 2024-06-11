@@ -253,7 +253,22 @@ nav {
   cursor: move;
 }
 
-
+#mostrarChat {
+      background-color: #242975; /* Color de fondo */
+      border: none; /* Sin borde */
+      color: white; /* Color del texto */
+      padding: 15px 32px; /* Espacio interior */
+      text-align: center; /* Alineación del texto */
+      text-decoration: none; /* Sin decoración de texto */
+      display: inline-block; /* Mostrar como un bloque */
+      font-size: 16px; /* Tamaño de fuente */
+      margin: 4px 2px; /* Márgenes */
+      cursor: pointer; /* Cursor al pasar por encima */
+      border-radius: 8px; /* Radio de borde */
+    }
+    #mostrarChat:hover {
+      background-color: cadetblue; /* Cambio de color al pasar el cursor */
+    }
 
     </style>
 </head>
