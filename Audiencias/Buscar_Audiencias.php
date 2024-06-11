@@ -428,6 +428,25 @@ button[type="submit"]:active {
     font-family: Bahnschrift;
 }
 
+.error-message {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #0056b3;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  transition: opacity 0.5s ease;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
     </style>
 </head>
 <body>
@@ -461,26 +480,45 @@ button[type="submit"]:active {
   </header>
 
 
+  <?php
+if(isset($_GET['error'])) {
+    echo '<div id="errorMessage" class="error-message">';
+    echo "<p>" . htmlspecialchars($_GET['error']) . "</p>";
+    echo '</div>';
+    echo '<script>
+        setTimeout(function() {
+            var errorMessage = document.getElementById("errorMessage");
+            if (errorMessage) {
+                errorMessage.style.display = "none";
+            }
+        }, 5000);
+    </script>';
+}
+?>
 
+    
   <?php if ($result->num_rows > 0): ?>
     <?php $row = $result->fetch_assoc(); ?>
 
-  <div id="deleteRequestModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Solicitud de Eliminación</h2>
-            <form id="deleteRequestForm">
-                <label>Nombre de Usuario:</label>
-                <p class="highlight"><strong></strong> <?php echo $row['nombre']; ?></strong> <?php echo $row['apellido']; ?></p></p>
-                <label for="reason"></label><br>
-                <label for="reason">Razón de la solicitud:</label><br>
-                <textarea id="reason" name="reason" rows="4" cols="50" required></textarea><br><br>
-                <label for="reason">Propone una fecha:</label><br>
-                <input type="datetime-local" id="fecha_hora"><br>
-                <button type="submit">Enviar</button>
-            </form>
-        </div>
+    <div id="deleteRequestModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Solicitud de Eliminación</h2>
+        <form id="deleteRequestForm" action="submit_request.php" method="POST">
+            <label>Nombre de Usuario:</label>
+            <p class="highlight">
+                <strong><?php echo $row['nombre']; ?> <?php echo $row['apellido']; ?></strong>
+                <input type="hidden" name="nombre_usuario" value="<?php echo $row['nombre'] . ' ' . $row['apellido']; ?>">
+            </p>
+            <label for="reason">Razón de la solicitud:</label><br>
+            <textarea id="reason" name="reason" rows="4" cols="50" required></textarea><br><br>
+            <label for="fecha_hora">Propone una fecha:</label><br>
+            <input type="datetime-local" id="fecha_hora" name="fecha_hora" required><br><br>
+            <button type="submit">Enviar</button>
+        </form>
     </div>
+</div>
+
 
     <?php else: ?>
         <p class="error-message">Error: No se encontraron detalles del usuario.</p>
@@ -601,18 +639,7 @@ window.onclick = function(event) {
 }
 
 // Manejar el envío del formulario
-var form = document.getElementById("deleteRequestForm");
-form.onsubmit = function(event) {
-    event.preventDefault();
-    // Aquí puedes agregar el código para enviar la solicitud
-    alert("Solicitud enviada: " + document.getElementById("reason").value);
-    
-    // Limpiar el formulario
-    form.reset();
-    
-    // Cerrar el modal
-    modal.style.display = "none";
-}
+
 
 function solicitar(id) {
     document.getElementById('popup').style.display = 'block';
